@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.scss';
+import Articles from './components/MainPage/Articles';
+import Navigation from './components/Nav/Navigation'
+import Login from './components/Login/Login'
+import RecentArticle from './components/Article/RecentArticle';
+import { Routes, Route } from "react-router-dom";
+import MyArticles from './components/MyArticles/MyArticles';
+import NewArticle from './components/NewArticle/NewArticle'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+	return (
+		<>
+			<Navigation />
+
+			<div className="container">
+				<Routes>
+					<Route index element={<Articles />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/article" element={<RecentArticle />} />
+
+					<Route path="/my-articles" element={<MyArticles />} />
+					<Route path="/create-new-article" element={<NewArticle />} />
+				</Routes>
+			</div>
+
+		</>
+	)
 }
-
-export default App;

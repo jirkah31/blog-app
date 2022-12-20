@@ -1,0 +1,36 @@
+@import '../../variables';
+
+nav {
+	background-color: $nav-background;
+	height: 50px;
+
+	.container {
+		display: flex;
+		margin: 0 auto;
+		height: 100%;
+		width: $container-width;
+		align-items: center;
+		justify-content: space-between;
+
+		ul {
+			display: inline-flex;
+			list-style: none;
+
+			li {
+				display: flex;
+				margin-right: 20px;
+				align-items: center;
+			}
+
+			a {
+				text-decoration: none;
+				color: black;
+			}
+		}
+
+		.logIn {
+			color: $login-text-color;
+			text-decoration: none;
+		}
+	}
+}

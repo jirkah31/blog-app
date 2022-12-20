@@ -1,0 +1,60 @@
+@import '../../variables';
+
+.commentContainer {
+	display: flex;
+	margin-bottom: 20px;
+
+	.avatar {
+		display: flex;
+
+		.avatarImg {
+			object-fit: cover;
+			border-radius: 50%;
+		}
+	}
+
+	.comment {
+		margin-left: 20px;
+
+		.infoComment {
+			display: flex;
+			margin: {
+				top: 2px;
+				bottom: 8px;
+			}
+
+			h4 {
+				font-size: 1em;
+				margin-right: 10px;
+			}
+
+			time {
+				color: $lighter-text;
+			}
+		}
+
+		p {
+			line-height: 1.5em;
+			font-size: .9em;
+		}
+
+		.counter {
+			display: flex;
+
+			h4 {
+				font-weight: normal;
+				padding-right: 15px;
+				padding-right: 5px;
+				border-right: 1px solid $border-line;
+			}
+
+			.arrow {
+				width: 30px;
+				background-color: transparent;
+				border: none;
+				border-right: 1px solid $border-line;
+				cursor: pointer;
+			}
+		}
+	}
+}

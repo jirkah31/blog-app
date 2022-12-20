@@ -1,0 +1,85 @@
+@import '../../variables';
+
+.articleContainer {
+	width: $minor-container;
+
+	.commentArticle {
+		display: inline-table;
+		border-bottom: 1px solid $border-line;
+		padding-bottom: 30px;
+		margin-bottom: 20px;
+
+		h2 {
+			font-size: 2em;
+			margin: {
+				top: 35px;
+				bottom: 20px;
+			}
+		}
+
+		h3,
+		time {
+			color: $lighter-text;
+			font: {
+				size: .9em;
+				weight: normal;
+			}
+			margin: {
+				right: 10px;
+				bottom: 15px;
+			}
+		}
+
+		.articleImg {
+			width: 100%;
+			margin: {
+				bottom: 15px;
+			}
+		}
+
+		p {
+			font-size: 1.2em;
+			line-height: 1.5em;
+		}
+	}
+
+	.info {
+		margin-bottom: 10px;
+
+		span {
+			font: {
+				size: 1.5em;
+				weight: bold;
+			}
+		}
+	}
+
+	.newComment {
+		display: flex;
+		margin-bottom: 15px;
+
+		input {
+			box-sizing: border-box;
+			width: 100%;
+			border: 1px solid $border-line;
+			border-radius: 5px;
+			padding: 10px;
+			font-size: 1em;
+			margin: {
+				top: 10px;
+				bottom: 20px;
+				left: 20px
+			}
+		}
+
+		.avatarContainer {
+			display: flex;
+			margin-right: 15px;
+
+			.avatarImg {
+				object-fit: cover;
+				border-radius: 50%;
+			}
+		}
+	}
+}

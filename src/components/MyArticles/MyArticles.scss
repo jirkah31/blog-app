@@ -1,0 +1,58 @@
+@import '../../variables';
+
+.my-articles {
+	font-family: $base-font;
+	width: $container-width;
+	margin: 0 auto;
+
+	.header {
+		display: flex;
+		align-items: center;
+		margin: {
+			top: 100px;
+			bottom: 50px;
+		}
+
+		h1 {
+			font-size: 2.5em;
+			margin-right: 50px;
+		}
+
+		button {
+			@include set-button;
+
+			&:hover,
+			&:focus {
+				background-color: lighten($color-button, 20%);
+			}
+		}
+	}
+
+	.table-articles {
+		border-collapse: collapse;
+		width: 100%;
+		
+		th {
+			border-bottom: 2px solid $border-line;
+			padding-top: 12px;
+			text-align: left;
+			padding: {
+				bottom: 12px;
+			}
+		}
+
+		td {
+			border-bottom: 1px solid $border-line;
+			line-height: 2.5em;
+			font-size: .9em;
+			
+			button {
+				padding: 2px 5px;
+				margin-right: 5px;
+				border-radius: 5px;
+				border: 1px solid;
+				cursor: pointer;
+			}
+		}
+	}
+}

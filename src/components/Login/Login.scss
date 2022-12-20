@@ -1,0 +1,60 @@
+@import '../../variables';
+
+.login {
+	width: 400px;
+	height: 400px;
+	margin: 15vh auto;
+	border-radius: 15px;
+	box-shadow: 15px 15px 40px $shadow;
+	display: flex;
+
+	.border {
+		margin: 40px;
+		position: relative;
+	}
+
+	h2 {
+		font: {
+			size: 2em;
+		}
+
+		margin-bottom: 30px;
+	}
+
+	form {
+		label {
+			font: {
+				size: 1.2em;
+				weight: bold;
+			}
+		}
+
+		input {
+			box-sizing: border-box;
+			width: 100%;
+			border: 1px solid $border-line;
+			border-radius: 4px;
+			padding: 10px 10px;
+			font-size: 1em;
+
+			margin: {
+				top: 10px;
+				bottom: 20px;
+			}
+		}
+	}
+
+	button {
+		@include set-button;
+
+		float: right;
+		position: absolute;
+		right: 0;
+		bottom: 0;
+
+		&:hover,
+		&:focus {
+			background-color: lighten($color-button, 20%);
+		}
+	}
+}

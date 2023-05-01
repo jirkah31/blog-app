@@ -20,7 +20,7 @@ export default function NewArticle() {
 				<input id="filePicker" style={{ visibility: "hidden" }} type={"file"} /><br/>
 
 				<label htmlFor='content' className='input-name'>Content</label><br />
-				<textarea type='text' id='content' name='content' placeholder='Supports markdown. Yay!' />
+				<textarea id='content' name='content' placeholder='Supports markdown. Yay!' />
 			</form>
 		</div>
 	)

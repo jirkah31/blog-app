@@ -7,10 +7,10 @@ function Login () {
 			<div className='border'>
 				<h2>Log In</h2>
 				<form method='post'>
-					<label for='email'>Email</label>
+					<label htmlFor='email'>Email</label>
 					<input type='email' name='email' placeholder='me@example.com' required />
 
-					<label for='password'>Password</label>
+					<label htmlFor='password'>Password</label>
 					<input type='password' name='password' placeholder='**********' required />
 					<button type='submit'>Log In</button>
 				</form>

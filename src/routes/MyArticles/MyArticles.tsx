@@ -19,12 +19,12 @@ export default function MyArticles() {
 			<table className='table-articles'>
 				<tbody>
 					<tr>
-						<th width="2%"> <input type='checkbox' /> </th>
-						<th width="20%">Article title</th>
+						<th><input type='checkbox' /></th>
+						<th>Article title</th>
 						<th>Perex</th>
-						<th width="15%" >Author</th>
-						<th width="10%"># of comments</th>
-						<th width="7%">Action</th>
+						<th>Author</th>
+						<th># of comments</th>
+						<th>Action</th>
 					</tr>
 					<tr>
 						<td> <input type='checkbox' /> </td>

@@ -10,7 +10,7 @@ type ErrorType = {
 }
 
 const ErrorPage = () => {
-  const error: ErrorType = useRouteError()
+  const error: any = useRouteError()
   console.log( error )
 
   return (

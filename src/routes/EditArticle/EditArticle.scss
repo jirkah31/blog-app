@@ -1,0 +1,79 @@
+@import '../../variables';
+
+.new-articles {
+	font-family: $base-font;
+	width: $container-width;
+	margin: 0 auto;
+
+	.header {
+		display: flex;
+		align-items: center;
+		margin: {
+			top: 100px;
+			bottom: 50px;
+		}
+
+		h1 {
+			font-size: 2.5em;
+			margin-right: 50px;
+		}
+
+		button {
+			@include set-button;
+			position: relative;
+
+			&:hover,
+			&:focus {
+				background-color: lighten($color-button, 20%);
+			}
+		}
+	}
+
+	form {
+
+		.input-name {
+			display: inline-block;
+			font-size: 1em;
+			margin-top: 20px;
+		}
+
+		input[type=text] {
+			font-size: 1.3em;
+			padding: 5px 10px;
+			border: 1px solid $border-line;
+			width: $minor-container;
+			margin: {
+				top: 10px;
+				bottom: 30px
+			}
+		}
+
+		.file-btn {
+			@include set-button;
+			
+			display: inline-block;
+			margin: {
+				top: 10px;
+				bottom: 30px;
+			}
+
+			&:hover,
+			&:focus {
+				background-color: lighten($color-button, 20%);
+			}
+		}
+
+		#content {
+			font-family: $base-font;
+			min-height: 30vh;
+			font-size: 1.3em;
+			padding: 5px 10px;
+			border: 1px solid $border-line;
+			width: $minor-container;
+			margin: {
+				top: 10px;
+				bottom: 30px
+			}
+		}
+	}
+}

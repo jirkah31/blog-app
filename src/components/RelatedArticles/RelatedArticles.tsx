@@ -2,6 +2,7 @@ import React from 'react';
 import './RelatedArticles.scss'
 
 function RelatedArticles () {
+
 const RelatedArticle = () => {
 	return (
 		<div className='preview'>

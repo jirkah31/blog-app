@@ -1,27 +1,32 @@
 import React from 'react'
 import Article from '../../components/Article/Article'
 import './AllArticles.scss'
-import { Outlet, useLoaderData } from 'react-router-dom'
-import { articleAPIT } from '../../articlesAPI';
-import { articlesAPI } from '../../articlesAPI';
-import { navLinks } from '../../links'
+import { Outlet } from 'react-router-dom'
+import image1 from '../../imgexample/image1.jpg'
+import useAllArticles from '../../helpers_hooks/useAllArticles'
+import getFullDateFromISO from '../../helpers_function/getFullDateFromString'
 
-export const loader = () => {
-  //tady bude následně probíhat načítání dat z API
-  const loaderData = [...articlesAPI]
-  const links = [...navLinks]
-  return { loaderData, links }
-}
 
 export default function AllArticles() {
-  const { loaderData }: any = useLoaderData();
+  const articles = useAllArticles()
 
   return (
     <div>
       <h1 className='title'>Recent articles</h1>
-      {loaderData.map((article: articleAPIT) =>{
-      const {id, image, title, content, author, date} = article
-        return <Article key={id} id={id} image={image} author={author} date={date} content={content} title={title} />}
+      {articles.map((article: any) => {
+        const { day, month, year } = getFullDateFromISO(article.createdAt)
+        const date = `${day}.${month}.${year}`
+        const {articleId, title, perex} = article
+
+        return <Article
+          key={articleId}
+          id={articleId}
+          image={image1}
+          author="{author}"
+          date={date}
+          perex={perex}
+          title={title}
+        />}
       )}
       <Outlet />
     </div>

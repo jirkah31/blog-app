@@ -10,24 +10,17 @@ import AllArticles from './routes/AllArticles/AllArticles';
 import MyArticles from './routes/MyArticles/MyArticles';
 import NewArticle from './routes/NewArticle/NewArticle';
 import RecentArticle from './components/RecentArticle/RecentArticle';
-import { loader as allArticles } from './routes/AllArticles/AllArticles';
-import { loader as recentArticleLoader } from './components/RecentArticle/RecentArticle';
-
-
-
-
+import EditArticle from './routes/EditArticle/EditArticle';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Navigation />,
     errorElement: <ErrorPage />,
-    loader: allArticles,
     children: [
       {
         path: "/",
         element: <AllArticles />,
-        loader: allArticles,
       },
       {
         path: "about",
@@ -36,7 +29,6 @@ const router = createBrowserRouter([
       {
         path: "recent-article/:articleId",
         element: <RecentArticle />,
-        loader: recentArticleLoader,
       },
       {
         path: "login",
@@ -49,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "create-new-article",
         element: <NewArticle />
+      },
+      {
+        path: "edit-article/:articleId",
+        element: <EditArticle />
       }
     ]
   },

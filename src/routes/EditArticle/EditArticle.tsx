@@ -1,21 +1,26 @@
 import React, { useState } from 'react'
-import './NewArticle.scss'
+import './EditArticle.scss'
 import postNewArticle from '../../helpers_handlers/postNewArticle'
 import { useAccessToken } from '../../helpers_hooks/useAccessToken'
 import postImage from '../../helpers_handlers/postImage'
+import useArticle from '../../helpers_hooks/useArticle'
+import { useParams } from 'react-router-dom'
 
-export default function NewArticle() {
+export default function EditArticle() {
+  const {articleId} = useParams()
+  const article = useArticle(articleId)
   const { accessToken } = useAccessToken()
   const [title, setTitle] = useState("")
   const [perex, setPerex] = useState("")
   const [image, setImage] = useState<File>()
+
 
   const handleTitle = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault()
     setTitle((event.target as HTMLInputElement).value)
   }
 
-  const handleContent = (event: React.FormEvent<HTMLTextAreaElement>) => {
+  const handlePerex = (event: React.FormEvent<HTMLTextAreaElement>) => {
     event.preventDefault()
     setPerex((event.target as HTMLInputElement).value)
   }
@@ -26,7 +31,6 @@ export default function NewArticle() {
     }
   };
 
-
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
       const newArticle = {
@@ -35,15 +39,14 @@ export default function NewArticle() {
       }
       postImage({accessToken, image})
     postNewArticle({accessToken, newArticle})
-
   }
 
   return (
     <div className='new-articles'>
       <form onSubmit={handleSubmit}>
-      <div className='header'>
-        <h1>Create new article</h1>
-        <button type='submit'>Publish article</button>
+        <div className='header'>
+          <h1>Edit article</h1>
+          <button type='submit'>Edit article</button>
         </div>
 
         <label htmlFor='title' className='input-name'>Article title</label><br />
@@ -56,7 +59,7 @@ export default function NewArticle() {
         <input id="filePicker" style={{ visibility: "hidden" }} type={"file"} onChange={handleImage} /><br/>
 
         <label htmlFor='content' className='input-name'>Content</label><br />
-        <textarea id='content' name='content' placeholder='Supports markdown. Yay!' value={perex} onChange={handleContent}/>
+        <textarea id='content' name='content' placeholder='Supports markdown. Yay!' value={perex} onChange={handlePerex}/>
       </form>
     </div>
   )

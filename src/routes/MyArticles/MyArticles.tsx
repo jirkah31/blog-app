@@ -1,63 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import './MyArticles.scss'
 import { Link, Outlet } from 'react-router-dom'
 import { useAccessToken } from '../../helpers_hooks/useAccessToken'
-import { apiConfig } from '../../api_configs'
+import deleteArticle from '../../helpers_handlers/deleteArticle'
+import useAllArticles from '../../helpers_hooks/useAllArticles'
 
 export default function MyArticles() {
+  const loadArticles = useAllArticles()
   const [articles, setArticles] = useState([])
   const {accessToken} = useAccessToken()
-  const allArticlesConfig = {
-    ...apiConfig,
-    url: '/articles',
-    header: {
-      ...apiConfig.headers,
-      'Authorization': accessToken
-    }
-  }
 
   useEffect(() => {
-
-    const getAllArticles = async (config: any) => {
-      await axios(config)
-      .then((response: any) => {
-        setArticles(response.data.items)  })
-      .catch((error: any) => {
-        console.log("ERROR_articles" , error);
-      });
-    }
-    getAllArticles(allArticlesConfig)
-  })
+    setArticles(loadArticles)
+  },[loadArticles])
 
   const handleDeleteArticle = async (articleId: string) => {
-    const apiArticleConfig = {
-      ...apiConfig,
-      method: 'delete',
-      url: `/articles/${articleId}`,
-      headers: {
-        ...apiConfig.headers,
-        'Authorization': accessToken
-      }
-    }
-
-    await axios(apiArticleConfig)
-    .then((response: any) => {
-      console.log('response.status: ', response.status)
-    })
-    .catch((error: any) => {
-      console.log("ERROR_articles" , error);
-    });
-
-    const getAllArticles = async (config: any) => {
-      await axios(config)
-      .then((response: any) => {
-        setArticles(response.data.items)  })
-      .catch((error: any) => {
-        console.log("ERROR_articles" , error);
-      });
-    }
-    getAllArticles(allArticlesConfig)
+    await deleteArticle({articleId, accessToken})
+    await setArticles(loadArticles)
   }
 
   return (
@@ -95,7 +54,7 @@ export default function MyArticles() {
               <Link to={`/edit-article/${articleId}`}>
                 <button>edit</button>
               </Link>
-              <button onClick={() => handleDeleteArticle(articleId)}>del</button>
+              <button onClick={() => handleDeleteArticle(articleId)}>delete</button>
             </td>
           </tr>
 

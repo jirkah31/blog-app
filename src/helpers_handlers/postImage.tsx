@@ -7,32 +7,32 @@ type PropsT = {
 }
 
 const postImage = async ({accessToken, image}: PropsT) => {
-  console.log('image: ', JSON.stringify(image))
 
   const config = {
     ...apiConfig,
-    method: 'post',
     url: '/images',
+    method: 'post',
+    headers: {
+      ...apiConfig.headers,
+      'Authorization': accessToken,
+      'Content-Type': 'multipart/form-data',
+    },
     data: {
       ...apiConfig.data,
       "image": image,
     },
-    headers: {
-      ...apiConfig.headers,
-      'Authorization': accessToken,
-      'Content-Type': 'multipart/form-data'
-    }
   }
-
-  await axios(config)
-  .then((response: any) => {
-    console.log('responseIMAGE: ', response)
-    return response
-  })
-  .catch((error: any) => {
-    console.log("ERROR_post_image" , error);
-   });
+  const imageIde = async () => await axios(config)
+    .then((response: any) => {
+      console.log('responseIMAGE: ', response)
+      return response.data[0].imageId
+    })
+    .catch((error: any) => {
+      console.log("ERROR_post_image" , error);
+    });
+    const imageId = imageIde()
+    console.log('imageId: ', await imageId)
+    return imageId
 }
-
 
 export default postImage

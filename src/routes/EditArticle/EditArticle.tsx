@@ -1,19 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './EditArticle.scss'
-import postNewArticle from '../../helpers_handlers/postNewArticle'
 import { useAccessToken } from '../../helpers_hooks/useAccessToken'
 import postImage from '../../helpers_handlers/postImage'
 import useArticle from '../../helpers_hooks/useArticle'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import updateArticle from '../../helpers_handlers/updateArticle'
 
 export default function EditArticle() {
   const {articleId} = useParams()
+  const navigate = useNavigate();
   const article = useArticle(articleId)
   const { accessToken } = useAccessToken()
   const [title, setTitle] = useState("")
   const [perex, setPerex] = useState("")
   const [image, setImage] = useState<File>()
 
+  useEffect(() => {
+    setTitle(article.title)
+    setPerex(article.perex)
+  },[article])
 
   const handleTitle = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault()
@@ -33,12 +38,13 @@ export default function EditArticle() {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-      const newArticle = {
+      const editedArticle = {
         title,
         perex,
       }
-      postImage({accessToken, image})
-    postNewArticle({accessToken, newArticle})
+      updateArticle({articleId, accessToken, editedArticle})
+      navigate("/my-articles")
+      // postImage({accessToken, image}) //tady updateImge
   }
 
   return (

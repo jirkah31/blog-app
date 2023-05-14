@@ -3,8 +3,10 @@ import './NewArticle.scss'
 import postNewArticle from '../../helpers_handlers/postNewArticle'
 import { useAccessToken } from '../../helpers_hooks/useAccessToken'
 import postImage from '../../helpers_handlers/postImage'
+import { useNavigate } from 'react-router-dom'
 
 export default function NewArticle() {
+  const navigate = useNavigate()
   const { accessToken } = useAccessToken()
   const [title, setTitle] = useState("")
   const [perex, setPerex] = useState("")
@@ -27,15 +29,15 @@ export default function NewArticle() {
   };
 
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async  (event: React.FormEvent) => {
     event.preventDefault()
       const newArticle = {
         title,
         perex,
       }
-      postImage({accessToken, image})
-    postNewArticle({accessToken, newArticle})
-
+        const imageId = await postImage({accessToken, image})
+        await postNewArticle({accessToken, newArticle, imageId})
+        navigate("/my-articles")
   }
 
   return (

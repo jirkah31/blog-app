@@ -5,10 +5,12 @@ import { Outlet } from 'react-router-dom'
 import image1 from '../../imgexample/image1.jpg'
 import useAllArticles from '../../helpers_hooks/useAllArticles'
 import getFullDateFromISO from '../../helpers_function/getFullDateFromString'
+import useImage from '../../helpers_hooks/useImage'
 
 
 export default function AllArticles() {
   const articles = useAllArticles()
+  // const image = useImage()
 
   return (
     <div>

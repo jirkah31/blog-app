@@ -2,25 +2,24 @@ import axios from "axios"
 import { apiConfig } from "../api_configs"
 
 type PropsT = {
+  articleId?: string,
   accessToken: string,
-  imageId: string,
-  newArticle:{
+  editedArticle:{
     title: string,
     perex: string,
   },
 }
 
-const postNewArticle = async ({accessToken, newArticle, imageId}: PropsT) => {
-  const { title, perex } = newArticle
+const updateArticle = async ({articleId, editedArticle, accessToken}: PropsT) => {
+  const { title, perex } = editedArticle
   const config = {
     ...apiConfig,
-    method: 'post',
-    url: '/articles',
+    method: 'patch',
+    url: `/articles/${articleId}`,
     data: {
       ...apiConfig.data,
       "title": title,
       "perex": perex,
-      "imageId": imageId,
     },
     headers: {
       ...apiConfig.headers,
@@ -30,7 +29,6 @@ const postNewArticle = async ({accessToken, newArticle, imageId}: PropsT) => {
 
   await axios(config)
   .then((response: any) => {
-    console.log('responseARTICLE: ', response)
     return response
   })
   .catch((error: any) => {
@@ -38,4 +36,4 @@ const postNewArticle = async ({accessToken, newArticle, imageId}: PropsT) => {
    });
 }
 
-export default postNewArticle
+export default updateArticle

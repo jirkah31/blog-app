@@ -1,41 +1,40 @@
-import axios from "axios"
-import { apiConfig } from "../api_configs"
+import axios from "axios";
+import { apiConfig } from "../api_configs";
 
 type PropsT = {
-  accessToken: string,
-  imageId: string,
-  newArticle:{
-    title: string,
-    perex: string,
-  },
-}
+  accessToken: string;
+  imageId: string;
+  newArticle: {
+    title: string;
+    perex: string;
+  };
+};
 
-const postNewArticle = async ({accessToken, newArticle, imageId}: PropsT) => {
-  const { title, perex } = newArticle
+const postNewArticle = async ({ accessToken, newArticle, imageId }: PropsT) => {
+  const { title, perex } = newArticle;
   const config = {
     ...apiConfig,
-    method: 'post',
-    url: '/articles',
+    method: "post",
+    url: "/articles",
     data: {
-      ...apiConfig.data,
-      "title": title,
-      "perex": perex,
-      "imageId": imageId,
+      title,
+      perex,
+      imageId,
     },
     headers: {
       ...apiConfig.headers,
-      'Authorization': accessToken,
-      }
-  }
+      Authorization: accessToken,
+    },
+  };
 
   await axios(config)
-  .then((response: any) => {
-    console.log('responseARTICLE: ', response)
-    return response
-  })
-  .catch((error: any) => {
-    console.log("ERROR_post_articles" , error);
-   });
-}
+    .then((response: any) => {
+      console.log("responseARTICLE: ", response);
+      return response;
+    })
+    .catch((error: any) => {
+      console.log("ERROR_post_articles", error);
+    });
+};
 
-export default postNewArticle
+export default postNewArticle;

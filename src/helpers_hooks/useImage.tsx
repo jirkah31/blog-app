@@ -1,7 +1,6 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { apiConfig } from "../api_configs"
-import { useAccessToken } from "./useAccessToken"
 
 type ArticleType = {
   articleId: string,
@@ -12,10 +11,8 @@ type ArticleType = {
   lastUpdatedAt: string,
 }
 
-const useImage = (
-  // imageId?: string
+const useImage = (accessToken:string // imageId?: string
   ) => {
-  const {accessToken} = useAccessToken()
   const [image, setImage] = useState<ArticleType>({
     articleId: "",
     title: "",
@@ -25,7 +22,7 @@ const useImage = (
     lastUpdatedAt:"",
   })
 
-  const imageId = "bb85e564-a2bb-4b31-8f68-59bc60ed5429"
+  const imageId = "c80b11ec-d38d-4530-bbe9-c018d18a3fb8"
 
    useEffect(() => {
     const url = `/image/${imageId}`

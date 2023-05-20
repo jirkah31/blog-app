@@ -1,30 +1,30 @@
-import axios from "axios"
-import { apiConfig } from "../api_configs"
+import axios from "axios";
+import { apiConfig } from "../api_configs";
 
-type PropsT = {
-  articleId: string,
-  accessToken: string,
-}
+export type DeletePropsT = {
+  articleId: string;
+  accessToken: string | null;
+};
 
-const deleteArticle = async ({articleId, accessToken}: PropsT) => {
+const deleteArticle = async ({ articleId, accessToken }: DeletePropsT) => {
   const config = {
     ...apiConfig,
-    method: 'delete',
+    method: "delete",
     url: `/articles/${articleId}`,
     headers: {
       ...apiConfig.headers,
-      'Authorization': accessToken,
-      }
-  }
+      Authorization: accessToken,
+    },
+  };
 
   await axios(config)
-  .then((response: any) => {
-    console.log('responseDELETE: ', response)
-    return response
-  })
-  .catch((error: any) => {
-    console.log("ERROR_post_articles" , error);
-   });
-}
+    .then((response: any) => {
+      console.log("responseDELETE: ", response);
+      return response;
+    })
+    .catch((error: any) => {
+      console.log("ERROR_post_articles", error);
+    });
+};
 
-export default deleteArticle
+export default deleteArticle;

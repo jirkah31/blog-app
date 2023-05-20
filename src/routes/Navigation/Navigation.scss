@@ -1,36 +1,43 @@
 @import '../../variables';
 
 nav {
-	background-color: $nav-background;
-	height: 50px;
+  background-color: $nav-background;
+  height: 50px;
+  display: flex;
 
-	.container {
-		display: flex;
-		margin: 0 auto;
-		height: 100%;
-		width: $container-width;
-		align-items: center;
-		justify-content: space-between;
+  .container {
+    display: flex;
+    margin: 0 auto;
+    height: 100%;
+    width: $container-width;
+    align-items: center;
+    justify-content: space-between;
 
-		ul {
-			display: inline-flex;
-			list-style: none;
+    ul {
+      display: inline-flex;
+      list-style: none;
 
-			li {
-				display: flex;
-				margin-right: 20px;
-				align-items: center;
-			}
+      li {
+        display: flex;
+        margin-right: 20px;
+        align-items: center;
+      }
 
-			a {
-				text-decoration: none;
-				color: black;
-			}
-		}
+      a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        font-size: 22px;
+      }
+    }
 
-		.logIn {
-			color: $login-text-color;
-			text-decoration: none;
-		}
-	}
+    .logIn {
+      color: $login-text-color;
+      text-decoration: none;
+    }
+
+    .icon {
+      margin-left: 5px;
+    }
+  }
 }

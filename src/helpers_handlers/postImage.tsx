@@ -18,13 +18,11 @@ const postImage = async ({accessToken, image}: PropsT) => {
       'Content-Type': 'multipart/form-data',
     },
     data: {
-      ...apiConfig.data,
       "image": image,
     },
   }
   const imageIde = async () => await axios(config)
     .then((response: any) => {
-      console.log('responseIMAGE: ', response)
       return response.data[0].imageId
     })
     .catch((error: any) => {

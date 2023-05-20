@@ -1,5 +1,13 @@
 import { Link } from 'react-router-dom'
-import { articleAPIT } from "../../articlesAPI"
+
+export type articleAPIT = {
+  id?: string,
+  image?: HTMLImageElement,
+  title?: string,
+  perex?: string,
+  author?: string,
+  date?: string,
+}
 
 const Article = ({ id, title, perex, image, author, date  }: articleAPIT) => {
   return (

@@ -17,7 +17,6 @@ const updateArticle = async ({articleId, editedArticle, accessToken}: PropsT) =>
     method: 'patch',
     url: `/articles/${articleId}`,
     data: {
-      ...apiConfig.data,
       "title": title,
       "perex": perex,
     },

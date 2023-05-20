@@ -1,35 +1,33 @@
-import axios from "axios"
-import { useState, useEffect } from "react"
-import { apiConfig } from "../api_configs"
-import { useAccessToken } from "./useAccessToken"
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { apiConfig } from "../api_configs";
 
-const useAllArticles = () => {
-  const [articles, setArticles] = useState([])
-  const {accessToken} = useAccessToken()
+const useAllArticles = (accessToken: string | null) => {
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     const allArticlesConfig = {
       ...apiConfig,
-      url: '/articles',
+      url: "/articles",
       headers: {
         ...apiConfig.headers,
-        'Authorization': accessToken,
-        undefined
-      }
-    }
-      const getAllArticles = async (config: any) => {
+        Authorization: accessToken,
+        undefined,
+      },
+    };
+    const getAllArticles = async (config: any) => {
       await axios(config)
-      .then((response: any) => {
-        setArticles(response.data.items)  })
-      .catch((error: any) => {
-        console.log("ERROR_articles" , error);
-      });
-    }
-    getAllArticles(allArticlesConfig)
+        .then((response: any) => {
+          setArticles(response.data.items);
+        })
+        .catch((error: any) => {
+          console.log("ERROR_articles", error);
+        });
+    };
+    getAllArticles(allArticlesConfig);
+  }, [accessToken]);
 
-  },[accessToken])
+  return articles;
+};
 
-  return articles
-}
-
-export default useAllArticles
+export default useAllArticles;

@@ -1,4 +1,14 @@
+@import 'variables';
+@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
+
 * {
 	padding: 0;
 	margin: 0;
+	font-family: 'Neucha', cursive;
+}
+
+.container {
+	font-family: $base-font;
+	width: $container-width;
+	margin: 0 auto;
 }

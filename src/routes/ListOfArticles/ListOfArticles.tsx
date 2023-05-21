@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./MyArticles.scss";
+import "./ListOfArticles.scss";
 import { Link, Outlet } from "react-router-dom";
 import deleteArticle from "../../helpers_handlers/deleteArticle";
 import useAllArticles from "../../helpers_hooks/useAllArticles";
@@ -21,7 +21,7 @@ export default function MyArticles() {
   }: DeletePropsT) => {
     if (accessToken !== "") {
       await deleteArticle({ articleId, accessToken });
-      await setArticles(loadArticles);
+      await setArticles(loadArticles); // tady mi dam jde neaktualizovaný articles, protože to znovu nezavolá useAllArticles
     }
   };
 

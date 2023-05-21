@@ -1,6 +1,7 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { useState, useEffect } from "react";
 import { apiConfig } from "../api_configs";
+import { errorToast } from "../toasts/toasts";
 
 type ArticleType = {
   articleId: string;
@@ -9,6 +10,7 @@ type ArticleType = {
   createdAt: string;
   imageId: string;
   lastUpdatedAt: string;
+  comments?: any; //dotypovat jak semi povede implementovat comment functionality
 };
 
 type PropsT = {
@@ -37,13 +39,13 @@ const useArticle = ({ articleId }: PropsT) => {
       },
     };
 
-    const getArticle = async (config: any) => {
+    const getArticle = async (config: AxiosRequestConfig) => {
       await axios(config)
-        .then((response: any) => {
-          console.log('response_ARTICLE: ', response)
+        .then((response) => {
           setArticle(response.data);
         })
-        .catch((error: any) => {
+        .catch((error) => {
+          errorToast("New article wasn't posted!")
           console.log("ERROR_article", error);
         });
     };

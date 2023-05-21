@@ -3,18 +3,17 @@ import { apiConfig } from "../api_configs";
 
 type PropsT = {
   accessToken: string;
-  articleId: string;
-  comment: string;
+  content: string;
 };
 
-const postComments = ({accessToken, articleId, comment}: PropsT) => {
+const postComments = ({ accessToken, content }: PropsT) => {
   const config = {
     ...apiConfig,
-    url: "/comments",
     method: "post",
+    url: "/comments",
     data: {
-      comment,
-      articleId,
+      content,
+      author: "Jirka"
     },
     headers: {
       ...apiConfig.headers,
@@ -22,14 +21,16 @@ const postComments = ({accessToken, articleId, comment}: PropsT) => {
     },
   };
 
+  console.log("config: ", config);
+
   const getApiKey = async () => {
     await axios(config)
-      .then((response: any) => {
-        console.log("response.data.apiKey: ", response.data.apiKey);
+      .then((response) => {
+        console.log("response_COMMENTS: ", response);
         return response.data;
       })
-      .catch((error: any) => {
-        console.log("ERROR_api_key", error);
+      .catch((error) => {
+        console.log("ERROR_COMMENTS", error);
       });
   };
   getApiKey();

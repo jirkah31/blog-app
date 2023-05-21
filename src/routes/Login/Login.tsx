@@ -27,8 +27,6 @@ function Login() {
         setIsLoggedIn(true);
         sessionStorage.setItem("blogLoginJSON", blogLoginJSON);
         navigate("/my-articles");
-      } else {
-        alert("Bad login or password! Please try it again.");
       }
     }
   };

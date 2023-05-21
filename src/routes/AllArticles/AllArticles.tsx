@@ -7,22 +7,17 @@ import useAllArticles from "../../helpers_hooks/useAllArticles";
 import getFullDateFromISO from "../../helpers_function/getFullDateFromString";
 import useImage from "../../helpers_hooks/useImage";
 import useLoggedIn from "../../helpers_hooks/useLoggedIn";
-import getTenant from "../../helpers_function/getTenant";
 
 export default function AllArticles() {
   const { accessToken } = useLoggedIn();
   const articles = useAllArticles(accessToken);
   // const image = useImage(accessToken)
 
-  const tenantID = getTenant("f6802748-3e4c-4e86-8a53-2a38ef8f5a9b")
-
-  console.log('tenantID from ALLARTCILES: ', tenantID)
-
   return (
     <>
       <h1 className="title">Recent articles</h1>
-      {articles.map((article: any) => {
-        const { day, month, year } = getFullDateFromISO(article.createdAt);
+      {articles.map((article) => {
+        const { day, month, year } = getFullDateFromISO((article as { createdAt: string }).createdAt);
         const date = `${day}.${month}.${year}`;
         const { articleId, title, perex } = article;
 

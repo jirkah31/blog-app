@@ -1,38 +1,46 @@
-import axios from "axios"
-import { apiConfig } from "../api_configs"
+import axios, { AxiosRequestConfig } from "axios";
+import { apiConfig } from "../api_configs";
+import { successToast } from "../toasts/toasts";
+import { errorToast } from "../toasts/toasts";
 
 type PropsT = {
-  articleId?: string,
-  accessToken: string,
-  editedArticle:{
-    title: string,
-    perex: string,
-  },
-}
+  articleId?: string;
+  accessToken: string;
+  editedArticle: {
+    title: string;
+    perex: string;
+  };
+};
 
-const updateArticle = async ({articleId, editedArticle, accessToken}: PropsT) => {
-  const { title, perex } = editedArticle
-  const config = {
+const updateArticle = async ({
+  articleId,
+  editedArticle,
+  accessToken,
+}: PropsT) => {
+  const { title, perex } = editedArticle;
+  const config: AxiosRequestConfig = {
     ...apiConfig,
-    method: 'patch',
+    method: "patch",
     url: `/articles/${articleId}`,
     data: {
-      "title": title,
-      "perex": perex,
+      title: title,
+      perex: perex,
     },
     headers: {
       ...apiConfig.headers,
-      'Authorization': accessToken,
-      }
-  }
+      Authorization: accessToken,
+    },
+  };
 
   await axios(config)
-  .then((response: any) => {
-    return response
-  })
-  .catch((error: any) => {
-    console.log("ERROR_post_articles" , error);
-   });
-}
+    .then((response) => {
+      successToast("Article was updated!");
+      return response;
+    })
+    .catch((error) => {
+      errorToast("ERROR happend!");
+      console.log("ERROR_post_articles", error);
+    });
+};
 
-export default updateArticle
+export default updateArticle;

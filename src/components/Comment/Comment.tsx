@@ -1,31 +1,37 @@
-import React from 'react'
-import './Comment.scss'
-import Avatar from '../Avatar/Avatar'
-import avatar from '../../imgexample/avatar.png'
+import React from "react";
+import "./Comment.scss";
+import Avatar from "../Avatar/Avatar";
+import avatar from "../../imgexample/avatar.png";
 
-function Comment() {
-	return (
-		<div className='commentContainer'>
-			<Avatar avatar={avatar} />
+function Comment({ comment }: any) {
+	const { content, author, createdAt, score} = comment
 
-			<div className='comment'>
-				<div className='infoComment'>
-					<h4>Name Author</h4>
-					<time>2 hours ago</time>
-				</div>
+  return (
+    <div className="commentContainer">
+      <Avatar avatar={avatar} />
 
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam earum, ratione assumenda consectetur facere quod dolorum libero ducimus esse iusto eveniet placeat doloremque sint sequi praesentium expedita voluptates fuga maiores quis nihil exercitationem eius! Ducimus officia deleniti esse dolores ad natus cum quia iusto hic voluptatum quod, possimus corporis pariatur.
-				</p>
+      <div className="comment">
+        <div className="infoComment">
+          <h4>{author}</h4>
+          <time>{createdAt}</time>
+        </div>
 
-				<div className='counter'>
-					<h4>+3</h4>
-					<button type='button' className='arrow'>+</button>
-					<button type='button' className='arrow'>-</button>
-				</div>
-			</div>
-		</div>
-	)
+        <p>
+          {content}
+        </p>
+
+        <div className="counter">
+          <h4>{score}</h4>
+          <button type="button" className="arrow">
+            +
+          </button>
+          <button type="button" className="arrow">
+            -
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Comment;

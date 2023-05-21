@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { apiConfig } from "../api_configs";
 
 const postTenant = () => {
-  const config = {
+  const config: AxiosRequestConfig = {
     ...apiConfig,
     url: "/tenants",
     method: "post",
@@ -14,11 +14,11 @@ const postTenant = () => {
 
   const getApiKey = async () => {
     await axios(config)
-      .then((response: any) => {
+      .then((response) => {
         console.log("response.data.apiKey: ", response.data.apiKey);
         return response.data;
       })
-      .catch((error: any) => {
+      .catch((error) => {
         console.log("ERROR_api_key", error);
       });
   };

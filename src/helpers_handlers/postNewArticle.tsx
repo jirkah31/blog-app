@@ -1,5 +1,6 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { apiConfig } from "../api_configs";
+import { successToast, errorToast } from "../toasts/toasts";
 
 type PropsT = {
   accessToken: string;
@@ -12,7 +13,7 @@ type PropsT = {
 
 const postNewArticle = async ({ accessToken, newArticle, imageId }: PropsT) => {
   const { title, perex } = newArticle;
-  const config = {
+  const config: AxiosRequestConfig = {
     ...apiConfig,
     method: "post",
     url: "/articles",
@@ -28,11 +29,12 @@ const postNewArticle = async ({ accessToken, newArticle, imageId }: PropsT) => {
   };
 
   await axios(config)
-    .then((response: any) => {
-      console.log("responseARTICLE: ", response);
+    .then((response) => {
+      successToast("Article posted!")
       return response;
     })
-    .catch((error: any) => {
+    .catch((error) => {
+      errorToast("Error durring posting article!")
       console.log("ERROR_post_articles", error);
     });
 };

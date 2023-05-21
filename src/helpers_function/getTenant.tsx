@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { apiConfig } from "../api_configs";
 
 // type ArticleType = {
@@ -9,10 +9,6 @@ import { apiConfig } from "../api_configs";
 //   imageId: string;
 //   lastUpdatedAt: string;
 // };
-
-type PropsT = {
-  tenantId: string;
-};
 
 const getTenant = (tenantId: string) => {
   // const [article, setArticle] = useState<ArticleType>({
@@ -28,18 +24,17 @@ const getTenant = (tenantId: string) => {
   const method = "get";
   const recentArticleConfig = {
     baseURL: "https://fullstack.exercise.applifting.cz",
-
     url,
     method,
   };
 
-  const getArticle = async (config: any) => {
+  const getArticle = async (config: AxiosRequestConfig) => {
     await axios(config)
-      .then((response: any) => {
+      .then((response) => {
         console.log("responseTENANT: ", response);
         return response;
       })
-      .catch((error: any) => {
+      .catch((error) => {
         console.log("TENANT error", error);
       });
   };

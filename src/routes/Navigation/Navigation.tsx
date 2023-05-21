@@ -5,6 +5,9 @@ import { navLinks } from "../../links";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons/faPaw";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Navigation() {
   const [isLoddegIn, setIsLoggedIn] = useState(false);
   const [accessToken, setAccessToken] = useState("");
@@ -16,7 +19,6 @@ function Navigation() {
     if (!!loginDataJSON) {
       const loginData = JSON.parse(loginDataJSON);
       const timeLimit = timeNow - loginData.accessTokenTime;
-      console.log("timeLimit: ", timeLimit);
 
       if (timeLimit < 3600000) {
         setIsLoggedIn(true);
@@ -34,7 +36,7 @@ function Navigation() {
       <nav>
         <div className="container">
           <ul>
-            {navLinks.map((link: any) => {
+            {navLinks.map((link) => {
               return (
                 <li key={link.id}>
                   <Link to={link.path}>
@@ -64,6 +66,7 @@ function Navigation() {
       <div className="container">
         <Outlet context={{ isLoddegIn, setIsLoggedIn, accessToken }} />
       </div>
+      <ToastContainer />
     </div>
   );
 }

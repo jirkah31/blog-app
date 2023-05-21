@@ -2,7 +2,7 @@ import { useOutletContext } from "react-router-dom";
 
 type ContextType = {
   isLoddegIn: boolean;
-  setIsLoggedIn: any;
+  setIsLoggedIn : (value: boolean) => void;
   accessToken: string;
 };
 

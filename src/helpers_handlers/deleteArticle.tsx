@@ -1,5 +1,7 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { apiConfig } from "../api_configs";
+import { successToast } from "../toasts/toasts";
+import { errorToast } from "../toasts/toasts";
 
 export type DeletePropsT = {
   articleId: string;
@@ -7,7 +9,7 @@ export type DeletePropsT = {
 };
 
 const deleteArticle = async ({ articleId, accessToken }: DeletePropsT) => {
-  const config = {
+  const config: AxiosRequestConfig = {
     ...apiConfig,
     method: "delete",
     url: `/articles/${articleId}`,
@@ -18,11 +20,12 @@ const deleteArticle = async ({ articleId, accessToken }: DeletePropsT) => {
   };
 
   await axios(config)
-    .then((response: any) => {
-      console.log("responseDELETE: ", response);
+    .then((response) => {
+      successToast("Delete success!");
       return response;
     })
-    .catch((error: any) => {
+    .catch((error) => {
+      errorToast("Delete fail!");
       console.log("ERROR_post_articles", error);
     });
 };

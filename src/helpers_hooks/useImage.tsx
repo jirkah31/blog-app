@@ -1,56 +1,57 @@
-import axios from "axios"
-import { useState, useEffect } from "react"
-import { apiConfig } from "../api_configs"
+import axios, { AxiosRequestConfig } from "axios";
+import { useState, useEffect } from "react";
+import { apiConfig } from "../api_configs";
 
 type ArticleType = {
-  articleId: string,
-  title: string,
-  perex: string,
-  createdAt: string,
-  imageId: string,
-  lastUpdatedAt: string,
-}
+  articleId: string;
+  title: string;
+  perex: string;
+  createdAt: string;
+  imageId: string;
+  lastUpdatedAt: string;
+};
 
-const useImage = (accessToken:string // imageId?: string
-  ) => {
+const useImage = (
+  accessToken: string // imageId?: string
+) => {
   const [image, setImage] = useState<ArticleType>({
     articleId: "",
     title: "",
     perex: "",
     createdAt: "",
     imageId: "",
-    lastUpdatedAt:"",
-  })
+    lastUpdatedAt: "",
+  });
 
-  const imageId = "c80b11ec-d38d-4530-bbe9-c018d18a3fb8"
+  const imageId = "c80b11ec-d38d-4530-bbe9-c018d18a3fb8";
 
-   useEffect(() => {
-    const url = `/image/${imageId}`
-    const method = "get"
+  useEffect(() => {
+    const url = `/image/${imageId}`;
+    const method = "get";
     const recentArticleConfig = {
       ...apiConfig,
       url,
       method,
-      headers:{
+      headers: {
         ...apiConfig.headers,
-        'Authorization': accessToken
-      }
-    }
+        Authorization: accessToken,
+      },
+    };
 
-       const getArticle = async (config: any) => {
-       await axios(config)
-       .then((response: any) => {
-        setImage(response.data)
-        console.log('responseIMAGE: ', response)
+    const getArticle = async (config: AxiosRequestConfig) => {
+      await axios(config)
+        .then((response) => {
+          setImage(response.data);
+          console.log("responseIMAGE: ", response);
         })
-       .catch((error: any) => {
-         console.log("ERROR_article" , error);
-       });
-     }
-     getArticle(recentArticleConfig)
-   },[accessToken, imageId])
+        .catch((error) => {
+          console.log("ERROR_article", error);
+        });
+    };
+    getArticle(recentArticleConfig);
+  }, [accessToken, imageId]);
 
-   return image
-}
+  return image;
+};
 
-export default useImage
+export default useImage;

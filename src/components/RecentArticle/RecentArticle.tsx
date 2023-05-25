@@ -8,7 +8,7 @@ import image2 from "../../imgexample/image2.jpg";
 import useArticle from "../../helpers_hooks/useArticle";
 import getFullDateFromISO from "../../helpers_function/getFullDateFromString";
 import NewComment from "../NewComment/NewComment";
-import useLoggedIn from "../../helpers_hooks/useLoggedIn";
+import useRouterContext from "../../helpers_hooks/useRouterContext";
 
 function RecentArticle() {
   const { articleId } = useParams();
@@ -16,7 +16,7 @@ function RecentArticle() {
   const { title, perex, createdAt } = article;
   const { day, month, year } = getFullDateFromISO(createdAt);
   const date = `${day}.${month}.${year}`;
-  const { isLoddegIn, accessToken } = useLoggedIn();
+  const { isLoddegIn, accessToken } = useRouterContext();
   const comments = article.comments || [];
   const commentsLength = comments.length;
 

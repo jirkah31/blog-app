@@ -4,10 +4,10 @@ import postImage from "../../helpers_handlers/postImage";
 import useArticle from "../../helpers_hooks/useArticle";
 import { useNavigate, useParams } from "react-router-dom";
 import updateArticle from "../../helpers_handlers/updateArticle";
-import useLoggedIn from "../../helpers_hooks/useLoggedIn";
+import useRouterContext from "../../helpers_hooks/useRouterContext";
 
 export default function EditArticle() {
-  const { isLoddegIn, accessToken } = useLoggedIn();
+  const { isLoddegIn, accessToken } = useRouterContext();
   const { articleId } = useParams();
   const navigate = useNavigate();
   const article = useArticle({ articleId });

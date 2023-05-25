@@ -3,11 +3,11 @@ import "./NewArticle.scss";
 import postNewArticle from "../../helpers_handlers/postNewArticle";
 import postImage from "../../helpers_handlers/postImage";
 import { useNavigate } from "react-router-dom";
-import useLoggedIn from "../../helpers_hooks/useLoggedIn";
+import useRouterContext from "../../helpers_hooks/useRouterContext";
 
 export default function NewArticle() {
   const navigate = useNavigate();
-  const { isLoddegIn, accessToken } = useLoggedIn();
+  const { isLoddegIn, accessToken } = useRouterContext();
   const [title, setTitle] = useState("");
   const [perex, setPerex] = useState("");
   const [image, setImage] = useState<File>();

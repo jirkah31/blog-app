@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./Login.scss";
 import tryLogin from "../../helpers_function/tryLogin";
-import useLoggedIn from "../../helpers_hooks/useLoggedIn";
+import useRouterContext from "../../helpers_hooks/useRouterContext";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { isLoddegIn, setIsLoggedIn } = useLoggedIn();
+  const { isLoddegIn, setIsLoggedIn } = useRouterContext();
   const navigate = useNavigate();
   const time = new Date();
 

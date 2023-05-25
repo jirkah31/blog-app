@@ -2,12 +2,13 @@ import { useOutletContext } from "react-router-dom";
 
 type ContextType = {
   isLoddegIn: boolean;
-  setIsLoggedIn : (value: boolean) => void;
+  setIsLoggedIn: (value: boolean) => void;
   accessToken: string;
+  isDarkMode: boolean;
 };
 
-const useLoggedIn = () => {
+const useRouterContext = () => {
   return useOutletContext<ContextType>();
 };
 
-export default useLoggedIn;
+export default useRouterContext;

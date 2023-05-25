@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from "react";
 import "./Navigation.scss";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { navLinks } from "../../links";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaw } from "@fortawesome/free-solid-svg-icons/faPaw";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ThemeButton from "../../components/ThemeButton/ThemeButton";
+import classNames from "classnames";
+import NavigationButton from "../../components/NavigationButton/NavigationButton";
 
 function Navigation() {
   const [isLoddegIn, setIsLoggedIn] = useState(false);
   const [accessToken, setAccessToken] = useState("");
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [bounce, setBounce] = useState(false);
   const loginDataJSON = sessionStorage.getItem("blogLoginJSON");
   const time = new Date();
   const timeNow = time.getTime();
+  const className = classNames("icon", { "dark-mode": isDarkMode });
+
+  const onMouseOver = () => {
+    setBounce(true);
+  };
+
+  const onMouseOut = () => {
+    setBounce(false);
+  };
 
   useEffect(() => {
     if (!!loginDataJSON) {
@@ -32,39 +43,65 @@ function Navigation() {
   }, [loginDataJSON, timeNow]);
 
   return (
-    <div>
-      <nav>
+    <div className={classNames({"main-dark-mode": isDarkMode})}>
+      <nav className={classNames("navigation", { "dark-mode": isDarkMode })}>
         <div className="container">
           <ul>
             {navLinks.map((link) => {
               return (
                 <li key={link.id}>
-                  <Link to={link.path}>
+                  <NavigationButton
+                    bounce={bounce}
+                    onMouseOver={onMouseOver}
+                    onMouseOut={onMouseOut}
+                    className={className}
+                    to={link.path}
+                  >
                     {link.content}
-                    <FontAwesomeIcon className="icon" icon={faPaw} />
-                  </Link>
+                  </NavigationButton>
                 </li>
               );
             })}
             {isLoddegIn && (
               <li>
-                <Link to="/my-articles">
+                <NavigationButton
+                  bounce={bounce}
+                  onMouseOver={onMouseOver}
+                  onMouseOut={onMouseOut}
+                  className={className}
+                  to="/my-articles"
+                >
                   My articles
-                  <FontAwesomeIcon className="icon" icon={faPaw} />
-                </Link>
+                </NavigationButton>
               </li>
             )}
             <li>
-              <Link to="/login">
+              <NavigationButton
+                className={className}
+                bounce={bounce}
+                onMouseOver={onMouseOver}
+                onMouseOut={onMouseOut}
+                to="/login"
+              >
                 {isLoddegIn ? "Log Out" : "Log In"}
-                <FontAwesomeIcon className="icon" icon={faPaw} />
-              </Link>
+              </NavigationButton>
             </li>
           </ul>
+
+          <ThemeButton
+            bounce={bounce}
+            onMouseOver={onMouseOver}
+            onMouseOut={onMouseOut}
+            setIsDarkMode={setIsDarkMode}
+            isDarkMode={isDarkMode}
+            className={className}
+          />
         </div>
       </nav>
       <div className="container">
-        <Outlet context={{ isLoddegIn, setIsLoggedIn, accessToken }} />
+        <Outlet
+          context={{ isLoddegIn, setIsLoggedIn, accessToken, isDarkMode }}
+        />
       </div>
       <ToastContainer />
     </div>

@@ -7,13 +7,16 @@ $lighter-text: #c0c0c0;
 $login-text-color: #366bff;
 $shadow: #ccc;
 $nav-background: #e8e7e7;
+$dark-mode-text-color: white;
+$navigation-background-color: black;
+$dark-mode-main-page: rgb(83, 83, 83);
 
 @mixin set-button {
-	background-color: $color-button;
-	color: white;
-	padding: 10px 15px;
-	border: none;
-	cursor: pointer;
-	border-radius: 5px;
-	font-size: 1em;
-};
+  background-color: $color-button;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1em;
+}

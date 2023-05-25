@@ -4,10 +4,10 @@ import { Link, Outlet } from "react-router-dom";
 import deleteArticle from "../../helpers_handlers/deleteArticle";
 import useAllArticles from "../../helpers_hooks/useAllArticles";
 import { DeletePropsT } from "../../helpers_handlers/deleteArticle";
-import useLoggedIn from "../../helpers_hooks/useLoggedIn";
+import useRouterContext from "../../helpers_hooks/useRouterContext";
 
 export default function MyArticles() {
-  const { isLoddegIn, accessToken } = useLoggedIn();
+  const { isLoddegIn, accessToken } = useRouterContext();
   const loadArticles = useAllArticles(accessToken);
   const [articles, setArticles] = useState([]);
 

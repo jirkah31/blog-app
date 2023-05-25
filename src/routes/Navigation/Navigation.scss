@@ -1,6 +1,6 @@
-@import '../../variables';
+@import "../../variables";
 
-nav {
+.navigation {
   background-color: $nav-background;
   height: 50px;
   display: flex;
@@ -40,4 +40,13 @@ nav {
       margin-left: 5px;
     }
   }
+}
+
+.navigation.dark-mode {
+  background-color: $navigation-background-color;
+}
+
+.main-dark-mode {
+  background-color: rgb(95, 95, 95);
+  min-height: 100vh;
 }

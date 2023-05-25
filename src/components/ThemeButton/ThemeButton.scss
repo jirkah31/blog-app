@@ -1,0 +1,13 @@
+@import "../../variables";
+
+.theme-button {
+  border: none;
+  background-color: transparent;
+  .icon.dark-mode {
+    color: $dark-mode-text-color;
+  }
+}
+
+.theme-button:hover {
+  cursor: pointer;
+}

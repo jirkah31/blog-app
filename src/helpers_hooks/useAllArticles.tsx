@@ -2,10 +2,10 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { apiConfig } from "../api_configs";
 
-const useAllArticles = (accessToken: string | null) => {
+const useAllArticles = (accessToken: string) => {
   const [articles, setArticles] = useState([]);
 
-  useEffect(() => {
+  
     const allArticlesConfig = {
       ...apiConfig,
       url: "/articles",
@@ -16,6 +16,7 @@ const useAllArticles = (accessToken: string | null) => {
       },
     };
     const getAllArticles = async (config: any) => {
+      console.log('call: ', )
       await axios(config)
         .then((response: any) => {
           setArticles(response.data.items);
@@ -25,9 +26,12 @@ const useAllArticles = (accessToken: string | null) => {
         });
     };
     getAllArticles(allArticlesConfig);
-  }, [accessToken]);
+  
 
-  return articles;
+  return {
+    articles,
+    refetch: getAllArticles
+  };
 };
 
 export default useAllArticles;

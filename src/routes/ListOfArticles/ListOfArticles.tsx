@@ -8,8 +8,7 @@ import useRouterContext from "../../helpers_hooks/useRouterContext";
 
 export default function MyArticles() {
   const { isLoddegIn, accessToken } = useRouterContext();
-  const loadArticles = useAllArticles(accessToken);
-  const [articles, setArticles] = useState([]);
+  const {articles, refetch} = useAllArticles(accessToken);
 
   useEffect(() => {
     setArticles(loadArticles);

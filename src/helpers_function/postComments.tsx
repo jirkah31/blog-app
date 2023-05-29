@@ -6,6 +6,8 @@ type PropsT = {
   content: string;
 };
 
+// Tady ti chybí ještě posílat articleId
+// Zkoušel sem ho tam přidat, ale stejně mi to nechtělo projít, ale backend nevrací žádnou konkrétní chybu...
 const postComments = ({ accessToken, content }: PropsT) => {
   const config = {
     ...apiConfig,

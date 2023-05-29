@@ -22,6 +22,9 @@ export default function MyArticles() {
     if (accessToken !== "") {
       await deleteArticle({ articleId, accessToken });
       await setArticles(loadArticles); // tady mi dam jde neaktualizovaný articles, protože to znovu nezavolá useAllArticles
+      // Aby se ti načetli aktuální články, musís znovu zavolat fci getAllArticles.
+      // Takhle si tam ukládáš znova to, co už si tam měl uložený
+    
     }
   };
 

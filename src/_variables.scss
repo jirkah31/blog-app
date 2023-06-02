@@ -6,10 +6,12 @@ $color-button: #1363b9;
 $lighter-text: #c0c0c0;
 $login-text-color: #366bff;
 $shadow: #ccc;
-$nav-background: #e8e7e7;
-$dark-mode-text-color: white;
-$navigation-background-color: black;
-$dark-mode-main-page: rgb(83, 83, 83);
+$nav-background: hsl(0, 0%, 69%);
+$dark-mode-text-color: rgb(209, 209, 209);
+$dark-mode-nav-text: rgb(150, 75, 180);
+$navigation-background-color: rgb(39, 39, 39);
+$dakr-mode-main-background: rgb(27, 27, 27);
+$dark-mode-link: rgb(58, 184, 184);
 
 @mixin set-button {
   background-color: $color-button;

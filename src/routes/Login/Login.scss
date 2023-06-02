@@ -1,60 +1,92 @@
-@import '../../variables';
+@import "../../variables";
 
 .login {
-	width: 400px;
-	height: 400px;
-	margin: 15vh auto;
-	border-radius: 15px;
-	box-shadow: 15px 15px 40px $shadow;
-	display: flex;
+  width: 400px;
+  height: 400px;
+  margin: 15vh auto;
+  border-radius: 15px;
+  box-shadow: 15px 15px 40px $shadow;
+  display: flex;
 
-	.border {
-		margin: 40px;
-		position: relative;
-	}
+  .border {
+    margin: 40px;
+    position: relative;
 
-	h2 {
-		font: {
-			size: 2em;
-		}
+    h2 {
+      font: {
+        size: 2em;
+      }
+      margin-bottom: 30px;
+    }
 
-		margin-bottom: 30px;
-	}
+    form {
+      label {
+        font: {
+          size: 1.2em;
+          weight: bold;
+        }
+      }
 
-	form {
-		label {
-			font: {
-				size: 1.2em;
-				weight: bold;
-			}
-		}
+      input {
+        box-sizing: border-box;
+        width: 100%;
+        border: 1px solid $border-line;
+        transition: 0.5s;
+        border-radius: 4px;
+        padding: 10px 10px;
+        font-size: 1em;
+        outline: none;
+        margin: {
+          top: 10px;
+          bottom: 20px;
+        }
+        &:hover {
+          border: 1px solid darken($border-line, 20%);
+        }
+        &:focus-visible {
+          border: 1px solid darken($border-line, 50%) !important;
+        }
+      }
+    }
+  }
+}
 
-		input {
-			box-sizing: border-box;
-			width: 100%;
-			border: 1px solid $border-line;
-			border-radius: 4px;
-			padding: 10px 10px;
-			font-size: 1em;
+.submit-button {
+  @include set-button;
 
-			margin: {
-				top: 10px;
-				bottom: 20px;
-			}
-		}
-	}
+  float: right;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 
-	button {
-		@include set-button;
+  &:hover,
+  &:focus {
+    background-color: lighten($color-button, 20%);
+  }
+}
 
-		float: right;
-		position: absolute;
-		right: 0;
-		bottom: 0;
+.login.login-dark-mode {
+  box-shadow: 15px 15px 40px black;
+  background-color: $navigation-background-color;
 
-		&:hover,
-		&:focus {
-			background-color: lighten($color-button, 20%);
-		}
-	}
+  .border {
+    color: $dark-mode-text-color;
+
+    input {
+      color: $dark-mode-text-color;
+      background-color: $navigation-background-color;
+      border: 1px solid black;
+      transition: 0.5s;
+
+      &:hover {
+        border: 1px solid lighten(black, 20%);
+      }
+    }
+
+    form {
+      .submit-button {
+        background-color: $dark-mode-nav-text;
+      }
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./NewArticle.scss";
-import postNewArticle from "../../helpers_handlers/postNewArticle";
-import postImage from "../../helpers_handlers/postImage";
+import postNewArticle from "../../helpers_function/postNewArticle";
+import postImage from "../../helpers_function/postImage";
 import { useNavigate } from "react-router-dom";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 

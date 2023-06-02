@@ -30,11 +30,12 @@ const postNewArticle = async ({ accessToken, newArticle, imageId }: PropsT) => {
 
   await axios(config)
     .then((response) => {
-      successToast("Article posted!")
-      return response;
+      successToast("Article posted!");
+      console.log("response article", response);
+      return;
     })
     .catch((error) => {
-      errorToast("Error durring posting article!")
+      errorToast("Error durring posting article!");
       console.log("ERROR_post_articles", error);
     });
 };

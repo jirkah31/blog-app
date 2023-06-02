@@ -7,12 +7,14 @@ type PropsT = {
   articleId?: string;
 };
 
-const NewComment = ({  articleId, accessToken }: PropsT) => {
+const NewComment = ({ articleId, accessToken }: PropsT) => {
   const [content, setContent] = useState("");
 
   const handleComment = (event: React.FormEvent) => {
-    event.preventDefault()
-      postComments({ accessToken, content });
+    event.preventDefault();
+    if (articleId && accessToken && content) {
+      postComments({ articleId, accessToken, content });
+    }
   };
 
   return (

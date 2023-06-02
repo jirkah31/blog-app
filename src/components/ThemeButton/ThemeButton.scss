@@ -1,6 +1,7 @@
 @import "../../variables";
 
 .theme-button {
+  position: relative;
   border: none;
   background-color: transparent;
   .icon.dark-mode {

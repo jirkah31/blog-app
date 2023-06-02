@@ -23,7 +23,7 @@ const useImage = (
     lastUpdatedAt: "",
   });
 
-  const imageId = "c80b11ec-d38d-4530-bbe9-c018d18a3fb8";
+  const imageId = "78cb2668-f2a5-4539-a563-2534a7227791";
 
   useEffect(() => {
     const url = `/image/${imageId}`;

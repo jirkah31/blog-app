@@ -11,15 +11,14 @@ import classNames from "classnames";
 
 export default function AllArticles() {
   const { accessToken, isDarkMode } = useRouterContext();
-  const articles = useAllArticles(accessToken);
+  const { articles } = useAllArticles(accessToken);
   // const image = useImage(accessToken)
-
   return (
     <>
       <h1 className={classNames("title", { "dark-mode": isDarkMode })}>
         Recent articles
       </h1>
-      {articles.map((article) => {
+      {articles.map((article: any) => {
         const { day, month, year } = getFullDateFromISO(
           (article as { createdAt: string }).createdAt
         );

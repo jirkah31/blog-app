@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./EditArticle.scss";
-import postImage from "../../helpers_handlers/postImage";
+import postImage from "../../helpers_function/postImage";
 import useArticle from "../../helpers_hooks/useArticle";
 import { useNavigate, useParams } from "react-router-dom";
-import updateArticle from "../../helpers_handlers/updateArticle";
+import updateArticle from "../../helpers_function/updateArticle";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 
 export default function EditArticle() {

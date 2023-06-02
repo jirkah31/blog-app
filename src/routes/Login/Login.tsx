@@ -3,13 +3,15 @@ import "./Login.scss";
 import tryLogin from "../../helpers_function/tryLogin";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import { useNavigate } from "react-router-dom";
+import classNames from "classnames";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { isLoddegIn, setIsLoggedIn } = useRouterContext();
+  const { isLoddegIn, setIsLoggedIn, isDarkMode } = useRouterContext();
   const navigate = useNavigate();
   const time = new Date();
+  const className = { "login-dark-mode": isDarkMode };
 
   const handleLogIn = async (event: React.FormEvent) => {
     event?.preventDefault();
@@ -38,7 +40,7 @@ function Login() {
   };
 
   return (
-    <div className="login">
+    <div className={classNames("login", className)}>
       <div className="border">
         {isLoddegIn ? (
           <>
@@ -53,24 +55,30 @@ function Login() {
             <form method="post" onSubmit={handleLogIn}>
               <label htmlFor="email">Usename</label>
               <input
+                id="email"
                 type="text"
                 name="email"
                 placeholder="username"
                 required
                 value={username}
                 onChange={(event) => setUsername(event.target.value)}
+                autoComplete="on"
               />
 
               <label htmlFor="password">Password</label>
               <input
+                id="password"
                 type="password"
                 name="password"
                 placeholder="**********"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
+                autoComplete="on"
                 required
               />
-              <button type="submit">Log In</button>
+              <button className="submit-button" type="submit">
+                Log In
+              </button>
             </form>
           </>
         )}

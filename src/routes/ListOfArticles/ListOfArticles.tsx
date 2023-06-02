@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
 import "./ListOfArticles.scss";
 import { Link, Outlet } from "react-router-dom";
-import deleteArticle from "../../helpers_handlers/deleteArticle";
+import deleteArticle from "../../helpers_function/deleteArticle";
 import useAllArticles from "../../helpers_hooks/useAllArticles";
-import { DeletePropsT } from "../../helpers_handlers/deleteArticle";
+import { DeletePropsT } from "../../helpers_function/deleteArticle";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
+import useImage from "../../helpers_hooks/useImage";
 
 export default function MyArticles() {
   const { isLoddegIn, accessToken } = useRouterContext();
-  const loadArticles = useAllArticles(accessToken);
-  const [articles, setArticles] = useState([]);
+  const [newArticles, setNewArticles] = useState([]);
+  const { articles, refetch } = useAllArticles(accessToken);
+  const image = useImage(accessToken);
+  console.log("useIMage : ", image);
 
   useEffect(() => {
-    setArticles(loadArticles);
-  }, [loadArticles]);
+    setNewArticles(articles);
+  }, [articles]);
 
   const handleDeleteArticle = async ({
     articleId,
     accessToken,
   }: DeletePropsT) => {
-    if (accessToken !== "") {
+    if (accessToken && articleId) {
       await deleteArticle({ articleId, accessToken });
-      await setArticles(loadArticles); // tady mi dam jde neaktualizovaný articles, protože to znovu nezavolá useAllArticles
+      refetch();
+      await setNewArticles(articles);
     }
   };
 
@@ -49,7 +53,7 @@ export default function MyArticles() {
                 <th># of comments</th>
                 <th>Action</th>
               </tr>
-              {articles.map((article) => {
+              {newArticles.map((article) => {
                 const { articleId, title, perex } = article;
                 return (
                   <tr key={articleId}>

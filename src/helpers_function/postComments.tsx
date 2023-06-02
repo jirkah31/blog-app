@@ -4,16 +4,18 @@ import { apiConfig } from "../api_configs";
 type PropsT = {
   accessToken: string;
   content: string;
+  articleId: string;
 };
 
-const postComments = ({ accessToken, content }: PropsT) => {
+const postComments = ({ articleId, accessToken, content }: PropsT) => {
   const config = {
     ...apiConfig,
     method: "post",
     url: "/comments",
     data: {
+      articleId,
       content,
-      author: "Jirka"
+      author: "Jirka",
     },
     headers: {
       ...apiConfig.headers,

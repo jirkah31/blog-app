@@ -43,7 +43,7 @@ function Navigation() {
   }, [loginDataJSON, timeNow]);
 
   return (
-    <div className={classNames({"main-dark-mode": isDarkMode})}>
+    <div className={classNames({ "main-dark-mode": isDarkMode })}>
       <nav className={classNames("navigation", { "dark-mode": isDarkMode })}>
         <div className="container">
           <ul>

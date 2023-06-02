@@ -1,7 +1,6 @@
 import React from "react";
 import "./RecentArticle.scss";
 import Comment from "../Comment/Comment";
-
 import RelatedArticles from "../RelatedArticles/RelatedArticles";
 import { useParams } from "react-router-dom";
 import image2 from "../../imgexample/image2.jpg";
@@ -53,7 +52,8 @@ function RecentArticle() {
         )}
 
         <div className="comments">
-          {comments.map((comment: any) => { //dotypovat jak semi povede implementovat comment functionality
+          {comments.map((comment: any) => {
+            //dotypovat jak semi povede implementovat comment functionality
             const oneComment = { ...comment };
             return <Comment comment={oneComment} />;
           })}

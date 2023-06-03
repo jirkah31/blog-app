@@ -5,17 +5,17 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import About from "./routes/About/About";
 import Login from "./routes/Login/Login";
-import Navigation from "./routes/Navigation/Navigation";
 import AllArticles from "./routes/AllArticles/AllArticles";
 import MyArticles from "./routes/ListOfArticles/ListOfArticles";
 import NewArticle from "./routes/NewArticle/NewArticle";
 import RecentArticle from "./components/RecentArticle/RecentArticle";
 import EditArticle from "./routes/EditArticle/EditArticle";
+import App from "./App";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navigation />,
+    element: <App />,
     errorElement: <ErrorPage />,
     children: [
       {

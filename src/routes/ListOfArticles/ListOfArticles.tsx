@@ -15,7 +15,6 @@ export default function MyArticles() {
   const { articles, refetch }: { articles: any; refetch: any } =
     useAllArticles(accessToken);
   const image = useImage(accessToken);
-  console.log("useIMage : ", image);
 
   useEffect(() => {
     setNewArticles(articles);

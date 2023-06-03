@@ -23,12 +23,9 @@ const postComments = ({ articleId, accessToken, content }: PropsT) => {
     },
   };
 
-  console.log("config: ", config);
-
   const getApiKey = async () => {
     await axios(config)
       .then((response) => {
-        console.log("response_COMMENTS: ", response);
         return response.data;
       })
       .catch((error) => {

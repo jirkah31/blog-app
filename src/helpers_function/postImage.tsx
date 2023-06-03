@@ -21,7 +21,6 @@ const postImage = async ({ accessToken, image }: PropsT) => {
         },
       })
       .then((response) => {
-        console.log("response image: ", response);
         return response.data[0].imageId;
       })
       .catch((error) => console.log("error image: ", error));

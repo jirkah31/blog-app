@@ -31,7 +31,6 @@ const getTenant = (tenantId: string) => {
   const getArticle = async (config: AxiosRequestConfig) => {
     await axios(config)
       .then((response) => {
-        console.log("responseTENANT: ", response);
         return response;
       })
       .catch((error) => {

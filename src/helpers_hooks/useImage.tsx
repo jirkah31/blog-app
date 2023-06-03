@@ -42,7 +42,6 @@ const useImage = (
       await axios(config)
         .then((response) => {
           setImage(response.data);
-          console.log("responseIMAGE: ", response);
         })
         .catch((error) => {
           console.log("ERROR_article", error);

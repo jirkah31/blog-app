@@ -31,7 +31,6 @@ const postNewArticle = async ({ accessToken, newArticle, imageId }: PropsT) => {
   await axios(config)
     .then((response) => {
       successToast("Article posted!");
-      console.log("response article", response);
       return;
     })
     .catch((error) => {

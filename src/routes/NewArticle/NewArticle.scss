@@ -1,79 +1,102 @@
-@import '../../variables';
+@import "../../variables";
 
 .new-articles {
-	font-family: $base-font;
-	width: $container-width;
-	margin: 0 auto;
+  font-family: $base-font;
+  width: $container-width;
+  margin: 0 auto;
 
-	.header {
-		display: flex;
-		align-items: center;
-		margin: {
-			top: 100px;
-			bottom: 50px;
-		}
+  .header {
+    display: flex;
+    align-items: center;
+    margin: {
+      top: 100px;
+      bottom: 50px;
+    }
 
-		h1 {
-			font-size: 2.5em;
-			margin-right: 50px;
-		}
+    h1 {
+      font-size: 2.5em;
+      margin-right: 50px;
+    }
 
-		button {
-			@include set-button;
-			position: relative;
+    button {
+      @include set-button;
+      position: relative;
 
-			&:hover,
-			&:focus {
-				background-color: lighten($color-button, 20%);
-			}
-		}
-	}
+      &:hover,
+      &:focus {
+        background-color: lighten($color-button, 20%);
+      }
+    }
+  }
 
-	form {
+  form {
+    .input-name {
+      display: inline-block;
+      font-size: 1em;
+      margin-top: 20px;
+    }
 
-		.input-name {
-			display: inline-block;
-			font-size: 1em;
-			margin-top: 20px;
-		}
+    #title-input {
+      font-size: 1.3em;
+      padding: 5px 10px;
+      border: 1px solid $border-line;
+      width: $minor-container;
+      margin: {
+        top: 10px;
+        bottom: 30px;
+      }
+    }
 
-		input[type=text] {
-			font-size: 1.3em;
-			padding: 5px 10px;
-			border: 1px solid $border-line;
-			width: $minor-container;
-			margin: {
-				top: 10px;
-				bottom: 30px
-			}
-		}
+    .file-btn {
+      @include set-button;
 
-		.file-btn {
-			@include set-button;
-			
-			display: inline-block;
-			margin: {
-				top: 10px;
-				bottom: 30px;
-			}
+      display: inline-block;
+      margin: {
+        top: 10px;
+        bottom: 30px;
+      }
 
-			&:hover,
-			&:focus {
-				background-color: lighten($color-button, 20%);
-			}
-		}
+      &:hover,
+      &:focus {
+        background-color: lighten($color-button, 20%);
+      }
+    }
 
-		#content {
-			font-family: $base-font;
-			min-height: 30vh;
-			font-size: 1.3em;
-			padding: 5px 10px;
-			border: 1px solid $border-line;
-			width: $minor-container;
-			margin: {
-				top: 10px;
-				bottom: 30px
-			}
-		}
-	}
+    #content-input {
+      font-family: $base-font;
+      min-height: 30vh;
+      font-size: 1.3em;
+      padding: 5px 10px;
+      border: 1px solid $border-line;
+      width: $minor-container;
+      margin: {
+        top: 10px;
+        bottom: 30px;
+      }
+    }
+  }
+}
+
+//Dark mode
+
+.new-articles.dark-mode {
+  .submit-button {
+    @include submit-button-dark-mode;
+  }
+
+  #title-input,
+  #content-input {
+    background-color: $dakr-mode-main-background;
+    border: 1px solid $dark-mode-border-line;
+    outline: none;
+    caret-color: white;
+    color: $dark-mode-text-color;
+
+    &:focus-visible {
+      border: 2px solid lighten($dark-mode-border-line, 10%);
+      margin-top: 9px;
+      margin-left: -1px;
+      margin-bottom: 29px;
+    }
+  }
 }

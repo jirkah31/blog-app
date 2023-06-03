@@ -1,7 +1,8 @@
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import "./NavigationButton.scss";
+import "./ButtonNavigation.scss";
+import classNames from "classnames";
 
 type PropsT = {
   to: string;
@@ -12,7 +13,7 @@ type PropsT = {
   onMouseOut: any;
 };
 
-const NavigationButton = ({
+const ButtonNavigation = ({
   to,
   className,
   bounce,
@@ -21,7 +22,11 @@ const NavigationButton = ({
   children,
 }: PropsT) => {
   return (
-    <div onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+    <div
+      className={classNames("nav-btn")}
+      onMouseOver={onMouseOver}
+      onMouseOut={onMouseOut}
+    >
       <Link to={to} className={className}>
         {children}
         <FontAwesomeIcon className={className} bounce={bounce} icon={faPaw} />
@@ -30,4 +35,4 @@ const NavigationButton = ({
   );
 };
 
-export default NavigationButton;
+export default ButtonNavigation;

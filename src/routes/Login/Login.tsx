@@ -45,7 +45,11 @@ function Login() {
         {isLoddegIn ? (
           <>
             <h2>You are still logged in!</h2>
-            <button type="button" onClick={handleLogOut}>
+            <button
+              className="submit-button"
+              type="button"
+              onClick={handleLogOut}
+            >
               Log Out
             </button>
           </>

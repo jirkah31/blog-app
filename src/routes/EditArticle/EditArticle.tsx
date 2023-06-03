@@ -5,9 +5,10 @@ import useArticle from "../../helpers_hooks/useArticle";
 import { useNavigate, useParams } from "react-router-dom";
 import updateArticle from "../../helpers_function/updateArticle";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
+import classNames from "classnames";
 
 export default function EditArticle() {
-  const { isLoddegIn, accessToken } = useRouterContext();
+  const { isLoddegIn, accessToken, isDarkMode } = useRouterContext();
   const { articleId } = useParams();
   const navigate = useNavigate();
   const article = useArticle({ articleId });
@@ -50,11 +51,15 @@ export default function EditArticle() {
   return (
     <>
       {isLoddegIn ? (
-        <div className="new-articles">
+        <div
+          className={classNames("edit-articles", { "dark-mode": isDarkMode })}
+        >
           <form onSubmit={handleSubmit}>
             <div className="header">
               <h1>Edit article</h1>
-              <button type="submit">Edit article</button>
+              <button className="submit-button" type="submit">
+                Edit article
+              </button>
             </div>
 
             <label htmlFor="title" className="input-name">
@@ -63,7 +68,7 @@ export default function EditArticle() {
             <br />
             <input
               type="text"
-              id="title"
+              id="title-input"
               name="title"
               placeholder="My First Article"
               value={title}
@@ -73,7 +78,7 @@ export default function EditArticle() {
 
             <p className="input-name">Featured image</p>
             <br />
-            <label htmlFor="filePicker" className="file-btn">
+            <label htmlFor="filePicker" className="submit-button file-btn">
               Upload an Image
             </label>
             <input
@@ -89,7 +94,7 @@ export default function EditArticle() {
             </label>
             <br />
             <textarea
-              id="content"
+              id="content-input"
               name="content"
               placeholder="Supports markdown. Yay!"
               value={perex}

@@ -1,86 +1,97 @@
-@import '../../variables';
+@import "../../variables";
 
-.articleContainer {
-	width: $minor-container;
-	margin: 0 auto;
+.article-container {
+  width: $minor-container;
+  margin: 0 auto;
 
-	.commentArticle {
-		display: inline-table;
-		border-bottom: 1px solid $border-line;
-		padding-bottom: 30px;
-		margin-bottom: 20px;
+  .comment-article {
+    display: inline-table;
+    border-bottom: 2px solid $border-line;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
 
-		h2 {
-			font-size: 2em;
-			margin: {
-				top: 35px;
-				bottom: 20px;
-			}
-		}
+    .article-title {
+      font-size: 2em;
+      margin: {
+        top: 35px;
+        bottom: 20px;
+      }
+    }
 
-		h3,
-		time {
-			color: $lighter-text;
-			font: {
-				size: .9em;
-				weight: normal;
-			}
-			margin: {
-				right: 10px;
-				bottom: 15px;
-			}
-		}
+    .article-author,
+    time {
+      color: $lighter-text;
+      font: {
+        size: 0.9em;
+        weight: normal;
+      }
+      margin: {
+        right: 10px;
+        bottom: 15px;
+      }
+    }
 
-		.articleImg {
-			width: 100%;
-			margin: {
-				bottom: 15px;
-			}
-		}
+    .article-img {
+      width: 100%;
+      margin: {
+        bottom: 15px;
+      }
+    }
 
-		p {
-			font-size: 1.2em;
-			line-height: 1.5em;
-		}
-	}
+    .content {
+      font-size: 1.2em;
+      line-height: 1.5em;
+    }
+  }
 
-	.info {
-		margin-bottom: 10px;
+  .info {
+    margin-bottom: 10px;
 
-		span {
-			font: {
-				size: 1.5em;
-				weight: bold;
-			}
-		}
-	}
+    span {
+      font: {
+        size: 1.5em;
+        weight: bold;
+      }
+    }
+  }
 
-	.newComment {
-		display: flex;
-		margin-bottom: 15px;
+  .newComment {
+    display: flex;
+    margin-bottom: 15px;
 
-		input {
-			box-sizing: border-box;
-			width: 100%;
-			border: 1px solid $border-line;
-			border-radius: 5px;
-			padding: 10px;
-			font-size: 1em;
-			margin: {
-				top: 10px;
-				bottom: 20px;
-				left: 20px
-			}
-		}
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      border: 1px solid $border-line;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 1em;
+      margin: {
+        top: 10px;
+        bottom: 20px;
+        left: 20px;
+      }
+    }
 
-		.avatarContainer {
-			display: flex;
-			margin-right: 15px;
+    .avatarContainer {
+      display: flex;
+      margin-right: 15px;
 
-			.avatarImg {
-				object-fit: cover;
-				border-radius: 50%;
-			}
-		}
-	}
+      .avatarImg {
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+//Dark mode
+.article-container.dark-mode {
+  .comment-article {
+    border-bottom: 2px solid rgb(88, 88, 88);
+  }
+  .article-date,
+  .article-author {
+    color: darken($dark-mode-text-color, 40%);
+  }
 }

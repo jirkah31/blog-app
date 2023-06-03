@@ -8,6 +8,7 @@ import useArticle from "../../helpers_hooks/useArticle";
 import getFullDateFromISO from "../../helpers_function/getFullDateFromString";
 import NewComment from "../NewComment/NewComment";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
+import classNames from "classnames";
 
 function RecentArticle() {
   const { articleId } = useParams();
@@ -15,32 +16,35 @@ function RecentArticle() {
   const { title, perex, createdAt } = article;
   const { day, month, year } = getFullDateFromISO(createdAt);
   const date = `${day}.${month}.${year}`;
-  const { isLoddegIn, accessToken } = useRouterContext();
+  const { isLoddegIn, accessToken, isDarkMode } = useRouterContext();
   const comments = article.comments || [];
   const commentsLength = comments.length;
+  const darkModeContainer = classNames("article-container", {
+    "dark-mode": isDarkMode,
+  });
 
   return (
     <div>
       {/* <RelatedArticles /> */}
 
-      <div className="articleContainer">
-        <article className="commentArticle">
-          <div className="">
-            <h2>{title}</h2>
+      <div className={darkModeContainer}>
+        <article className="comment-article">
+          <div>
+            <h2 className="article-title">{title}</h2>
             <div className="info">
-              <h3>author</h3>
-              <time>{date}</time>
+              <h3 className="article-author">author</h3>
+              <time className="article-date">{date}</time>
             </div>
             <div>
               <img
-                className="articleImg"
+                className="article-img"
                 src={image2}
                 alt="cat"
                 width="100%"
                 height="100%"
               />
             </div>
-            <p>{perex}</p>
+            <p className="content">{perex}</p>
           </div>
         </article>
         <div className="info">

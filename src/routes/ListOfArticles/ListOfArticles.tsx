@@ -6,11 +6,14 @@ import useAllArticles from "../../helpers_hooks/useAllArticles";
 import { DeletePropsT } from "../../helpers_function/deleteArticle";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import useImage from "../../helpers_hooks/useImage";
+import classNames from "classnames";
+import ButtonSmall from "../../components/ButtonSmall/ButtonSmall";
 
 export default function MyArticles() {
-  const { isLoddegIn, accessToken } = useRouterContext();
+  const { isLoddegIn, accessToken, isDarkMode } = useRouterContext();
   const [newArticles, setNewArticles] = useState([]);
-  const { articles, refetch } = useAllArticles(accessToken);
+  const { articles, refetch }: { articles: any; refetch: any } =
+    useAllArticles(accessToken);
   const image = useImage(accessToken);
   console.log("useIMage : ", image);
 
@@ -30,14 +33,16 @@ export default function MyArticles() {
   };
 
   return (
-    <div className="my-articles">
+    <div className={classNames("my-articles", { "dark-mode": isDarkMode })}>
       {isLoddegIn ? (
         <>
           <div className="header">
             <h1>My articles</h1>
 
             <Link to="/create-new-article">
-              <button type="button">Create new article</button>
+              <button className="normal-btn" type="button">
+                Create new article
+              </button>
             </Link>
           </div>
 
@@ -66,16 +71,20 @@ export default function MyArticles() {
                     <td>Elisabeth Straingth</td>
                     <td>4</td>
                     <td>
-                      <Link to={`/edit-article/${articleId}`}>
-                        <button>edit</button>
-                      </Link>
-                      <button
+                      <ButtonSmall
+                        isDarkMode={isDarkMode}
+                        path={`/edit-article/${articleId}`}
+                      >
+                        edit
+                      </ButtonSmall>
+                      <ButtonSmall
+                        isDarkMode={isDarkMode}
                         onClick={() =>
                           handleDeleteArticle({ articleId, accessToken })
                         }
                       >
                         delete
-                      </button>
+                      </ButtonSmall>
                     </td>
                   </tr>
                 );

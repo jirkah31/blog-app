@@ -6,11 +6,13 @@
   color: black;
   width: max-content;
   margin: 0 auto;
-
   display: flex;
   width: $minor-container;
   height: 220px;
   margin-bottom: 30px;
+  border-radius: 15px;
+  box-shadow: 15px 15px 40px $shadow;
+  padding: 20px;
 
   .article-img {
     border-radius: 15px;
@@ -55,10 +57,9 @@
 
 //Dark-mode
 .link-article.dark-mode {
-  border-radius: 15px;
-  padding: 20px;
   color: $dark-mode-text-color;
   background-color: $navigation-background-color;
+  box-shadow: 15px 15px 40px $dark-mode-shadow;
 
   .main-page-article.dark-mode {
     width: 100%;

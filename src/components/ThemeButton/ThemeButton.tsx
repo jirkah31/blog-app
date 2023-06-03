@@ -15,7 +15,10 @@ const ThemeButton = ({
       className="theme-button"
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
-      onClick={() => setIsDarkMode(!isDarkMode)}
+      onClick={() => {
+        localStorage.setItem("darkMode", isDarkMode);
+        setIsDarkMode(isDarkMode);
+      }}
     >
       <FontAwesomeIcon
         className={className}

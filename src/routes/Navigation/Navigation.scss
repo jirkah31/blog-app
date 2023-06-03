@@ -13,7 +13,7 @@
     align-items: center;
     justify-content: space-between;
 
-    ul {
+    .nav-list {
       display: inline-flex;
       list-style: none;
 
@@ -21,13 +21,6 @@
         display: flex;
         margin-right: 20px;
         align-items: center;
-      }
-
-      a {
-        text-decoration: none;
-        color: black;
-        font-weight: bold;
-        font-size: 22px;
       }
     }
 
@@ -42,6 +35,8 @@
   }
 }
 
+//Dark mode
+
 .navigation.dark-mode {
   background-color: $navigation-background-color;
 }
@@ -49,4 +44,14 @@
 .main-dark-mode {
   background-color: $dakr-mode-main-background;
   min-height: 100vh;
+}
+
+//Toast dark mode
+.Toastify {
+  .Toastify__toast-container.dark-mode {
+    .Toastify__toast {
+      color: $dark-mode-text-color;
+      background-color: $dakr-mode-main-background;
+    }
+  }
 }

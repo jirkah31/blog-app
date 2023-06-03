@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ThemeButton from "../../components/ThemeButton/ThemeButton";
 import classNames from "classnames";
-import NavigationButton from "../../components/NavigationButton/NavigationButton";
+import ButtonNavigation from "../../components/ButtonNavigation/ButtonNavigation";
 
 function Navigation() {
   const [isLoddegIn, setIsLoggedIn] = useState(false);
@@ -14,6 +14,7 @@ function Navigation() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [bounce, setBounce] = useState(false);
   const loginDataJSON = sessionStorage.getItem("blogLoginJSON");
+  const getDarkModeJSON = localStorage.getItem("darkMode");
   const time = new Date();
   const timeNow = time.getTime();
   const className = classNames("icon", { "dark-mode": isDarkMode });
@@ -42,15 +43,25 @@ function Navigation() {
     }
   }, [loginDataJSON, timeNow]);
 
+  useEffect(() => {
+    if (getDarkModeJSON) {
+      const getDarkMode = JSON.parse(getDarkModeJSON);
+      if (getDarkMode) {
+        setIsDarkMode(getDarkMode);
+        console.log("getDarkMode: ", getDarkMode);
+      }
+    }
+  }, [getDarkModeJSON]);
+
   return (
     <div className={classNames({ "main-dark-mode": isDarkMode })}>
       <nav className={classNames("navigation", { "dark-mode": isDarkMode })}>
         <div className="container">
-          <ul>
+          <ul className="nav-list">
             {navLinks.map((link) => {
               return (
                 <li key={link.id}>
-                  <NavigationButton
+                  <ButtonNavigation
                     bounce={bounce}
                     onMouseOver={onMouseOver}
                     onMouseOut={onMouseOut}
@@ -58,13 +69,13 @@ function Navigation() {
                     to={link.path}
                   >
                     {link.content}
-                  </NavigationButton>
+                  </ButtonNavigation>
                 </li>
               );
             })}
             {isLoddegIn && (
               <li>
-                <NavigationButton
+                <ButtonNavigation
                   bounce={bounce}
                   onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut}
@@ -72,11 +83,11 @@ function Navigation() {
                   to="/my-articles"
                 >
                   My articles
-                </NavigationButton>
+                </ButtonNavigation>
               </li>
             )}
             <li>
-              <NavigationButton
+              <ButtonNavigation
                 className={className}
                 bounce={bounce}
                 onMouseOver={onMouseOver}
@@ -84,7 +95,7 @@ function Navigation() {
                 to="/login"
               >
                 {isLoddegIn ? "Log Out" : "Log In"}
-              </NavigationButton>
+              </ButtonNavigation>
             </li>
           </ul>
 
@@ -93,7 +104,7 @@ function Navigation() {
             onMouseOver={onMouseOver}
             onMouseOut={onMouseOut}
             setIsDarkMode={setIsDarkMode}
-            isDarkMode={isDarkMode}
+            isDarkMode={!isDarkMode}
             className={className}
           />
         </div>
@@ -103,7 +114,7 @@ function Navigation() {
           context={{ isLoddegIn, setIsLoggedIn, accessToken, isDarkMode }}
         />
       </div>
-      <ToastContainer />
+      <ToastContainer className={classNames({ "dark-mode": isDarkMode })} />
     </div>
   );
 }

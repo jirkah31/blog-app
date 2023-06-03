@@ -31,7 +31,6 @@
         box-sizing: border-box;
         width: 100%;
         border: 1px solid $border-line;
-        transition: 0.5s;
         border-radius: 4px;
         padding: 10px 10px;
         font-size: 1em;
@@ -48,45 +47,51 @@
         }
       }
     }
+    .submit-button {
+      @include set-button;
+
+      float: right;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+
+      &:hover,
+      &:focus {
+        background-color: lighten($color-button, 20%);
+      }
+    }
   }
 }
 
-.submit-button {
-  @include set-button;
-
-  float: right;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-
-  &:hover,
-  &:focus {
-    background-color: lighten($color-button, 20%);
-  }
-}
-
+//Dark mode
 .login.login-dark-mode {
-  box-shadow: 15px 15px 40px black;
+  box-shadow: 15px 15px 40px $dark-mode-shadow;
   background-color: $navigation-background-color;
 
   .border {
     color: $dark-mode-text-color;
+    form {
+      input {
+        color: $dark-mode-text-color;
+        background-color: $navigation-background-color;
+        border: 1px solid black;
 
-    input {
-      color: $dark-mode-text-color;
-      background-color: $navigation-background-color;
-      border: 1px solid black;
-      transition: 0.5s;
-
-      &:hover {
-        border: 1px solid lighten(black, 20%);
+        &:hover {
+          border: 1px solid $dark-mode-border-line;
+        }
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+          -webkit-box-shadow: 0 0 0 30px $navigation-background-color inset !important;
+        }
+        &:-webkit-autofill {
+          -webkit-text-fill-color: $dark-mode-text-color !important;
+        }
       }
     }
-
-    form {
-      .submit-button {
-        background-color: $dark-mode-nav-text;
-      }
+    .submit-button {
+      @include submit-button-dark-mode;
     }
   }
 }

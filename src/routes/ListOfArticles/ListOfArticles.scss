@@ -18,7 +18,7 @@
       margin-right: 50px;
     }
 
-    button {
+    .normal-btn {
       @include set-button;
 
       &:hover,
@@ -54,5 +54,13 @@
         cursor: pointer;
       }
     }
+  }
+}
+
+// Dark mode
+
+.my-articles.dark-mode {
+  .normal-btn {
+    @include submit-button-dark-mode;
   }
 }

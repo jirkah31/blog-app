@@ -4,10 +4,11 @@ import postNewArticle from "../../helpers_function/postNewArticle";
 import postImage from "../../helpers_function/postImage";
 import { useNavigate } from "react-router-dom";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
+import classNames from "classnames";
 
 export default function NewArticle() {
   const navigate = useNavigate();
-  const { isLoddegIn, accessToken } = useRouterContext();
+  const { isLoddegIn, accessToken, isDarkMode } = useRouterContext();
   const [title, setTitle] = useState("");
   const [perex, setPerex] = useState("");
   const [image, setImage] = useState<File>();
@@ -42,11 +43,15 @@ export default function NewArticle() {
   return (
     <>
       {isLoddegIn ? (
-        <div className="new-articles">
+        <div
+          className={classNames("new-articles", { "dark-mode": isDarkMode })}
+        >
           <form onSubmit={handleSubmit}>
             <div className="header">
               <h1>Create new article</h1>
-              <button type="submit">Publish article</button>
+              <button className="submit-button" type="submit">
+                Publish article
+              </button>
             </div>
 
             <label htmlFor="title" className="input-name">
@@ -55,8 +60,8 @@ export default function NewArticle() {
             <br />
             <input
               type="text"
-              id="title"
-              name="title"
+              id="title-input"
+              name="title-input"
               placeholder="My First Article"
               value={title}
               onChange={handleTitle}
@@ -65,7 +70,7 @@ export default function NewArticle() {
 
             <p className="input-name">Featured image</p>
             <br />
-            <label htmlFor="filePicker" className="file-btn">
+            <label className="submit-button file-btn" htmlFor="filePicker">
               Upload an Image
             </label>
             <input
@@ -81,8 +86,8 @@ export default function NewArticle() {
             </label>
             <br />
             <textarea
-              id="content"
-              name="content"
+              id="content-input"
+              name="content-input"
               placeholder="Supports markdown. Yay!"
               value={perex}
               onChange={handleContent}

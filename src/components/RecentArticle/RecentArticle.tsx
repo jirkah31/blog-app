@@ -9,14 +9,17 @@ import getFullDateFromISO from "../../helpers_function/getFullDateFromString";
 import NewComment from "../NewComment/NewComment";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
+import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 
-function RecentArticle() {
+const RecentArticle: React.FC = () => {
+  const { isLoddegIn } = useRouterContext();
   const { articleId } = useParams();
   const article = useArticle({ articleId });
   const { title, perex, createdAt } = article;
+  const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const { day, month, year } = getFullDateFromISO(createdAt);
+
   const date = `${day}.${month}.${year}`;
-  const { isLoddegIn, accessToken, isDarkMode } = useRouterContext();
   const comments = article.comments || [];
   const commentsLength = comments.length;
   const darkModeContainer = classNames("article-container", {
@@ -51,9 +54,7 @@ function RecentArticle() {
           <span>Comments ({commentsLength})</span>
         </div>
 
-        {isLoddegIn && (
-          <NewComment accessToken={accessToken} articleId={articleId} />
-        )}
+        {isLoddegIn && <NewComment articleId={articleId} />}
 
         <div className="comments">
           {comments.map((comment: any) => {
@@ -65,6 +66,6 @@ function RecentArticle() {
       </div>
     </div>
   );
-}
+};
 
 export default RecentArticle;

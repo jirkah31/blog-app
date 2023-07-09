@@ -3,12 +3,17 @@ import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Navigation from "./routes/Navigation/Navigation";
 import { useState, useEffect } from "react";
+import { setDarkTheme } from "./features/darkTheme";
+import { useAppDispatch, useAppSelector } from "./helpers_hooks/reduxHooks";
+import { setAccessToken } from "./features/accessToken";
 
-const App = () => {
+const App: React.FC = () => {
   const [isLoddegIn, setIsLoggedIn] = useState(false);
-  const [accessToken, setAccessToken] = useState("");
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [bounce, setBounce] = useState(false);
+  // const { accessToken } = useAppSelector((state) => state.accessToken.value);
+  const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
+  const dispatch = useAppDispatch();
+
   const loginDataJSON = sessionStorage.getItem("blogLoginJSON");
   const getDarkModeJSON = localStorage.getItem("darkMode");
   const time = new Date();
@@ -21,22 +26,24 @@ const App = () => {
 
       if (timeLimit < 3600000) {
         setIsLoggedIn(true);
-        setAccessToken(loginData.accessToken);
+        dispatch(setAccessToken({ accessToken: loginData.accessToken }));
       } else {
         sessionStorage.removeItem("blogLoginJSON");
         setIsLoggedIn(false);
-        setAccessToken("");
+        dispatch(setAccessToken({ accessToken: "" }));
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginDataJSON, timeNow]);
 
   useEffect(() => {
     if (getDarkModeJSON) {
       const getDarkMode = JSON.parse(getDarkModeJSON);
       if (getDarkMode) {
-        setIsDarkMode(getDarkMode);
+        dispatch(setDarkTheme({ isDarkMode: getDarkMode }));
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getDarkModeJSON]);
 
   return (
@@ -44,13 +51,12 @@ const App = () => {
       <Navigation
         setBounce={setBounce}
         isLoddegIn={isLoddegIn}
-        isDarkMode={isDarkMode}
         bounce={bounce}
-        setIsDarkMode={setIsDarkMode}
       />
       <div className="container">
         <Outlet
-          context={{ isLoddegIn, setIsLoggedIn, accessToken, isDarkMode }}
+          context={{ isLoddegIn, setIsLoggedIn }}
+          //Outlet context can be deleted after finishing redux store
         />
       </div>
       <ToastContainer className={classNames({ "dark-mode": isDarkMode })} />

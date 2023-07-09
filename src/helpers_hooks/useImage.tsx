@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { useState, useEffect } from "react";
 import { apiConfig } from "../api_configs";
+import { useAppSelector } from "./reduxHooks";
 
 type ArticleType = {
   articleId: string;
@@ -11,9 +12,8 @@ type ArticleType = {
   lastUpdatedAt: string;
 };
 
-const useImage = (
-  accessToken: string // imageId?: string
-) => {
+const useImage = () => {
+  const { accessToken } = useAppSelector((state) => state.accessToken.value);
   const [image, setImage] = useState<ArticleType>({
     articleId: "",
     title: "",

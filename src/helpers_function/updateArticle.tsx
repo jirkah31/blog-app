@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { apiConfig } from "../api_configs";
 import { successToast } from "../toasts/toasts";
 import { errorToast } from "../toasts/toasts";
@@ -16,7 +16,7 @@ const updateArticle = async ({
   articleId,
   editedArticle,
   accessToken,
-}: PropsT) => {
+}: PropsT): Promise<void> => {
   const { title, perex } = editedArticle;
   const config: AxiosRequestConfig = {
     ...apiConfig,
@@ -33,13 +33,12 @@ const updateArticle = async ({
   };
 
   await axios(config)
-    .then((response) => {
-      successToast("Article was updated!");
-      return response;
+    .then((response: AxiosResponse) => {
+      response.status === 200 && successToast("Article was updated!");
     })
     .catch((error) => {
       errorToast("ERROR happend!");
-      console.log("ERROR_post_articles", error);
+      console.log("ERROR_post_articles", error instanceof AxiosError);
     });
 };
 

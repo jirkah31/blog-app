@@ -24,12 +24,16 @@ $dark-mode-border-line: rgb(50, 50, 50);
   border-radius: 5px;
   font-size: 1em;
   transition: background-color 0.5s ease-in-out;
+
+  &:hover {
+    background-color: lighten($color-button, 10%);
+  }
 }
 
 @mixin submit-button-dark-mode {
   background-color: $dark-mode-nav-text;
 
   &:hover {
-    background-color: lighten($dark-mode-nav-text, 20%);
+    background-color: lighten($dark-mode-nav-text, 10%);
   }
 }

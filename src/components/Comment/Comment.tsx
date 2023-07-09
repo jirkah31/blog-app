@@ -3,8 +3,19 @@ import "./Comment.scss";
 import Avatar from "../Avatar/Avatar";
 import avatar from "../../imgexample/avatar.png";
 
-function Comment({ comment }: any) {
-	const { content, author, createdAt, score} = comment
+interface CommentPropsT {
+  comment: {
+    content: string;
+    author: string;
+    createdAt: string;
+    score: number;
+  };
+}
+
+const Comment: React.JSXElementConstructor<CommentPropsT> = ({
+  comment,
+}: CommentPropsT) => {
+  const { content, author, createdAt, score } = comment;
 
   return (
     <div className="commentContainer">
@@ -16,9 +27,7 @@ function Comment({ comment }: any) {
           <time>{createdAt}</time>
         </div>
 
-        <p>
-          {content}
-        </p>
+        <p>{content}</p>
 
         <div className="counter">
           <h4>{score}</h4>
@@ -32,6 +41,6 @@ function Comment({ comment }: any) {
       </div>
     </div>
   );
-}
+};
 
 export default Comment;

@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import avatar from "../../imgexample/avatar.png";
 import postComments from "../../helpers_function/postComments";
+import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 
 type PropsT = {
-  accessToken: string;
   articleId?: string;
 };
 
-const NewComment = ({ articleId, accessToken }: PropsT) => {
+const NewComment = ({ articleId }: PropsT) => {
   const [content, setContent] = useState("");
+  const { accessToken } = useAppSelector((state) => state.accessToken.value);
 
   const handleComment = (event: React.FormEvent) => {
     event.preventDefault();

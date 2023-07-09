@@ -10,7 +10,7 @@ import { apiConfig } from "../api_configs";
 //   lastUpdatedAt: string;
 // };
 
-const getTenant = (tenantId: string) => {
+const getTenant = (tenantId: string): Promise<void> => {
   // const [article, setArticle] = useState<ArticleType>({
   //   articleId: "",
   //   title: "",

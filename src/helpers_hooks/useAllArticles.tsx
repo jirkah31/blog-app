@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { apiConfig } from "../api_configs";
+import { useAppSelector } from "./reduxHooks";
 
-const useAllArticles = (accessToken: string) => {
+const useAllArticles = () => {
+  const { accessToken } = useAppSelector((state) => state.accessToken.value);
   const [articles, setArticles] = useState([]);
 
   const getAllArticles = async () => {

@@ -6,9 +6,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import updateArticle from "../../helpers_function/updateArticle";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
+import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 
-export default function EditArticle() {
-  const { isLoddegIn, accessToken, isDarkMode } = useRouterContext();
+const EditArticle: React.FC = () => {
+  const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
+  const { accessToken } = useAppSelector((state) => state.accessToken.value);
+  const { isLoddegIn } = useRouterContext();
   const { articleId } = useParams();
   const navigate = useNavigate();
   const article = useArticle({ articleId });
@@ -107,4 +110,6 @@ export default function EditArticle() {
       )}
     </>
   );
-}
+};
+
+export default EditArticle;

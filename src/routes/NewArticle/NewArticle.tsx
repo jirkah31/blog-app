@@ -5,10 +5,13 @@ import postImage from "../../helpers_function/postImage";
 import { useNavigate } from "react-router-dom";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
+import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 
-export default function NewArticle() {
+const NewArticle: React.FC = () => {
   const navigate = useNavigate();
-  const { isLoddegIn, accessToken, isDarkMode } = useRouterContext();
+  const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
+  const { accessToken } = useAppSelector((state) => state.accessToken.value);
+  const { isLoddegIn } = useRouterContext();
   const [title, setTitle] = useState("");
   const [perex, setPerex] = useState("");
   const [image, setImage] = useState<File>();
@@ -99,4 +102,6 @@ export default function NewArticle() {
       )}
     </>
   );
-}
+};
+
+export default NewArticle;

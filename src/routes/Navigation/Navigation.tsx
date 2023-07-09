@@ -2,25 +2,23 @@ import React, { Dispatch, SetStateAction } from "react";
 import "./Navigation.scss";
 import { navLinks } from "../../links";
 import "react-toastify/dist/ReactToastify.css";
-import ThemeButton from "../../components/ThemeButton/ThemeButton";
+import ThemeButton from "../../components/ButtonTheme/ButtonTheme";
 import classNames from "classnames";
 import ButtonNavigation from "../../components/ButtonNavigation/ButtonNavigation";
+import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 
 type PropsT = {
-  isDarkMode: boolean;
   bounce: boolean;
   isLoddegIn: boolean;
-  setIsDarkMode: Dispatch<SetStateAction<boolean>>;
   setBounce: Dispatch<SetStateAction<boolean>>;
 };
 
-function Navigation({
-  isDarkMode,
+const Navigation = ({
   bounce,
   isLoddegIn,
-  setIsDarkMode,
   setBounce,
-}: PropsT) {
+}: PropsT): React.FunctionComponentElement<PropsT> => {
+  const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const className = classNames("icon", { "dark-mode": isDarkMode });
   const onMouseOver = () => {
     setBounce(true);
@@ -42,7 +40,7 @@ function Navigation({
                   onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut}
                   className={className}
-                  to={link.path}
+                  path={link.path}
                 >
                   {link.content}
                 </ButtonNavigation>
@@ -56,7 +54,7 @@ function Navigation({
                 onMouseOver={onMouseOver}
                 onMouseOut={onMouseOut}
                 className={className}
-                to="/my-articles"
+                path="/my-articles"
               >
                 My articles
               </ButtonNavigation>
@@ -68,7 +66,7 @@ function Navigation({
               bounce={bounce}
               onMouseOver={onMouseOver}
               onMouseOut={onMouseOut}
-              to="/login"
+              path="/login"
             >
               {isLoddegIn ? "Log Out" : "Log In"}
             </ButtonNavigation>
@@ -79,13 +77,11 @@ function Navigation({
           bounce={bounce}
           onMouseOver={onMouseOver}
           onMouseOut={onMouseOut}
-          setIsDarkMode={setIsDarkMode}
-          isDarkMode={!isDarkMode}
           className={className}
         />
       </div>
     </nav>
   );
-}
+};
 
 export default Navigation;

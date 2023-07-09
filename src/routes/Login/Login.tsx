@@ -4,11 +4,13 @@ import tryLogin from "../../helpers_function/tryLogin";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
+import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 
-function Login() {
+const Login: React.FC = () => {
+  const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { isLoddegIn, setIsLoggedIn, isDarkMode } = useRouterContext();
+  const { isLoddegIn, setIsLoggedIn } = useRouterContext();
   const navigate = useNavigate();
   const time = new Date();
   const className = { "login-dark-mode": isDarkMode };
@@ -27,7 +29,7 @@ function Login() {
         };
         const blogLoginJSON = JSON.stringify(blogLogin);
         setIsLoggedIn(true);
-        sessionStorage.setItem("blogLoginJSON", blogLoginJSON);
+        await sessionStorage.setItem("blogLoginJSON", blogLoginJSON);
         navigate("/my-articles");
       }
     }
@@ -89,6 +91,6 @@ function Login() {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

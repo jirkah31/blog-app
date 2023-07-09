@@ -6,19 +6,19 @@ import image1 from "../../imgexample/image1.jpg";
 import useAllArticles from "../../helpers_hooks/useAllArticles";
 import getFullDateFromISO from "../../helpers_function/getFullDateFromString";
 import useImage from "../../helpers_hooks/useImage";
-import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
+import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 
-export default function AllArticles() {
-  const { accessToken, isDarkMode } = useRouterContext();
-  const { articles } = useAllArticles(accessToken);
+const AllArticles: React.FC = () => {
+  const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
+  const { articles } = useAllArticles();
   // const image = useImage(accessToken)
   return (
     <>
       <h1 className={classNames("title", { "dark-mode": isDarkMode })}>
         Recent articles
       </h1>
-      {articles.map((article: any) => {
+      {articles.map((article) => {
         const { day, month, year } = getFullDateFromISO(
           (article as { createdAt: string }).createdAt
         );
@@ -27,7 +27,6 @@ export default function AllArticles() {
 
         return (
           <Article
-            isDarkMode={isDarkMode}
             key={articleId}
             id={articleId}
             image={image1}
@@ -41,4 +40,6 @@ export default function AllArticles() {
       <Outlet />
     </>
   );
-}
+};
+
+export default AllArticles;

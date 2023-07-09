@@ -8,13 +8,16 @@ import useRouterContext from "../../helpers_hooks/useRouterContext";
 import useImage from "../../helpers_hooks/useImage";
 import classNames from "classnames";
 import ButtonSmall from "../../components/ButtonSmall/ButtonSmall";
+import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 
 export default function MyArticles() {
-  const { isLoddegIn, accessToken, isDarkMode } = useRouterContext();
+  const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
+  const { accessToken } = useAppSelector((state) => state.accessToken.value);
+  const { isLoddegIn } = useRouterContext();
   const [newArticles, setNewArticles] = useState([]);
   const { articles, refetch }: { articles: any; refetch: any } =
-    useAllArticles(accessToken);
-  const image = useImage(accessToken);
+    useAllArticles();
+  // const image = useImage();
 
   useEffect(() => {
     setNewArticles(articles);
@@ -70,14 +73,10 @@ export default function MyArticles() {
                     <td>Elisabeth Straingth</td>
                     <td>4</td>
                     <td>
-                      <ButtonSmall
-                        isDarkMode={isDarkMode}
-                        path={`/edit-article/${articleId}`}
-                      >
+                      <ButtonSmall path={`/edit-article/${articleId}`}>
                         edit
                       </ButtonSmall>
                       <ButtonSmall
-                        isDarkMode={isDarkMode}
                         onClick={() =>
                           handleDeleteArticle({ articleId, accessToken })
                         }

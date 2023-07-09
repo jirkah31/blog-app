@@ -1,13 +1,13 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { apiConfig } from "../api_configs";
 
-type PropsT = {
+interface PropsT {
   accessToken: string;
   content: string;
   articleId: string;
-};
+}
 
-const postComments = ({ articleId, accessToken, content }: PropsT) => {
+const postComments = async ({ articleId, accessToken, content }: PropsT) => {
   const config = {
     ...apiConfig,
     method: "post",
@@ -23,16 +23,13 @@ const postComments = ({ articleId, accessToken, content }: PropsT) => {
     },
   };
 
-  const getApiKey = async () => {
-    await axios(config)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        console.log("ERROR_COMMENTS", error);
-      });
-  };
-  getApiKey();
+  await axios(config)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log("ERROR_COMMENTS", error instanceof AxiosError);
+    });
 };
 
 export default postComments;

@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 import "./Article.scss";
 import classNames from "classnames";
+import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 
-export type articleAPIT = {
+export interface ArticleAPIT {
   id?: string;
   image?: HTMLImageElement;
   title?: string;
   perex?: string;
   author?: string;
   date?: string;
-  isDarkMode: boolean;
-};
+}
 
 const Article = ({
   id,
@@ -19,9 +19,9 @@ const Article = ({
   image,
   author,
   date,
-  isDarkMode,
-}: articleAPIT) => {
-  const darkMode = { "dark-mode":isDarkMode }
+}: ArticleAPIT): React.FunctionComponentElement<ArticleAPIT> => {
+  const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
+  const darkMode = { "dark-mode": isDarkMode };
   const infoClassName = classNames("info", darkMode);
   const linkArticleClassName = classNames("link-article", darkMode);
   const articleImgClassName = classNames("article-img", darkMode);

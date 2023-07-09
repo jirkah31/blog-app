@@ -1,13 +1,12 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { apiConfig } from "../api_configs";
-import useImage from "../helpers_hooks/useImage";
 
 type PropsT = {
   accessToken: string;
   image?: any;
 };
 
-const postImage = async ({ accessToken, image }: PropsT) => {
+const postImage = async ({ accessToken, image }: PropsT): Promise<string> => {
   const data = new FormData();
   data.append("image", image);
 
@@ -20,10 +19,12 @@ const postImage = async ({ accessToken, image }: PropsT) => {
           Authorization: accessToken,
         },
       })
-      .then((response) => {
+      .then((response: AxiosResponse) => {
         return response.data[0].imageId;
       })
-      .catch((error) => console.log("error image: ", error));
+      .catch((error) =>
+        console.log("error image: ", error instanceof AxiosError)
+      );
 
   const imageId = await getImageId();
 

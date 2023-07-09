@@ -11,6 +11,8 @@ import NewArticle from "./routes/NewArticle/NewArticle";
 import RecentArticle from "./components/RecentArticle/RecentArticle";
 import EditArticle from "./routes/EditArticle/EditArticle";
 import App from "./App";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +57,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );

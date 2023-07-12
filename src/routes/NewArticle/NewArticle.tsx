@@ -12,8 +12,8 @@ const NewArticle: React.FC = () => {
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const { accessToken } = useAppSelector((state) => state.accessToken.value);
   const { isLoddegIn } = useRouterContext();
-  const [title, setTitle] = useState("");
-  const [perex, setPerex] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [perex, setPerex] = useState<string>("");
   const [image, setImage] = useState<File>();
 
   const handleTitle = (event: React.FormEvent<HTMLInputElement>) => {

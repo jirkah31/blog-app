@@ -9,14 +9,14 @@ import useImage from "../../helpers_hooks/useImage";
 import classNames from "classnames";
 import ButtonSmall from "../../components/ButtonSmall/ButtonSmall";
 import { useAppSelector } from "../../helpers_hooks/reduxHooks";
+import { ArticleType } from "../../helpers_hooks/useAllArticles";
 
 export default function MyArticles() {
+  const [newArticles, setNewArticles] = useState<ArticleType[]>([]);
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const { accessToken } = useAppSelector((state) => state.accessToken.value);
   const { isLoddegIn } = useRouterContext();
-  const [newArticles, setNewArticles] = useState([]);
-  const { articles, refetch }: { articles: any; refetch: any } =
-    useAllArticles();
+  const { articles, refetch } = useAllArticles();
   // const image = useImage();
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { apiConfig } from "../api_configs";
 
 interface PropsT {
@@ -8,7 +8,7 @@ interface PropsT {
 }
 
 const postComments = async ({ articleId, accessToken, content }: PropsT) => {
-  const config = {
+  const config: AxiosRequestConfig = {
     ...apiConfig,
     method: "post",
     url: "/comments",

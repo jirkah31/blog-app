@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { apiConfig } from "../api_configs";
 import { successToast, errorToast } from "../toasts/toasts";
 
@@ -11,7 +11,7 @@ const tryLogin = async ({
   username,
   password,
 }: PropsT): Promise<AxiosResponse> => {
-  const config = {
+  const config: AxiosRequestConfig = {
     ...apiConfig,
     url: "/login",
     method: "post",
@@ -21,7 +21,7 @@ const tryLogin = async ({
     },
   };
 
-  const response: Promise<AxiosResponse> = await axios(config)
+  const response: Promise<AxiosResponse<Response>> = await axios(config)
     .then((response) => {
       successToast(`${username}, you are successfully logged in!`);
       return response;
@@ -30,6 +30,7 @@ const tryLogin = async ({
       errorToast("Bad username or password!");
       return error;
     });
+  console.log("response: ", response);
   return response;
 };
 

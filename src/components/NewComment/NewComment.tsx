@@ -8,7 +8,7 @@ type PropsT = {
 };
 
 const NewComment = ({ articleId }: PropsT) => {
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState<string>("");
   const { accessToken } = useAppSelector((state) => state.accessToken.value);
 
   const handleComment = (event: React.FormEvent) => {

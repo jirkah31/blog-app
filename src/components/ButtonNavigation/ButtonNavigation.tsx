@@ -1,12 +1,11 @@
+import { ComponentProps } from "react";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import "./ButtonNavigation.scss";
 import classNames from "classnames";
-import { ButtonSmallPropsT } from "../ButtonSmall/ButtonSmall";
 
-export interface ButtonNavPropsT
-  extends Omit<ButtonSmallPropsT, "onClick" | "path"> {
+export interface ButtonNavPropsT extends ComponentProps<"button"> {
   path: string;
   bounce: boolean;
   onMouseOver: React.MouseEventHandler<HTMLButtonElement>;
@@ -20,7 +19,7 @@ const ButtonNavigation = ({
   onMouseOver,
   onMouseOut,
   children,
-}: ButtonNavPropsT): React.ReactElement<ButtonNavPropsT> => {
+}: ButtonNavPropsT): React.FunctionComponentElement<ButtonNavPropsT> => {
   return (
     <button
       className={classNames("nav-btn")}

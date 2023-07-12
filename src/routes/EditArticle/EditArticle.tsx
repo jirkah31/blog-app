@@ -9,15 +9,15 @@ import classNames from "classnames";
 import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 
 const EditArticle: React.FC = () => {
+  const [title, setTitle] = useState<string>("");
+  const [perex, setPerex] = useState<string>("");
+  const [image, setImage] = useState<File>();
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const { accessToken } = useAppSelector((state) => state.accessToken.value);
   const { isLoddegIn } = useRouterContext();
   const { articleId } = useParams();
   const navigate = useNavigate();
   const article = useArticle({ articleId });
-  const [title, setTitle] = useState("");
-  const [perex, setPerex] = useState("");
-  const [image, setImage] = useState<File>();
 
   useEffect(() => {
     setTitle(article.title);
@@ -40,7 +40,7 @@ const EditArticle: React.FC = () => {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const editedArticle = {
       title,

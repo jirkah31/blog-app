@@ -19,9 +19,7 @@ const AllArticles: React.FC = () => {
         Recent articles
       </h1>
       {articles.map((article) => {
-        const { day, month, year } = getFullDateFromISO(
-          (article as { createdAt: string }).createdAt
-        );
+        const { day, month, year } = getFullDateFromISO(article.createdAt);
         const date = `${day}.${month}.${year}`;
         const { articleId, title, perex } = article;
 

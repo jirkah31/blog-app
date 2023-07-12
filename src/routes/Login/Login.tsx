@@ -8,8 +8,8 @@ import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 
 const Login: React.FC = () => {
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const { isLoddegIn, setIsLoggedIn } = useRouterContext();
   const navigate = useNavigate();
   const time = new Date();

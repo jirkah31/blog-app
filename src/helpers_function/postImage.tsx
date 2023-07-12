@@ -30,7 +30,7 @@ const postImage = async ({ accessToken, image }: PropsT): Promise<string> => {
 
   return imageId;
 
-  // const config = {
+  // const config: AxiosRequestConfig = {
   //   ...apiConfig,
   //   url: "/images",
   //   method: "post",

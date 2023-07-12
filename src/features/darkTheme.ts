@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
 
-interface DarkThemeState {
+export interface DarkThemeState {
   isDarkMode: boolean
 }
 

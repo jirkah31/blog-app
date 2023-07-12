@@ -3,15 +3,17 @@ import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Navigation from "./routes/Navigation/Navigation";
 import { useState, useEffect } from "react";
-import { setDarkTheme } from "./features/darkTheme";
+import { DarkThemeState, setDarkTheme } from "./features/darkTheme";
 import { useAppDispatch, useAppSelector } from "./helpers_hooks/reduxHooks";
 import { setAccessToken } from "./features/accessToken";
 
 const App: React.FC = () => {
-  const [isLoddegIn, setIsLoggedIn] = useState(false);
-  const [bounce, setBounce] = useState(false);
+  const [isLoddegIn, setIsLoggedIn] = useState<boolean>(false);
+  const [bounce, setBounce] = useState<boolean>(false);
   // const { accessToken } = useAppSelector((state) => state.accessToken.value);
-  const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
+  const { isDarkMode } = useAppSelector<DarkThemeState>(
+    (state) => state.isDarkMode.value
+  );
   const dispatch = useAppDispatch();
 
   const loginDataJSON = sessionStorage.getItem("blogLoginJSON");

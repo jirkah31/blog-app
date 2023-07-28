@@ -6,6 +6,10 @@ import { useNavigate } from "react-router-dom";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
 import { useAppSelector } from "../../helpers_hooks/reduxHooks";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { RequestConfigT, apiConfig } from "../../api_configs";
+import { PathsT } from "../../paths";
 
 const NewArticle: React.FC = () => {
   const navigate = useNavigate();
@@ -14,7 +18,21 @@ const NewArticle: React.FC = () => {
   const { isLoddegIn } = useRouterContext();
   const [title, setTitle] = useState<string>("");
   const [perex, setPerex] = useState<string>("");
-  const [image, setImage] = useState<File>();
+  const [image, setImage] = useState<any>();
+
+  //ZAČÁTEK MUTATION
+
+  const mutation = useMutation({
+    mutationFn: async (config: RequestConfigT) => await axios(config),
+    onError: (error, variables, context) => {
+      console.error("error, variables, context: ", error, variables, context);
+    },
+    onSuccess: (data) => {
+      return { data };
+    },
+  });
+
+  //KONEC MUTATION
 
   const handleTitle = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -34,13 +52,30 @@ const NewArticle: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    const data = new FormData();
+    data.append("image", image);
+
+    const configImage: RequestConfigT = {
+      ...apiConfig,
+      url: PathsT.ImagesPathT,
+      method: "post",
+      headers: {
+        ...apiConfig.headers,
+        Authorization: accessToken,
+        "Content-Type": "multipart/form-data",
+      },
+      data,
+    };
     const newArticle = {
       title,
       perex,
     };
-    const imageId = await postImage({ accessToken, image });
+
+    const dataImage = await mutation.mutateAsync(configImage);
+    const imageId = dataImage.data[0].imageId;
     await postNewArticle({ accessToken, newArticle, imageId });
-    navigate("/my-articles");
+    navigate(PathsT.MyArticlesPathT);
   };
 
   return (

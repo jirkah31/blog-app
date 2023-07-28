@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { apiConfig } from "../api_configs";
+import { PathsT } from "../paths";
 
 // type ArticleType = {
 //   articleId: string;
@@ -20,7 +21,7 @@ const getTenant = (tenantId: string): Promise<void> => {
   //   lastUpdatedAt: "",
   // });
 
-  const url = `/tenants/${tenantId}`;
+  const url = `${PathsT.TenantPathT}/${tenantId}`;
   const method = "get";
   const recentArticleConfig = {
     baseURL: "https://fullstack.exercise.applifting.cz",
@@ -34,7 +35,7 @@ const getTenant = (tenantId: string): Promise<void> => {
         return response;
       })
       .catch((error) => {
-        console.log("TENANT error", error);
+        console.error("TENANT error", error);
       });
   };
   const tenant = getArticle(recentArticleConfig);

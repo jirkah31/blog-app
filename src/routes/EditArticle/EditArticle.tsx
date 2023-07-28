@@ -3,10 +3,12 @@ import "./EditArticle.scss";
 import postImage from "../../helpers_function/postImage";
 import useArticle from "../../helpers_hooks/useArticle";
 import { useNavigate, useParams } from "react-router-dom";
-import updateArticle from "../../helpers_function/updateArticle";
+import useUpdateArticle from "../../helpers_function/useUpdateArticle";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
 import { useAppSelector } from "../../helpers_hooks/reduxHooks";
+import { RequestConfigT, apiConfig } from "../../api_configs";
+import { PathsT } from "../../paths";
 
 const EditArticle: React.FC = () => {
   const [title, setTitle] = useState<string>("");
@@ -17,11 +19,15 @@ const EditArticle: React.FC = () => {
   const { isLoddegIn } = useRouterContext();
   const { articleId } = useParams();
   const navigate = useNavigate();
-  const article = useArticle({ articleId });
+  const { query } = useArticle({ articleId });
+  const article = query.data?.data;
+  const { mutate: updateArticle } = useUpdateArticle();
 
   useEffect(() => {
-    setTitle(article.title);
-    setPerex(article.perex);
+    if (article) {
+      setTitle(article.title);
+      setPerex(article.perex);
+    }
   }, [article]);
 
   const handleTitle = (event: React.FormEvent<HTMLInputElement>) => {
@@ -42,13 +48,21 @@ const EditArticle: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const editedArticle = {
-      title,
-      perex,
+    const editConfig: RequestConfigT = {
+      ...apiConfig,
+      method: "patch",
+      url: `${PathsT.ArticlesPathT}/${articleId}`,
+      data: {
+        title,
+        perex,
+      },
+      headers: {
+        ...apiConfig.headers,
+        Authorization: accessToken,
+      },
     };
-    updateArticle({ articleId, accessToken, editedArticle });
-    navigate("/my-articles");
-    // postImage({accessToken, image}) //tady updateImge
+    updateArticle(editConfig);
+    navigate(PathsT.MyArticlesPathT);
   };
 
   return (

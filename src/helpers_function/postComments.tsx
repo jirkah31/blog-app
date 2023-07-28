@@ -1,5 +1,7 @@
-import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import axios, { AxiosError } from "axios";
 import { apiConfig } from "../api_configs";
+import { RequestConfigT } from "../api_configs";
+import { PathsT } from "../paths";
 
 interface PropsT {
   accessToken: string;
@@ -8,10 +10,10 @@ interface PropsT {
 }
 
 const postComments = async ({ articleId, accessToken, content }: PropsT) => {
-  const config: AxiosRequestConfig = {
+  const config: RequestConfigT = {
     ...apiConfig,
     method: "post",
-    url: "/comments",
+    url: PathsT.CommentsPathT,
     data: {
       articleId,
       content,
@@ -28,7 +30,7 @@ const postComments = async ({ articleId, accessToken, content }: PropsT) => {
       return response.data;
     })
     .catch((error) => {
-      console.log("ERROR_COMMENTS", error instanceof AxiosError);
+      console.error("ERROR_COMMENTS", error instanceof AxiosError);
     });
 };
 

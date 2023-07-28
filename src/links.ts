@@ -1,3 +1,5 @@
+import { PathsT } from "./paths";
+
 export type navLinksT = {
   id: number,
   path: string,
@@ -5,6 +7,6 @@ export type navLinksT = {
 }
 
 export const navLinks: navLinksT[] = [
-  { id: 1, path: "/", content: "Bulldogs Articles" },
-  { id: 2, path: "/about", content: "About Buldogs" },
+  { id: 1, path: PathsT.HomePathT, content: "Bulldogs Articles" },
+  { id: 2, path: PathsT.AboutPathT, content: "About Buldogs" },
 ];

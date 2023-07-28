@@ -6,6 +6,7 @@ import ThemeButton from "../../components/ButtonTheme/ButtonTheme";
 import classNames from "classnames";
 import ButtonNavigation from "../../components/ButtonNavigation/ButtonNavigation";
 import { useAppSelector } from "../../helpers_hooks/reduxHooks";
+import { PathsT } from "../../paths";
 
 type PropsT = {
   bounce: boolean;
@@ -54,7 +55,7 @@ const Navigation = ({
                 onMouseOver={onMouseOver}
                 onMouseOut={onMouseOut}
                 className={className}
-                path="/my-articles"
+                path={PathsT.MyArticlesPathT}
               >
                 My articles
               </ButtonNavigation>
@@ -66,7 +67,7 @@ const Navigation = ({
               bounce={bounce}
               onMouseOver={onMouseOver}
               onMouseOut={onMouseOut}
-              path="/login"
+              path={PathsT.LoginPathT}
             >
               {isLoddegIn ? "Log Out" : "Log In"}
             </ButtonNavigation>

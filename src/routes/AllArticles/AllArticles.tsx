@@ -2,39 +2,44 @@ import React from "react";
 import Article from "../../components/Article/Article";
 import "./AllArticles.scss";
 import { Outlet } from "react-router-dom";
-import image1 from "../../imgexample/image1.jpg";
 import useAllArticles from "../../helpers_hooks/useAllArticles";
-import getFullDateFromISO from "../../helpers_function/getFullDateFromString";
-import useImage from "../../helpers_hooks/useImage";
 import classNames from "classnames";
 import { useAppSelector } from "../../helpers_hooks/reduxHooks";
+import { ArticleType } from "../../helpers_hooks/useAllArticles";
 
 const AllArticles: React.FC = () => {
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
-  const { articles } = useAllArticles();
-  // const image = useImage(accessToken)
+  const { query } = useAllArticles();
+  const { data, isLoading, isError } = query;
+  const articles = data?.data.items;
+
+  if (isError) {
+    return <h2>Something wrong happend...</h2>;
+  }
+
   return (
     <>
       <h1 className={classNames("title", { "dark-mode": isDarkMode })}>
         Recent articles
       </h1>
-      {articles.map((article) => {
-        const { day, month, year } = getFullDateFromISO(article.createdAt);
-        const date = `${day}.${month}.${year}`;
-        const { articleId, title, perex } = article;
 
-        return (
-          <Article
-            key={articleId}
-            id={articleId}
-            image={image1}
-            author="{author}"
-            date={date}
-            perex={perex}
-            title={title}
-          />
-        );
-      })}
+      {isLoading && <h2>Loading...</h2>}
+
+      {articles &&
+        articles.map((article: ArticleType) => {
+          const { articleId, title, perex, imageId, createdAt } = article;
+          return (
+            <Article
+              key={articleId}
+              articleId={articleId}
+              imageId={imageId}
+              author="{author}"
+              createdAt={createdAt}
+              perex={perex}
+              title={title}
+            />
+          );
+        })}
       <Outlet />
     </>
   );

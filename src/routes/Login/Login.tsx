@@ -5,6 +5,7 @@ import useRouterContext from "../../helpers_hooks/useRouterContext";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { useAppSelector } from "../../helpers_hooks/reduxHooks";
+import { PathsT } from "../../paths";
 
 const Login: React.FC = () => {
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
@@ -30,7 +31,7 @@ const Login: React.FC = () => {
         const blogLoginJSON = JSON.stringify(blogLogin);
         setIsLoggedIn(true);
         await sessionStorage.setItem("blogLoginJSON", blogLoginJSON);
-        navigate("/my-articles");
+        navigate(PathsT.MyArticlesPathT);
       }
     }
   };
@@ -38,7 +39,7 @@ const Login: React.FC = () => {
   const handleLogOut = () => {
     setIsLoggedIn(false);
     sessionStorage.removeItem("blogLoginJSON");
-    navigate("/");
+    navigate(PathsT.HomePathT);
   };
 
   return (

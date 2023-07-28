@@ -18,7 +18,7 @@ const postTenant = () => {
         return response.data;
       })
       .catch((error) => {
-        console.log("ERROR_api_key", error);
+        console.error("ERROR_api_key", error);
       });
   };
   getApiKey();

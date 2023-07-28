@@ -1,6 +1,8 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { apiConfig } from "../api_configs";
 import { successToast, errorToast } from "../toasts/toasts";
+import { RequestConfigT } from "../api_configs";
+import { PathsT } from "../paths";
 
 type PropsT = {
   username: string;
@@ -11,9 +13,9 @@ const tryLogin = async ({
   username,
   password,
 }: PropsT): Promise<AxiosResponse> => {
-  const config: AxiosRequestConfig = {
+  const config: RequestConfigT = {
     ...apiConfig,
-    url: "/login",
+    url: PathsT.LoginPathT,
     method: "post",
     data: {
       username: username,
@@ -30,7 +32,6 @@ const tryLogin = async ({
       errorToast("Bad username or password!");
       return error;
     });
-  console.log("response: ", response);
   return response;
 };
 

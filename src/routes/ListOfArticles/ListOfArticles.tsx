@@ -1,36 +1,30 @@
 import React, { useEffect, useState } from "react";
 import "./ListOfArticles.scss";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import useAllArticles from "../../helpers_hooks/useAllArticles";
 import { DeletePropsT } from "../../helpers_function/deleteArticle";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
-import ButtonSmall from "../../components/ButtonSmall/ButtonSmall";
 import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 import { ArticleType } from "../../helpers_hooks/useAllArticles";
 import { RequestConfigT, apiConfig } from "../../api_configs";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import { errorToast, successToast } from "../../toasts/toasts";
 import { PathsT } from "../../paths";
+import useDeleteArticle from "../../helpers_hooks/useDeleteArticle";
+import Button from "../../components/Button/Button";
 
 const MyArticles: React.FC = () => {
   const [newArticles, setNewArticles] = useState<ArticleType[]>([]);
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const { accessToken } = useAppSelector((state) => state.accessToken.value);
   const { isLoddegIn } = useRouterContext();
-  const { query } = useAllArticles();
-  const { data, isError, isLoading, refetch } = query;
+  const {
+    data,
+    isError: isArticlesError,
+    isLoading: isArticlesLoading,
+    refetch,
+  } = useAllArticles();
+  const { mutate: deleteArticle } = useDeleteArticle();
   const articles = data?.data.items;
-  const mutation = useMutation({
-    mutationFn: (configArg: RequestConfigT) => axios(configArg),
-    onSuccess: async () => {
-      await refetch();
-      await setNewArticles(articles);
-      successToast("Deletion success!");
-    },
-    onError: () => errorToast("Deletion fail!"),
-  });
 
   useEffect(() => {
     refetch();
@@ -54,11 +48,14 @@ const MyArticles: React.FC = () => {
           Authorization: accessToken,
         },
       };
-      mutation.mutate(config);
+
+      await deleteArticle(config);
+      await refetch();
+      await setNewArticles(articles);
     }
   };
 
-  if (isError) {
+  if (isArticlesError) {
     <h2>Something goes wrong...</h2>;
   }
 
@@ -69,14 +66,12 @@ const MyArticles: React.FC = () => {
           <div className="header">
             <h1>My articles</h1>
 
-            <Link to={PathsT.CreateNewArticlePathT}>
-              <button className="normal-btn" type="button">
-                Create new article
-              </button>
-            </Link>
+            <Button path={PathsT.CreateNewArticlePathT} type="button">
+              Create new article
+            </Button>
           </div>
 
-          {isLoading ? (
+          {isArticlesLoading ? (
             <h2>Loading...</h2>
           ) : (
             <table className="table-articles">
@@ -106,18 +101,20 @@ const MyArticles: React.FC = () => {
                         <td>Elisabeth Straingth</td>
                         <td>4</td>
                         <td>
-                          <ButtonSmall
+                          <Button
+                            small
                             path={`${PathsT.EditArticlePathT}/${articleId}`}
                           >
                             edit
-                          </ButtonSmall>
-                          <ButtonSmall
+                          </Button>
+                          <Button
+                            small
                             onClick={() =>
                               handleDeleteArticle({ articleId, accessToken })
                             }
                           >
                             delete
-                          </ButtonSmall>
+                          </Button>
                         </td>
                       </tr>
                     );
@@ -128,7 +125,7 @@ const MyArticles: React.FC = () => {
           <Outlet />
         </>
       ) : (
-        <div>You aren't logeed in. Please log in first.</div>
+        <div>You are not logged in. Please log in first.</div>
       )}
     </div>
   );

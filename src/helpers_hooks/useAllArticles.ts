@@ -17,6 +17,7 @@ export interface ArticleType {
 
 const useAllArticles = () => {
   const { accessToken } = useAppSelector((state) => state.accessToken.value);
+
   const allArticlesConfig: RequestConfigT = {
     ...apiConfig,
     url: PathsT.ArticlesPathT,
@@ -26,7 +27,7 @@ const useAllArticles = () => {
     },
   };
 
-  const query = useQuery({
+  return useQuery({
     queryKey: ["articles"],
     queryFn: () => {
       return axios(allArticlesConfig).catch((error) => console.error("Error: ", error)
@@ -34,7 +35,6 @@ const useAllArticles = () => {
     },
   });
 
-  return { query };
 };
 
 export default useAllArticles;

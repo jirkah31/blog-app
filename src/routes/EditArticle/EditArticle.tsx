@@ -9,6 +9,7 @@ import classNames from "classnames";
 import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 import { RequestConfigT, apiConfig } from "../../api_configs";
 import { PathsT } from "../../paths";
+import Button from "../../components/Button/Button";
 
 const EditArticle: React.FC = () => {
   const [title, setTitle] = useState<string>("");
@@ -74,9 +75,9 @@ const EditArticle: React.FC = () => {
           <form onSubmit={handleSubmit}>
             <div className="header">
               <h1>Edit article</h1>
-              <button className="submit-button" type="submit">
+              <Button className="submit-button" type="submit">
                 Edit article
-              </button>
+              </Button>
             </div>
 
             <label htmlFor="title" className="input-name">

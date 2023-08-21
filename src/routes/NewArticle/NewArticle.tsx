@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { RequestConfigT, apiConfig } from "../../api_configs";
 import { PathsT } from "../../paths";
+import Button from "../../components/Button/Button";
 
 const NewArticle: React.FC = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const NewArticle: React.FC = () => {
   const { isLoddegIn } = useRouterContext();
   const [title, setTitle] = useState<string>("");
   const [perex, setPerex] = useState<string>("");
-  const [image, setImage] = useState<any>();
+  const [image, setImage] = useState<string | Blob>("");
 
   //ZAČÁTEK MUTATION
 
@@ -86,10 +87,10 @@ const NewArticle: React.FC = () => {
         >
           <form onSubmit={handleSubmit}>
             <div className="header">
-              <h1>Create new article</h1>
-              <button className="submit-button" type="submit">
+              <h1 className="text-">Create new article</h1>
+              <Button className="submit-button" type="submit">
                 Publish article
-              </button>
+              </Button>
             </div>
 
             <label htmlFor="title" className="input-name">

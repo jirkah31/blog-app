@@ -9,8 +9,8 @@ import { ArticleType } from "../../helpers_hooks/useAllArticles";
 
 const AllArticles: React.FC = () => {
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
-  const { query } = useAllArticles();
-  const { data, isLoading, isError } = query;
+  const { data, isLoading, isError } = useAllArticles();
+  // const { data, isLoading, isError } = query;
   const articles = data?.data.items;
 
   if (isError) {

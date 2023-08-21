@@ -18,8 +18,8 @@ const RecentArticle: React.FC = () => {
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const { articleId } = useParams();
   const { query } = useArticle({ articleId });
-  const { queryImage } = useImage(imageId);
-  const { isLoading, isSuccess } = query;
+  const { data: imageData, isSuccess: isImageSuccess } = useImage(imageId);
+  const { isLoading: isArticleLoading, isSuccess: isArticleSuccess } = query;
   const { title, perex, createdAt, comments } = query.data?.data || {
     title: "",
     perex: "",
@@ -30,28 +30,26 @@ const RecentArticle: React.FC = () => {
   const darkModeContainer = classNames("article-container", {
     "dark-mode": isDarkMode,
   });
-  // Tady to musím poupravit aby to správně načítalo obrázek, zatím se zdá
-  //že kontroluju dvakrát to samý a stačil by mi možná jen jeden useEffects
-  useEffect(() => {
-    if (isSuccess) {
-      setImageId(query.data?.data.imageId);
-    }
-  }, [isSuccess, query.data?.data.imageId]);
 
   useEffect(() => {
-    if (queryImage.isSuccess) {
-      let base64ImageString = Buffer.from(
-        queryImage.data.data,
-        "binary"
-      ).toString("base64");
+    if (isArticleSuccess) {
+      setImageId(query.data?.data.imageId);
+    }
+  }, [isArticleSuccess, query.data?.data.imageId]);
+
+  useEffect(() => {
+    if (isImageSuccess && imageData) {
+      let base64ImageString = Buffer.from(imageData.data, "binary").toString(
+        "base64"
+      );
       setBase64Image(base64ImageString);
     }
-  }, [queryImage.data, queryImage.isSuccess]);
+  }, [imageData, isImageSuccess]);
 
   return (
     <div>
       <div className={darkModeContainer}>
-        {isLoading ? (
+        {isArticleLoading ? (
           <h2>Loading...</h2>
         ) : (
           <>

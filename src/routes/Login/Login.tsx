@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 import { PathsT } from "../../paths";
+import Button from "../../components/Button/Button";
 
 const Login: React.FC = () => {
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
@@ -48,13 +49,13 @@ const Login: React.FC = () => {
         {isLoddegIn ? (
           <>
             <h2>You are still logged in!</h2>
-            <button
+            <Button
               className="submit-button"
               type="button"
               onClick={handleLogOut}
             >
               Log Out
-            </button>
+            </Button>
           </>
         ) : (
           <>
@@ -83,9 +84,9 @@ const Login: React.FC = () => {
                 autoComplete="on"
                 required
               />
-              <button className="submit-button" type="submit">
+              <Button className="submit-button" type="submit">
                 Log In
-              </button>
+              </Button>
             </form>
           </>
         )}

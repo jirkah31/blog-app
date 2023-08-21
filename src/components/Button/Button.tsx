@@ -1,25 +1,32 @@
 import { Link } from "react-router-dom";
-import "./ButtonSmall.scss";
+import "./Button.scss";
 import classNames from "classnames";
 import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 
-export interface ButtonSmallPropsT {
+export interface ButtonPropsT {
+  type?: "button" | "submit" | "reset" | undefined;
   children?: React.ReactNode;
   className?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   path?: string;
+  small?: boolean;
 }
 
-const ButtonSmall = ({
+const Button = ({
+  small,
   className,
   onClick,
   path,
+  type,
   children,
-}: ButtonSmallPropsT): React.ReactElement<ButtonSmallPropsT> => {
+}: ButtonPropsT): React.ReactElement<ButtonPropsT> => {
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
+  const isSmallButton = small ? "button-small" : "normal-btn";
+
   const button: JSX.Element = (
     <button
-      className={classNames(className, "button-small", {
+      type={type}
+      className={classNames(className, isSmallButton, {
         "dark-mode": isDarkMode,
       })}
       onClick={onClick}
@@ -39,4 +46,4 @@ const ButtonSmall = ({
   return button;
 };
 
-export default ButtonSmall;
+export default Button;

@@ -25,7 +25,7 @@ const Article = ({
   createdAt,
 }: ArticleAPIT): React.FunctionComponentElement<ArticleAPIT> => {
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
-  const { queryImage } = useImage(imageId);
+  const { data, isSuccess: isImageSuccess } = useImage(imageId);
   const [image, setImage] = useState("");
   const darkMode = { "dark-mode": isDarkMode };
   const infoClassName = classNames("info", darkMode);
@@ -36,14 +36,13 @@ const Article = ({
   const date = `${day}.${month}.${year} ${hour}:${minute}`;
 
   useEffect(() => {
-    if (queryImage.isSuccess) {
-      const base64ImageString = Buffer.from(
-        queryImage.data.data,
-        "binary"
-      ).toString("base64");
+    if (isImageSuccess && data) {
+      const base64ImageString = Buffer.from(data.data, "binary").toString(
+        "base64"
+      );
       setImage(base64ImageString);
     }
-  }, [queryImage.isSuccess, queryImage.data?.data]);
+  }, [isImageSuccess, data]);
 
   return (
     <article className={linkArticleClassName}>

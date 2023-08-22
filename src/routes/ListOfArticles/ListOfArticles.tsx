@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./ListOfArticles.scss";
+import styles from "./ListOfArticles.module.scss";
 import { Outlet } from "react-router-dom";
 import useAllArticles from "../../helpers_hooks/useAllArticles";
 import { DeletePropsT } from "../../helpers_function/deleteArticle";
@@ -28,6 +28,7 @@ const MyArticles: React.FC = () => {
 
   useEffect(() => {
     refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -60,11 +61,11 @@ const MyArticles: React.FC = () => {
   }
 
   return (
-    <div className={classNames("my-articles", { "dark-mode": isDarkMode })}>
+    <div className={classNames(styles.articles, { "dark-mode": isDarkMode })}>
       {isLoddegIn ? (
         <>
-          <div className="header">
-            <h1>My articles</h1>
+          <div className={styles.header}>
+            <h1 className={styles.headline}>My articles</h1>
 
             <Button path={PathsT.CreateNewArticlePathT} type="button">
               Create new article
@@ -74,17 +75,17 @@ const MyArticles: React.FC = () => {
           {isArticlesLoading ? (
             <h2>Loading...</h2>
           ) : (
-            <table className="table-articles">
+            <table className={styles.table}>
               <tbody>
                 <tr>
-                  <th>
+                  <th className={styles.th}>
                     <input type="checkbox" />
                   </th>
-                  <th>Article title</th>
-                  <th>Perex</th>
-                  <th>Author</th>
-                  <th># of comments</th>
-                  <th>Action</th>
+                  <th className={styles.th}>Article title</th>
+                  <th className={styles.th}>Perex</th>
+                  <th className={styles.th}>Author</th>
+                  <th className={styles.th}># of comments</th>
+                  <th className={styles.th}>Action</th>
                 </tr>
 
                 {newArticles &&
@@ -92,15 +93,15 @@ const MyArticles: React.FC = () => {
                     const { articleId, title, perex } = article;
                     return (
                       <tr key={articleId}>
-                        <td>
+                        <td className={styles.td}>
                           {" "}
                           <input type="checkbox" />{" "}
                         </td>
-                        <td>{title}</td>
-                        <td>{perex}</td>
-                        <td>Elisabeth Straingth</td>
-                        <td>4</td>
-                        <td>
+                        <td className={styles.td}>{title}</td>
+                        <td className={styles.td}>{perex}</td>
+                        <td className={styles.td}>Elisabeth Straingth</td>
+                        <td className={styles.td}>4</td>
+                        <td className={styles.td}>
                           <Button
                             small
                             path={`${PathsT.EditArticlePathT}/${articleId}`}

@@ -12,22 +12,22 @@
     margin: 40px;
     position: relative;
 
-    h2 {
+    .headline2 {
       font: {
         size: 2em;
       }
       margin-bottom: 30px;
     }
 
-    form {
-      label {
+    .form {
+      .label {
         font: {
           size: 1.2em;
           weight: bold;
         }
       }
 
-      input {
+      .input {
         box-sizing: border-box;
         width: 100%;
         border: 1px solid $border-line;
@@ -47,36 +47,21 @@
         }
       }
     }
-    .submit-button {
-      @include set-button;
-
-      float: right;
-      position: absolute;
-      right: 0;
-      bottom: 0;
-
-      &:hover,
-      &:focus {
-        background-color: lighten($color-button, 20%);
-      }
-    }
   }
 }
 
-//Dark mode
-.login.login-dark-mode {
+.login.darkMode {
   box-shadow: 15px 15px 40px $dark-mode-shadow;
   background-color: $navigation-background-color;
 
   .border {
     color: $dark-mode-text-color;
-    form {
-      input {
+    .form {
+      .input {
         color: $dark-mode-text-color;
         background-color: $navigation-background-color;
-        border: 1px solid black;
-
-        &:hover {
+        border: 1px solid lighten(black, 10%);
+        posi &:hover {
           border: 1px solid $dark-mode-border-line;
         }
         &:-webkit-autofill,
@@ -89,9 +74,6 @@
           -webkit-text-fill-color: $dark-mode-text-color !important;
         }
       }
-    }
-    .submit-button {
-      @include submit-button-dark-mode;
     }
   }
 }

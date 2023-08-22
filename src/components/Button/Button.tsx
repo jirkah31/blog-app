@@ -10,9 +10,11 @@ export interface ButtonPropsT {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   path?: string;
   small?: boolean;
+  style?: object;
 }
 
 const Button = ({
+  style,
   small,
   className,
   onClick,
@@ -25,6 +27,7 @@ const Button = ({
 
   const button: JSX.Element = (
     <button
+      style={style}
       type={type}
       className={classNames(className, isSmallButton, {
         [styles.btnDarkMode]: isDarkMode,
@@ -36,7 +39,11 @@ const Button = ({
   );
 
   if (path) {
-    return <Link to={path}>{button}</Link>;
+    return (
+      <Link style={style} to={path}>
+        {button}
+      </Link>
+    );
   }
 
   return button;

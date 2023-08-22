@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.scss";
+import styles from "./Login.module.scss";
 import tryLogin from "../../helpers_function/tryLogin";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ const Login: React.FC = () => {
   const { isLoddegIn, setIsLoggedIn } = useRouterContext();
   const navigate = useNavigate();
   const time = new Date();
-  const className = { "login-dark-mode": isDarkMode };
+  const className = { [styles.darkMode]: isDarkMode };
 
   const handleLogIn = async (event: React.FormEvent) => {
     event?.preventDefault();
@@ -44,25 +44,24 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className={classNames("login", className)}>
-      <div className="border">
+    <div className={classNames(styles.login, className)}>
+      <div className={styles.border}>
         {isLoddegIn ? (
           <>
-            <h2>You are still logged in!</h2>
-            <Button
-              className="submit-button"
-              type="button"
-              onClick={handleLogOut}
-            >
+            <h2 className={styles.headline2}>You are still logged in!</h2>
+            <Button type="button" onClick={handleLogOut}>
               Log Out
             </Button>
           </>
         ) : (
           <>
-            <h2>Log In</h2>
-            <form method="post" onSubmit={handleLogIn}>
-              <label htmlFor="email">Usename</label>
+            <h2 className={styles.headline2}>Log In</h2>
+            <form className={styles.form} method="post" onSubmit={handleLogIn}>
+              <label className={styles.label} htmlFor="email">
+                Usename
+              </label>
               <input
+                className={styles.input}
                 id="email"
                 type="text"
                 name="email"
@@ -75,6 +74,7 @@ const Login: React.FC = () => {
 
               <label htmlFor="password">Password</label>
               <input
+                className={styles.input}
                 id="password"
                 type="password"
                 name="password"
@@ -84,7 +84,10 @@ const Login: React.FC = () => {
                 autoComplete="on"
                 required
               />
-              <Button className="submit-button" type="submit">
+              <Button
+                style={{ position: "absolute", bottom: "0", right: "0" }}
+                type="submit"
+              >
                 Log In
               </Button>
             </form>

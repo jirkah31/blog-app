@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import "./NewArticle.scss";
+import styles from "./NewArticle.module.scss";
 import postNewArticle from "../../helpers_function/postNewArticle";
-import postImage from "../../helpers_function/postImage";
 import { useNavigate } from "react-router-dom";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
@@ -21,8 +20,6 @@ const NewArticle: React.FC = () => {
   const [perex, setPerex] = useState<string>("");
   const [image, setImage] = useState<string | Blob>("");
 
-  //ZAČÁTEK MUTATION
-
   const mutation = useMutation({
     mutationFn: async (config: RequestConfigT) => await axios(config),
     onError: (error, variables, context) => {
@@ -32,8 +29,6 @@ const NewArticle: React.FC = () => {
       return { data };
     },
   });
-
-  //KONEC MUTATION
 
   const handleTitle = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -83,21 +78,22 @@ const NewArticle: React.FC = () => {
     <>
       {isLoddegIn ? (
         <div
-          className={classNames("new-articles", { "dark-mode": isDarkMode })}
+          className={classNames(styles.article, {
+            [styles.darkMode]: isDarkMode,
+          })}
         >
-          <form onSubmit={handleSubmit}>
-            <div className="header">
-              <h1 className="text-">Create new article</h1>
-              <Button className="submit-button" type="submit">
-                Publish article
-              </Button>
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <div className={styles.header}>
+              <h1 className={styles.headline1}>Create new article</h1>
+              <Button type="submit">Publish article</Button>
             </div>
 
-            <label htmlFor="title" className="input-name">
+            <label htmlFor="title" className={styles.label}>
               Article title
             </label>
             <br />
             <input
+              className={styles.titleInput}
               type="text"
               id="title-input"
               name="title-input"
@@ -107,9 +103,9 @@ const NewArticle: React.FC = () => {
             />
             <br />
 
-            <p className="input-name">Featured image</p>
+            <p className={styles.label}>Featured image</p>
             <br />
-            <label className="submit-button file-btn" htmlFor="filePicker">
+            <label className={styles.btnFile} htmlFor="filePicker">
               Upload an Image
             </label>
             <input
@@ -120,11 +116,12 @@ const NewArticle: React.FC = () => {
             />
             <br />
 
-            <label htmlFor="content" className="input-name">
+            <label htmlFor="content" className={styles.label}>
               Content
             </label>
             <br />
             <textarea
+              className={styles.contentInput}
               id="content-input"
               name="content-input"
               placeholder="Supports markdown. Yay!"

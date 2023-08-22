@@ -1,5 +1,5 @@
 import React from "react";
-import "./RelatedArticles.scss";
+import styles from "./RelatedArticles.module.scss";
 
 //not finish yet
 
@@ -17,9 +17,9 @@ function RelatedArticles() {
   };
 
   return (
-    <div className="relatedContainer">
+    <div className={styles.relatedArticle}>
       <h2>Related articles</h2>
-
+      {/* bylo by mapováno přes map methodu */}
       <RelatedArticle />
       <RelatedArticle />
       <RelatedArticle />

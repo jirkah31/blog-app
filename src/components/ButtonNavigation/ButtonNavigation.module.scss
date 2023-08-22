@@ -1,18 +1,21 @@
 @import "../../variables";
 
-.nav-btn {
+.btn {
   background: transparent;
   outline: none;
   border: none;
-  a {
+  .link {
     text-decoration: none;
     color: black;
     font-weight: bold;
     font-size: 22px;
+
+    .icon {
+      margin-left: 5px;
+    }
   }
 }
 
-//Dark mode
-a.icon.dark-mode {
+.darkMode {
   color: $dark-mode-nav-text !important;
 }

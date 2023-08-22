@@ -1,16 +1,16 @@
 @import "../../variables";
 
-.article-container {
+.container {
   width: $minor-container;
   margin: 0 auto;
 
-  .comment-article {
+  .comment {
     display: inline-table;
     border-bottom: 2px solid $border-line;
     padding-bottom: 30px;
     margin-bottom: 20px;
 
-    .article-title {
+    .articleTitle {
       font-size: 2em;
       margin: {
         top: 35px;
@@ -18,8 +18,8 @@
       }
     }
 
-    .article-author,
-    time {
+    .author,
+    .date {
       color: $lighter-text;
       font: {
         size: 0.9em;
@@ -31,7 +31,7 @@
       }
     }
 
-    .article-img {
+    .image {
       width: 100%;
       margin: {
         bottom: 15px;
@@ -54,44 +54,15 @@
       }
     }
   }
-
-  .newComment {
-    display: flex;
-    margin-bottom: 15px;
-
-    input {
-      box-sizing: border-box;
-      width: 100%;
-      border: 1px solid $border-line;
-      border-radius: 5px;
-      padding: 10px;
-      font-size: 1em;
-      margin: {
-        top: 10px;
-        bottom: 20px;
-        left: 20px;
-      }
-    }
-
-    .avatarContainer {
-      display: flex;
-      margin-right: 15px;
-
-      .avatarImg {
-        object-fit: cover;
-        border-radius: 50%;
-      }
-    }
-  }
 }
 
 //Dark mode
-.article-container.dark-mode {
+.darkMode {
   .comment-article {
     border-bottom: 2px solid rgb(88, 88, 88);
   }
-  .article-date,
-  .article-author {
+  .date,
+  .author {
     color: darken($dark-mode-text-color, 40%);
   }
 }

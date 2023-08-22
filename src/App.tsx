@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { DarkThemeState, setDarkTheme } from "./features/darkTheme";
 import { useAppDispatch, useAppSelector } from "./helpers_hooks/reduxHooks";
 import { setAccessToken } from "./features/accessToken";
+import styles from "./App.module.scss";
 
 const App: React.FC = () => {
   const [isLoddegIn, setIsLoggedIn] = useState<boolean>(false);
@@ -49,13 +50,17 @@ const App: React.FC = () => {
   }, [getDarkModeJSON]);
 
   return (
-    <div className={classNames({ "main-dark-mode": isDarkMode })}>
+    <div
+      className={classNames(styles.appContainer, {
+        [styles.darkMode]: isDarkMode,
+      })}
+    >
       <Navigation
         setBounce={setBounce}
         isLoddegIn={isLoddegIn}
         bounce={bounce}
       />
-      <div className="container">
+      <div className={styles.container}>
         <Outlet
           context={{ isLoddegIn, setIsLoggedIn }}
           //Outlet context can be deleted after finishing redux store

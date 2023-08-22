@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./EditArticle.scss";
-import postImage from "../../helpers_function/postImage";
+import styles from "./EditArticle.module.scss";
 import useArticle from "../../helpers_hooks/useArticle";
 import { useNavigate, useParams } from "react-router-dom";
 import useUpdateArticle from "../../helpers_function/useUpdateArticle";
@@ -70,23 +69,24 @@ const EditArticle: React.FC = () => {
     <>
       {isLoddegIn ? (
         <div
-          className={classNames("edit-articles", { "dark-mode": isDarkMode })}
+          className={classNames(styles.editArticle, {
+            [styles.darkMode]: isDarkMode,
+          })}
         >
-          <form onSubmit={handleSubmit}>
-            <div className="header">
-              <h1>Edit article</h1>
-              <Button className="submit-button" type="submit">
-                Edit article
-              </Button>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.header}>
+              <h1 className={styles.headline}>Edit article</h1>
+              <Button type="submit">Edit article</Button>
             </div>
 
-            <label htmlFor="title" className="input-name">
+            <label htmlFor="title" className={styles.label}>
               Article title
             </label>
             <br />
             <input
               type="text"
               id="title-input"
+              className={styles.inputTitle}
               name="title"
               placeholder="My First Article"
               value={title}
@@ -96,7 +96,12 @@ const EditArticle: React.FC = () => {
 
             <p className="input-name">Featured image</p>
             <br />
-            <label htmlFor="filePicker" className="submit-button file-btn">
+            <label
+              htmlFor="filePicker"
+              className={classNames(styles.btnFile, {
+                [styles.darkMode]: isDarkMode,
+              })}
+            >
               Upload an Image
             </label>
             <input
@@ -107,12 +112,13 @@ const EditArticle: React.FC = () => {
             />
             <br />
 
-            <label htmlFor="content" className="input-name">
+            <label htmlFor="content" className={styles.label}>
               Content
             </label>
             <br />
             <textarea
               id="content-input"
+              className={styles.inputContent}
               name="content"
               placeholder="Supports markdown. Yay!"
               value={perex}

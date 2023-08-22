@@ -1,6 +1,6 @@
 @import "../../variables";
 
-.edit-articles {
+.editArticle {
   font-family: $base-font;
   width: $container-width;
   margin: 0 auto;
@@ -13,12 +13,12 @@
       bottom: 50px;
     }
 
-    h1 {
+    .headline {
       font-size: 2.5em;
       margin-right: 50px;
     }
 
-    .submit-button {
+    .btn {
       @include set-button;
       position: relative;
 
@@ -29,14 +29,14 @@
     }
   }
 
-  form {
-    .input-name {
+  .form {
+    .label {
       display: inline-block;
       font-size: 1em;
       margin-top: 20px;
     }
 
-    #title-input {
+    .inputTitle {
       font-size: 1.3em;
       padding: 5px 10px;
       border: 1px solid $border-line;
@@ -47,7 +47,7 @@
       }
     }
 
-    .file-btn {
+    .btnFile {
       @include set-button;
 
       display: inline-block;
@@ -62,7 +62,7 @@
       }
     }
 
-    #content-input {
+    .inputContent {
       font-family: $base-font;
       min-height: 30vh;
       font-size: 1.3em;
@@ -79,13 +79,13 @@
 
 //Dark mode
 
-.edit-articles.dark-mode {
-  .submit-button {
+.editArticle.darkMode {
+  .darkMode {
     @include submit-button-dark-mode;
   }
 
-  #title-input,
-  #content-input {
+  .inputTitle,
+  .inputContent {
     background-color: $dakr-mode-main-background;
     border: 1px solid $dark-mode-border-line;
     outline: none;

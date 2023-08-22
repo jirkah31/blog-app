@@ -1,20 +1,20 @@
-import "./ButtonTheme.scss";
+import styles from "./ButtonTheme.module.scss";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { setDarkTheme } from "../../features/darkTheme";
-import { useAppDispatch, useAppSelector } from "../../helpers_hooks/reduxHooks";
+import { useAppDispatch } from "../../helpers_hooks/reduxHooks";
 import { ButtonNavPropsT } from "../ButtonNavigation/ButtonNavigation";
 import { JSXElementConstructor } from "react";
+import classNames from "classnames";
 
 interface ButtonThemePropsT extends Omit<ButtonNavPropsT, "path"> {}
 
 const ThemeButton: JSXElementConstructor<ButtonThemePropsT> = ({
-  className,
+  isDarkMode,
   onMouseOut,
   onMouseOver,
   bounce,
 }: ButtonThemePropsT) => {
-  const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const dispatch = useAppDispatch();
   const handleTheme = () => {
     localStorage.setItem("darkMode", JSON.stringify(!isDarkMode));
@@ -23,13 +23,13 @@ const ThemeButton: JSXElementConstructor<ButtonThemePropsT> = ({
 
   return (
     <button
-      className="theme-button"
+      className={classNames(styles.btnTheme)}
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
       onClick={handleTheme}
     >
       <FontAwesomeIcon
-        className={className}
+        className={classNames({ [styles.darkMode]: isDarkMode })}
         icon={faLightbulb}
         size="2xl"
         bounce={bounce}

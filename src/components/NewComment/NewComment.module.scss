@@ -1,0 +1,31 @@
+@import "../../variables";
+
+.newComment {
+  display: flex;
+  margin-bottom: 15px;
+
+  .avatarContainer {
+    display: flex;
+    margin-right: 15px;
+
+    .avatarImg {
+      object-fit: cover;
+      border-radius: 50%;
+      height: 64px;
+    }
+  }
+
+  .input {
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid $border-line;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1em;
+    margin: {
+      top: 10px;
+      bottom: 20px;
+      left: 20px;
+    }
+  }
+}

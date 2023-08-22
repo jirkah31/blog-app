@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./Button.scss";
+import styles from "./Button.module.scss";
 import classNames from "classnames";
 import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 
@@ -21,13 +21,13 @@ const Button = ({
   children,
 }: ButtonPropsT): React.ReactElement<ButtonPropsT> => {
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
-  const isSmallButton = small ? "button-small" : "normal-btn";
+  const isSmallButton = small ? styles.btnSmall : styles.btnNormal;
 
   const button: JSX.Element = (
     <button
       type={type}
       className={classNames(className, isSmallButton, {
-        "dark-mode": isDarkMode,
+        [styles.btnDarkMode]: isDarkMode,
       })}
       onClick={onClick}
     >
@@ -36,11 +36,7 @@ const Button = ({
   );
 
   if (path) {
-    return (
-      <Link className="button-small-link" to={path}>
-        {button}
-      </Link>
-    );
+    return <Link to={path}>{button}</Link>;
   }
 
   return button;

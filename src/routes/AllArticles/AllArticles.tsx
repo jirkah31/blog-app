@@ -1,6 +1,6 @@
 import React from "react";
 import Article from "../../components/Article/Article";
-import "./AllArticles.scss";
+import styles from "./AllArticles.module.scss";
 import { Outlet } from "react-router-dom";
 import useAllArticles from "../../helpers_hooks/useAllArticles";
 import classNames from "classnames";
@@ -19,7 +19,9 @@ const AllArticles: React.FC = () => {
 
   return (
     <>
-      <h1 className={classNames("title", { "dark-mode": isDarkMode })}>
+      <h1
+        className={classNames(styles.title, { [styles.darkMode]: isDarkMode })}
+      >
         Recent articles
       </h1>
 

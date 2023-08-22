@@ -13,11 +13,11 @@
     align-items: center;
     justify-content: space-between;
 
-    .nav-list {
+    .lists {
       display: inline-flex;
       list-style: none;
 
-      li {
+      .oneList {
         display: flex;
         margin-right: 20px;
         align-items: center;
@@ -28,30 +28,9 @@
       color: $login-text-color;
       text-decoration: none;
     }
-
-    .icon {
-      margin-left: 5px;
-    }
   }
 }
 
-//Dark mode
-
-.navigation.dark-mode {
+.darkMode {
   background-color: $navigation-background-color;
-}
-
-.main-dark-mode {
-  background-color: $dakr-mode-main-background;
-  min-height: 100vh;
-}
-
-//Toast dark mode
-.Toastify {
-  .Toastify__toast-container.dark-mode {
-    .Toastify__toast {
-      color: $dark-mode-text-color;
-      background-color: $dakr-mode-main-background;
-    }
-  }
 }

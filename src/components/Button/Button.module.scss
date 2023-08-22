@@ -1,6 +1,6 @@
 @import "../../variables";
 
-.button-small {
+.btnSmall {
   @include set-button;
 
   height: 25px;
@@ -10,14 +10,19 @@
   transition: background-color ease-in-out 0.5s;
 }
 
-//Dark mode
-.button-small.dark-mode {
-  height: 25px;
-  width: 50px;
+.btnNormal {
+  @include set-button;
+
+  &:hover,
+  &:focus {
+    background-color: lighten($color-button, 20%);
+  }
+}
+
+.btnDarkMode {
+  @include submit-button-dark-mode;
   color: $dark-mode-text-color;
   outline: none;
   border: none !important;
   transition: background-color ease-in-out 0.5s;
-
-  @include submit-button-dark-mode;
 }

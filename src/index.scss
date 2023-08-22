@@ -7,12 +7,20 @@
   font-family: "Neucha", cursive;
 }
 
-.container {
-  font-family: $base-font;
-  width: $container-width;
-  margin: 0 auto;
+body {
+  min-height: 100vh;
 }
 
-.main-dark-mode {
-  color: $dark-mode-text-color;
+#root {
+  min-height: 100%;
+}
+
+//Toast dark mode
+.Toastify {
+  .Toastify__toast-container.dark-mode {
+    .Toastify__toast {
+      color: $dark-mode-text-color;
+      background-color: $dakr-mode-main-background;
+    }
+  }
 }

@@ -1,6 +1,6 @@
 @import "../../variables";
 
-.link-article {
+.article {
   display: flex;
   text-decoration: none;
   color: black;
@@ -14,7 +14,7 @@
   box-shadow: 15px 15px 40px $shadow;
   padding: 20px;
 
-  .article-img {
+  .articleImg {
     border-radius: 15px;
     width: 300px;
     height: 100%;
@@ -24,8 +24,9 @@
     margin-right: 20px;
   }
 
-  .main-page-article {
+  .articleContent {
     width: 100%;
+    background: transparent;
   }
 
   .info {
@@ -37,53 +38,35 @@
       weight: normal;
     }
 
-    h3 {
+    .articleHeadline {
       font-weight: normal;
       margin-right: 30px;
     }
   }
 
-  p {
+  .paragraf {
     font-size: 0.9em;
     line-height: 1.5;
   }
 
-  a {
-    color: rgb(7, 84, 228);
+  .link {
+    color: $login-text-color;
     text-decoration: none;
     margin-right: 20px;
   }
 }
 
-//Dark-mode
-.link-article.dark-mode {
+.darkMode {
   color: $dark-mode-text-color;
   background-color: $navigation-background-color;
   box-shadow: 15px 15px 40px $dark-mode-shadow;
 
-  .main-page-article.dark-mode {
-    width: 100%;
-  }
-
-  .info {
-    h3 {
-      font-weight: normal;
-      margin-right: 30px;
-    }
-  }
-
-  p {
-    font-size: 0.9em;
-    line-height: 1.5;
-  }
-
-  a {
+  .link {
     color: darken($dark-mode-link, 10%);
     text-decoration: none;
     margin-right: 20px;
-  }
-
-  a:hover {
-    color: $dark-mode-link;
+    &:hover {
+      color: $dark-mode-link;
+    }
   }
 }

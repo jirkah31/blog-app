@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./Article.scss";
+import styles from "./Article.module.scss";
 import classNames from "classnames";
 import { useAppSelector } from "../../helpers_hooks/reduxHooks";
 import useImage from "../../helpers_hooks/useImage";
@@ -27,11 +27,6 @@ const Article = ({
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const { data, isSuccess: isImageSuccess } = useImage(imageId);
   const [image, setImage] = useState("");
-  const darkMode = { "dark-mode": isDarkMode };
-  const infoClassName = classNames("info", darkMode);
-  const linkArticleClassName = classNames("link-article", darkMode);
-  const articleImgClassName = classNames("article-img", darkMode);
-  const mainPageArticleClassName = classNames("main-page-article", darkMode);
   const [year, month, day, hour, minute] = createdAt.match(/\d+/g)!.map(Number);
   const date = `${day}.${month}.${year} ${hour}:${minute}`;
 
@@ -45,13 +40,15 @@ const Article = ({
   }, [isImageSuccess, data]);
 
   return (
-    <article className={linkArticleClassName}>
+    <article
+      className={classNames(styles.article, { [styles.darkMode]: isDarkMode })}
+    >
       <div
-        className={articleImgClassName}
+        className={styles.articleImg}
         style={{ backgroundImage: `data:image/*;base64,${image}` }}
       >
         <img
-          className="article-img"
+          className={styles.articleImg}
           src={`data:image/*;base64,${image}`}
           alt="dog"
           width="100%"
@@ -59,15 +56,18 @@ const Article = ({
         />
       </div>
 
-      <div className={mainPageArticleClassName}>
+      <div className={styles.articleContent}>
         <h2>{title}</h2>
-        <div className={infoClassName}>
-          <h3>{author}</h3>
+        <div className={styles.info}>
+          <h3 className={styles.articleHeadline}>{author}</h3>
           <time className="time">{date}</time>
         </div>
-        <p>{perex}</p>
-        <div className={infoClassName}>
-          <Link to={`${PathsT.RecentArticlePathT}/${articleId}`}>
+        <p className={styles.paragraf}>{perex}</p>
+        <div className={styles.info}>
+          <Link
+            className={styles.link}
+            to={`${PathsT.RecentArticlePathT}/${articleId}`}
+          >
             Read whole article
           </Link>
           <div>4 comments</div>

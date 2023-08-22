@@ -1,14 +1,15 @@
 @import "../../variables";
 
-.theme-button {
+.btnTheme {
   position: relative;
   border: none;
   background-color: transparent;
-  .icon.dark-mode {
-    color: $dark-mode-text-color;
-  }
 }
 
-.theme-button:hover {
+.btnTheme:hover {
   cursor: pointer;
+}
+
+.darkMode {
+  color: $dark-mode-nav-text !important;
 }

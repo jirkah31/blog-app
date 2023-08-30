@@ -14,26 +14,3 @@ $dakr-mode-main-background: rgb(27, 27, 27);
 $dark-mode-link: rgb(58, 184, 184);
 $dark-mode-shadow: rgb(20, 20, 20);
 $dark-mode-border-line: rgb(50, 50, 50);
-
-@mixin set-button {
-  background-color: $color-button;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 1em;
-  transition: background-color 0.5s ease-in-out;
-
-  &:hover {
-    background-color: lighten($color-button, 10%);
-  }
-}
-
-@mixin submit-button-dark-mode {
-  background-color: $dark-mode-nav-text;
-
-  &:hover {
-    background-color: lighten($dark-mode-nav-text, 10%);
-  }
-}

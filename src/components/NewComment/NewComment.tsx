@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./NewComment.module.scss";
-import avatar from "../../imgexample/avatar.png";
+import avatar from "../../assets/avatar.png";
 import postComments from "../../helpers_function/postComments";
 import { useAppSelector } from "../../redux/reduxHooks";
 

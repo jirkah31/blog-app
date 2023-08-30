@@ -1,23 +1,24 @@
-@import '../../variables';
+@import "../../styles/variables";
+@import "../../styles/mixins";
 
 .relatedContainer {
-	margin-top: 35px;
-	float: right;
-	width: 340px;
-	margin-left: 30px;
-	padding-left: 30px;
-	border-left: 1px solid $lighter-text;
+  margin-top: 35px;
+  float: right;
+  width: 340px;
+  margin-left: 30px;
+  padding-left: 30px;
+  border-left: 1px solid $lighter-text;
 
-	.preview {
-		margin-top: 20px;
+  .preview {
+    margin-top: 20px;
 
-		h3 {
-			margin-bottom: 10px;
-		}
+    h3 {
+      margin-bottom: 10px;
+    }
 
-		p {
-			line-height: 1.5em;
-			font-size: .9em;
-		}
-	}
+    p {
+      line-height: 1.5em;
+      font-size: 0.9em;
+    }
+  }
 }

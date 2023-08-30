@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Comment.module.scss";
 import Avatar from "../Avatar/Avatar";
-import avatar from "../../imgexample/avatar.png";
+import avatar from "../../assets/avatar.png";
 
 interface CommentPropsT {
   comment: {

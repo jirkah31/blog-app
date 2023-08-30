@@ -21,7 +21,7 @@ const MyArticles: React.FC = () => {
     data,
     isError: isArticlesError,
     isLoading: isArticlesLoading,
-    refetch,
+    refetch: refetchArticles,
   } = useAllArticles();
   const { mutate: deleteArticle } = useDeleteArticle();
   const articles = data?.data.items;
@@ -46,7 +46,7 @@ const MyArticles: React.FC = () => {
       };
 
       await deleteArticle(config);
-      await refetch();
+      await refetchArticles();
       await setNewArticles(articles);
     }
   };

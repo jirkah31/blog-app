@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./EditArticle.module.scss";
 import useArticle from "../../helpers_hooks/useArticle";
-import { useNavigate, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import useUpdateArticle from "../../helpers_function/useUpdateArticle";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
-import { useAppSelector } from "../../helpers_hooks/reduxHooks";
+import { useAppSelector } from "../../redux/reduxHooks";
 import { RequestConfigT, apiConfig } from "../../api_configs";
 import { PathsT } from "../../paths";
 import Button from "../../components/Button/Button";
@@ -16,7 +16,7 @@ const EditArticle: React.FC = () => {
   const [image, setImage] = useState<File>();
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const { accessToken } = useAppSelector((state) => state.accessToken.value);
-  const { isLoddegIn } = useRouterContext();
+  const { isLoddegIn, setIsLoggedIn } = useRouterContext();
   const { articleId } = useParams();
   const navigate = useNavigate();
   const { query } = useArticle({ articleId });
@@ -62,7 +62,7 @@ const EditArticle: React.FC = () => {
       },
     };
     updateArticle(editConfig);
-    navigate(PathsT.MyArticlesPathT);
+    navigate(`/${PathsT.MyArticlesPathT}`);
   };
 
   return (
@@ -129,6 +129,7 @@ const EditArticle: React.FC = () => {
       ) : (
         <div>Not logged in. Please logged in!</div>
       )}
+      <Outlet context={{ isLoddegIn, setIsLoggedIn }} />
     </>
   );
 };

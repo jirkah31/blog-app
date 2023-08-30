@@ -3,10 +3,11 @@ import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Navigation from "./routes/Navigation/Navigation";
 import { useState, useEffect } from "react";
-import { DarkThemeState, setDarkTheme } from "./features/darkTheme";
-import { useAppDispatch, useAppSelector } from "./helpers_hooks/reduxHooks";
-import { setAccessToken } from "./features/accessToken";
+import { DarkThemeState, setDarkTheme } from "./redux/features/darkTheme";
+import { useAppDispatch, useAppSelector } from "./redux/reduxHooks";
+import { setAccessToken } from "./redux/features/accessToken";
 import styles from "./App.module.scss";
+import React from "react";
 
 const App: React.FC = () => {
   const [isLoddegIn, setIsLoggedIn] = useState<boolean>(false);

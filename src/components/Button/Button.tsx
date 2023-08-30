@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./Button.module.scss";
 import classNames from "classnames";
-import { useAppSelector } from "../../helpers_hooks/reduxHooks";
+import { useAppSelector } from "../../redux/reduxHooks";
 
 export interface ButtonPropsT {
   type?: "button" | "submit" | "reset" | undefined;

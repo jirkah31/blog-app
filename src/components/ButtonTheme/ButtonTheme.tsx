@@ -1,8 +1,8 @@
 import styles from "./ButtonTheme.module.scss";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { setDarkTheme } from "../../features/darkTheme";
-import { useAppDispatch } from "../../helpers_hooks/reduxHooks";
+import { setDarkTheme } from "../../redux/features/darkTheme";
+import { useAppDispatch } from "../../redux/reduxHooks";
 import { ButtonNavPropsT } from "../ButtonNavigation/ButtonNavigation";
 import { JSXElementConstructor } from "react";
 import classNames from "classnames";

@@ -12,7 +12,7 @@ import RecentArticle from "./components/RecentArticle/RecentArticle";
 import EditArticle from "./routes/EditArticle/EditArticle";
 import App from "./App";
 import { Provider } from "react-redux";
-import store from "./store/store";
+import store from "./redux/store/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PathsT } from "./paths";
 
@@ -25,30 +25,63 @@ const router = createBrowserRouter([
       {
         path: PathsT.HomePathT,
         element: <AllArticles />,
+        children: [
+          {
+            path: PathsT.LoginPathT,
+            element: <Login />,
+          },
+        ],
       },
       {
         path: PathsT.AboutPathT,
         element: <About />,
+        children: [
+          {
+            path: PathsT.LoginPathT,
+            element: <Login />,
+          },
+        ],
       },
       {
-        path: "recent-article/:articleId",
+        path: `${PathsT.RecentArticlePathT}/:articleId`,
         element: <RecentArticle />,
+        children: [
+          {
+            path: `${PathsT.LoginPathT}`,
+            element: <Login />,
+          },
+        ],
       },
-      {
-        path: PathsT.LoginPathT,
-        element: <Login />,
-      },
+
       {
         path: PathsT.MyArticlesPathT,
         element: <MyArticles />,
+        children: [
+          {
+            path: `${PathsT.LoginPathT}`,
+            element: <Login />,
+          },
+        ],
       },
       {
         path: PathsT.CreateNewArticlePathT,
         element: <NewArticle />,
+        children: [
+          {
+            path: `${PathsT.LoginPathT}`,
+            element: <Login />,
+          },
+        ],
       },
       {
-        path: "edit-article/:articleId",
+        path: `${PathsT.EditArticlePathT}/:articleId`,
         element: <EditArticle />,
+        children: [
+          {
+            path: `${PathsT.LoginPathT}`,
+            element: <Login />,
+          },
+        ],
       },
     ],
   },

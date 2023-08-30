@@ -5,7 +5,7 @@ import useAllArticles from "../../helpers_hooks/useAllArticles";
 import { DeletePropsT } from "../../helpers_function/deleteArticle";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
-import { useAppSelector } from "../../helpers_hooks/reduxHooks";
+import { useAppSelector } from "../../redux/reduxHooks";
 import { ArticleType } from "../../helpers_hooks/useAllArticles";
 import { RequestConfigT, apiConfig } from "../../api_configs";
 import { PathsT } from "../../paths";
@@ -16,7 +16,7 @@ const MyArticles: React.FC = () => {
   const [newArticles, setNewArticles] = useState<ArticleType[]>([]);
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const { accessToken } = useAppSelector((state) => state.accessToken.value);
-  const { isLoddegIn } = useRouterContext();
+  const { isLoddegIn, setIsLoggedIn } = useRouterContext();
   const {
     data,
     isError: isArticlesError,
@@ -25,11 +25,6 @@ const MyArticles: React.FC = () => {
   } = useAllArticles();
   const { mutate: deleteArticle } = useDeleteArticle();
   const articles = data?.data.items;
-
-  useEffect(() => {
-    refetch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     setNewArticles(articles);
@@ -67,7 +62,7 @@ const MyArticles: React.FC = () => {
           <div className={styles.header}>
             <h1 className={styles.headline}>My articles</h1>
 
-            <Button path={PathsT.CreateNewArticlePathT} type="button">
+            <Button path={`/${PathsT.CreateNewArticlePathT}`} type="button">
               Create new article
             </Button>
           </div>
@@ -104,7 +99,7 @@ const MyArticles: React.FC = () => {
                         <td className={styles.td}>
                           <Button
                             small
-                            path={`${PathsT.EditArticlePathT}/${articleId}`}
+                            path={`/${PathsT.EditArticlePathT}/${articleId}`}
                           >
                             edit
                           </Button>
@@ -123,11 +118,11 @@ const MyArticles: React.FC = () => {
               </tbody>
             </table>
           )}
-          <Outlet />
         </>
       ) : (
         <div>You are not logged in. Please log in first.</div>
       )}
+      <Outlet context={{ isLoddegIn, setIsLoggedIn }} />
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styles from "./NewArticle.module.scss";
 import postNewArticle from "../../helpers_function/postNewArticle";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
-import { useAppSelector } from "../../helpers_hooks/reduxHooks";
+import { useAppSelector } from "../../redux/reduxHooks";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { RequestConfigT, apiConfig } from "../../api_configs";
@@ -13,9 +13,9 @@ import Button from "../../components/Button/Button";
 
 const NewArticle: React.FC = () => {
   const navigate = useNavigate();
+  const { isLoddegIn, setIsLoggedIn } = useRouterContext();
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const { accessToken } = useAppSelector((state) => state.accessToken.value);
-  const { isLoddegIn } = useRouterContext();
   const [title, setTitle] = useState<string>("");
   const [perex, setPerex] = useState<string>("");
   const [image, setImage] = useState<string | Blob>("");
@@ -71,7 +71,7 @@ const NewArticle: React.FC = () => {
     const dataImage = await mutation.mutateAsync(configImage);
     const imageId = dataImage.data[0].imageId;
     await postNewArticle({ accessToken, newArticle, imageId });
-    navigate(PathsT.MyArticlesPathT);
+    navigate(`/${PathsT.MyArticlesPathT}`);
   };
 
   return (
@@ -133,6 +133,7 @@ const NewArticle: React.FC = () => {
       ) : (
         <div> You aren't logged in! PLease logged in.</div>
       )}
+      <Outlet context={{ isLoddegIn, setIsLoggedIn }} />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./Article.module.scss";
 import classNames from "classnames";
-import { useAppSelector } from "../../helpers_hooks/reduxHooks";
+import { useAppSelector } from "../../redux/reduxHooks";
 import useImage from "../../helpers_hooks/useImage";
 import { useEffect, useState } from "react";
 import { Buffer } from "buffer";
@@ -12,7 +12,6 @@ export interface ArticleAPIT {
   imageId: string;
   title: string;
   perex: string;
-  author: string;
   createdAt: string;
 }
 
@@ -21,7 +20,6 @@ const Article = ({
   title,
   perex,
   imageId,
-  author,
   createdAt,
 }: ArticleAPIT): React.FunctionComponentElement<ArticleAPIT> => {
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
@@ -59,7 +57,6 @@ const Article = ({
       <div className={styles.articleContent}>
         <h2>{title}</h2>
         <div className={styles.info}>
-          <h3 className={styles.articleHeadline}>{author}</h3>
           <time className="time">{date}</time>
         </div>
         <p className={styles.paragraf}>{perex}</p>

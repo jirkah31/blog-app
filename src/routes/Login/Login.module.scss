@@ -1,15 +1,18 @@
 @import "../../variables";
 
 .login {
+  position: absolute;
+  top: calc(50% - 200px);
+  left: calc(50% - 200px);
   width: 400px;
   height: 400px;
-  margin: 15vh auto;
   border-radius: 15px;
   box-shadow: 15px 15px 40px $shadow;
   display: flex;
 
   .border {
     margin: 40px;
+    width: 100%;
     position: relative;
 
     .headline2 {

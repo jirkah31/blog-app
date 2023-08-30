@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import styles from "./RecentArticle.module.scss";
 import Comment from "../Comment/Comment";
 import { Buffer } from "buffer";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import useArticle from "../../helpers_hooks/useArticle";
 import getFullDateFromISO from "../../helpers_function/getFullDateFromString";
 import NewComment from "../NewComment/NewComment";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
-import { useAppSelector } from "../../helpers_hooks/reduxHooks";
+import { useAppSelector } from "../../redux/reduxHooks";
 import useImage from "../../helpers_hooks/useImage";
 
 const RecentArticle: React.FC = () => {
   const [base64Image, setBase64Image] = useState<string>();
   const [imageId, setImageId] = useState<string>("");
-  const { isLoddegIn } = useRouterContext();
+  const { isLoddegIn, setIsLoggedIn } = useRouterContext();
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const { articleId } = useParams();
   const { query } = useArticle({ articleId });
@@ -88,6 +88,7 @@ const RecentArticle: React.FC = () => {
           </div>
         </>
       )}
+      <Outlet context={{ isLoddegIn, setIsLoggedIn }} />
     </div>
   );
 };

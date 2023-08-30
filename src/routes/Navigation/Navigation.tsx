@@ -5,8 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 import ThemeButton from "../../components/ButtonTheme/ButtonTheme";
 import classNames from "classnames";
 import ButtonNavigation from "../../components/ButtonNavigation/ButtonNavigation";
-import { useAppSelector } from "../../helpers_hooks/reduxHooks";
+import { useAppSelector } from "../../redux/reduxHooks";
 import { PathsT } from "../../paths";
+import { useLocation } from "react-router-dom";
 
 type PropsT = {
   bounce: boolean;
@@ -20,6 +21,11 @@ const Navigation = ({
   setBounce,
 }: PropsT): React.FunctionComponentElement<PropsT> => {
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
+  const location = useLocation();
+  const currnetPath = location.pathname;
+  const loginButtonPath = currnetPath.includes("login")
+    ? currnetPath
+    : `${currnetPath}/${PathsT.LoginPathT}`.replaceAll("//", "/");
 
   const onMouseOver = () => {
     setBounce(true);
@@ -71,7 +77,7 @@ const Navigation = ({
               bounce={bounce}
               onMouseOver={onMouseOver}
               onMouseOut={onMouseOut}
-              path={PathsT.LoginPathT}
+              path={loginButtonPath}
             >
               {isLoddegIn ? "Log Out" : "Log In"}
             </ButtonNavigation>

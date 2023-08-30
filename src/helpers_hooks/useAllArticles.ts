@@ -1,6 +1,6 @@
 import axios from "axios";
 import { apiConfig } from "../api_configs";
-import { useAppSelector } from "./reduxHooks";
+import { useAppSelector } from "../redux/reduxHooks";
 import { useQuery } from "@tanstack/react-query";
 import { RequestConfigT } from "../api_configs";
 import { PathsT } from "../paths";

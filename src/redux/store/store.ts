@@ -1,12 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import darkThemeReducer from "../features/darkTheme"
-import accessTokenReducer from "../features/accessToken"
-
+import darkThemeReducer from "../features/darkTheme";
+import accessTokenReducer from "../features/accessToken";
 
 const store = configureStore({
   reducer: {
     isDarkMode: darkThemeReducer,
-    accessToken: accessTokenReducer
+    accessToken: accessTokenReducer,
   }
 });
 

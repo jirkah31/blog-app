@@ -4,13 +4,14 @@ import styles from "./AllArticles.module.scss";
 import { Outlet } from "react-router-dom";
 import useAllArticles from "../../helpers_hooks/useAllArticles";
 import classNames from "classnames";
-import { useAppSelector } from "../../helpers_hooks/reduxHooks";
+import { useAppSelector } from "../../redux/reduxHooks";
 import { ArticleType } from "../../helpers_hooks/useAllArticles";
+import useRouterContext from "../../helpers_hooks/useRouterContext";
 
 const AllArticles: React.FC = () => {
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
+  const { isLoddegIn, setIsLoggedIn } = useRouterContext();
   const { data, isLoading, isError } = useAllArticles();
-  // const { data, isLoading, isError } = query;
   const articles = data?.data.items;
 
   if (isError) {
@@ -35,14 +36,13 @@ const AllArticles: React.FC = () => {
               key={articleId}
               articleId={articleId}
               imageId={imageId}
-              author="{author}"
               createdAt={createdAt}
               perex={perex}
               title={title}
             />
           );
         })}
-      <Outlet />
+      <Outlet context={{ isLoddegIn, setIsLoggedIn }} />
     </>
   );
 };

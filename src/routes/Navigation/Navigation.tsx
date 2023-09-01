@@ -37,6 +37,7 @@ const Navigation = ({
 
   return (
     <nav
+      data-cy="navigation"
       className={classNames(styles.navigation, {
         [styles.darkMode]: isDarkMode,
       })}

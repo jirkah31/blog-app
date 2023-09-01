@@ -39,6 +39,7 @@ const Article = ({
 
   return (
     <article
+      data-cy="article"
       className={classNames(styles.article, { [styles.darkMode]: isDarkMode })}
     >
       <div
@@ -62,6 +63,7 @@ const Article = ({
         <p className={styles.paragraf}>{perex}</p>
         <div className={styles.info}>
           <Link
+            data-cy="article-link"
             className={styles.link}
             to={`${PathsT.RecentArticlePathT}/${articleId}`}
           >

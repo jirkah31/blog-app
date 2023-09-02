@@ -23,6 +23,7 @@ const ThemeButton: JSXElementConstructor<ButtonThemePropsT> = ({
 
   return (
     <button
+      data-cy="theme-btn"
       className={classNames(styles.btnTheme)}
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}

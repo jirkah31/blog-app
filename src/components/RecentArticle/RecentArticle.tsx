@@ -55,9 +55,12 @@ const RecentArticle: React.FC = () => {
         <>
           <article className={styles.comment}>
             <div>
-              <h2 className={styles.articleTitle}>{title}</h2>
+              <h2 data-cy="title" className={styles.articleTitle}>
+                {title}
+              </h2>
               <div className={styles.info}>
-                <h3 className={styles.author}>author</h3>
+                <h3 className={styles.author}>author</h3>{" "}
+                {/* author need to be implemented */}
                 <time className={styles.date}>{`${day}.${month}.${year}`}</time>
               </div>
               <div style={{ width: "900px", height: "600px" }}>

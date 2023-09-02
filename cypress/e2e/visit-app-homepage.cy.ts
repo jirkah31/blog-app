@@ -2,6 +2,7 @@
 
 describe("Load app", () => {
   beforeEach("Visit app", () => {
+    cy.viewport("macbook-16");
     cy.visit("http://localhost:3000/");
   });
 
@@ -16,4 +17,9 @@ describe("Load app", () => {
   it('Home page have at least one article', () => {
     cy.get('[data-cy="article"]').should('have.length.at.least', 1);
   });
+
+  it("Dark od button click", () => {
+    cy.get('[data-cy="theme-btn"]').click()
+    cy.get('#root').children('div').should('have.css', 'background-color', 'rgb(27, 27, 27)')
+  })
 });

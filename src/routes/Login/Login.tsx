@@ -70,11 +70,17 @@ const Login: React.FC = () => {
         ) : (
           <>
             <h2 className={styles.headline2}>Log In</h2>
-            <form className={styles.form} method="post" onSubmit={handleLogIn}>
+            <form
+              data-cy="login-form"
+              className={styles.form}
+              method="post"
+              onSubmit={handleLogIn}
+            >
               <label className={styles.label} htmlFor="email">
                 Usename
               </label>
               <input
+                data-cy="email-input"
                 className={styles.input}
                 id="email"
                 type="text"
@@ -88,6 +94,7 @@ const Login: React.FC = () => {
 
               <label htmlFor="password">Password</label>
               <input
+                data-cy="password-input"
                 className={styles.input}
                 id="password"
                 type="password"
@@ -106,6 +113,7 @@ const Login: React.FC = () => {
                 Cancel
               </Button>
               <Button
+                data-cy="submit"
                 style={{ position: "absolute", bottom: "0", right: "0" }}
                 type="submit"
               >

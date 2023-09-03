@@ -20,10 +20,11 @@ const MyArticles: React.FC = () => {
   const {
     data,
     isError: isArticlesError,
+    isFetching: isArticleFetching,
     isLoading: isArticlesLoading,
     refetch: refetchArticles,
   } = useAllArticles();
-  const { mutate: deleteArticle } = useDeleteArticle();
+  const { mutate: deleteArticle } = useDeleteArticle(refetchArticles);
   const articles = data?.data.items;
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const MyArticles: React.FC = () => {
       };
 
       await deleteArticle(config);
-      await refetchArticles();
+      // await refetchArticles();
       await setNewArticles(articles);
     }
   };
@@ -83,7 +84,10 @@ const MyArticles: React.FC = () => {
                   <th className={styles.th}>Action</th>
                 </tr>
 
-                {newArticles &&
+                {isArticleFetching ? (
+                  <h2>Loading articles...</h2>
+                ) : (
+                  newArticles &&
                   newArticles.map((article) => {
                     const { articleId, title, perex } = article;
                     return (
@@ -114,7 +118,8 @@ const MyArticles: React.FC = () => {
                         </td>
                       </tr>
                     );
-                  })}
+                  })
+                )}
               </tbody>
             </table>
           )}

@@ -3,14 +3,16 @@ import axios, { AxiosResponse } from "axios";
 import { RequestConfigT } from "../api_configs";
 import { successToast, errorToast } from "../toasts/toasts";
 
-const useDeleteArticle = (): UseMutationResult<
+const useDeleteArticle = (refetchArticles: any): UseMutationResult<
   AxiosResponse<MutateFunction, RequestConfigT>,
   unknown,
   RequestConfigT,
   unknown> => {
   return useMutation({
     mutationFn: (configArg: RequestConfigT) => axios(configArg),
-    onSuccess: async () => {
+    onSuccess: () => {
+      refetchArticles()
+      console.log("mutation")
       successToast("Deletion success!");
     },
     onError: () => errorToast("Deletion fail!"),

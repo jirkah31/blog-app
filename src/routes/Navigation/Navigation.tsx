@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./Navigation.module.scss";
 import { navLinks } from "../../links";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,16 +10,13 @@ import { PathsT } from "../../paths";
 import { useLocation } from "react-router-dom";
 
 type PropsT = {
-  bounce: boolean;
   isLoddegIn: boolean;
-  setBounce: Dispatch<SetStateAction<boolean>>;
 };
 
 const Navigation = ({
-  bounce,
   isLoddegIn,
-  setBounce,
 }: PropsT): React.FunctionComponentElement<PropsT> => {
+  const [bounce, setBounce] = useState<boolean>(false);
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const location = useLocation();
   const currnetPath = location.pathname;

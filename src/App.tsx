@@ -11,8 +11,6 @@ import React from "react";
 
 const App: React.FC = () => {
   const [isLoddegIn, setIsLoggedIn] = useState<boolean>(false);
-  const [bounce, setBounce] = useState<boolean>(false);
-  // const { accessToken } = useAppSelector((state) => state.accessToken.value);
   const { isDarkMode } = useAppSelector<DarkThemeState>(
     (state) => state.isDarkMode.value
   );
@@ -56,11 +54,7 @@ const App: React.FC = () => {
         [styles.darkMode]: isDarkMode,
       })}
     >
-      <Navigation
-        setBounce={setBounce}
-        isLoddegIn={isLoddegIn}
-        bounce={bounce}
-      />
+      <Navigation isLoddegIn={isLoddegIn} />
       <div className={styles.container}>
         <Outlet
           context={{ isLoddegIn, setIsLoggedIn }}

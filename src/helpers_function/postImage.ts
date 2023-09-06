@@ -5,7 +5,7 @@ import { PathsT } from "../paths";
 
 type PropsT = {
   accessToken: string;
-  image?: any;
+  image: string;
 };
 
 const postImage = async ({ accessToken, image }: PropsT) => {

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React from "react";
 import styles from "./Navigation.module.scss";
 import { navLinks } from "../../links";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,24 +13,15 @@ type PropsT = {
   isLoddegIn: boolean;
 };
 
-const Navigation = ({
+const Navigation = React.memo(function Navigation({
   isLoddegIn,
-}: PropsT): React.FunctionComponentElement<PropsT> => {
-  const [bounce, setBounce] = useState<boolean>(false);
+}: PropsT): React.FunctionComponentElement<PropsT> {
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const location = useLocation();
   const currnetPath = location.pathname;
   const loginButtonPath = currnetPath.includes("login")
     ? currnetPath
     : `${currnetPath}/${PathsT.LoginPathT}`.replaceAll("//", "/");
-
-  const onMouseOver = () => {
-    setBounce(true);
-  };
-
-  const onMouseOut = () => {
-    setBounce(false);
-  };
 
   return (
     <nav
@@ -44,13 +35,7 @@ const Navigation = ({
           {navLinks.map((link) => {
             return (
               <li key={link.id} className={styles.oneList}>
-                <ButtonNavigation
-                  bounce={bounce}
-                  onMouseOver={onMouseOver}
-                  onMouseOut={onMouseOut}
-                  isDarkMode={isDarkMode}
-                  path={link.path}
-                >
+                <ButtonNavigation isDarkMode={isDarkMode} path={link.path}>
                   {link.content}
                 </ButtonNavigation>
               </li>
@@ -59,9 +44,6 @@ const Navigation = ({
           {isLoddegIn && (
             <li className={styles.oneList}>
               <ButtonNavigation
-                bounce={bounce}
-                onMouseOver={onMouseOver}
-                onMouseOut={onMouseOut}
                 isDarkMode={isDarkMode}
                 path={PathsT.MyArticlesPathT}
               >
@@ -70,27 +52,16 @@ const Navigation = ({
             </li>
           )}
           <li className={styles.oneList}>
-            <ButtonNavigation
-              isDarkMode={isDarkMode}
-              bounce={bounce}
-              onMouseOver={onMouseOver}
-              onMouseOut={onMouseOut}
-              path={loginButtonPath}
-            >
+            <ButtonNavigation isDarkMode={isDarkMode} path={loginButtonPath}>
               {isLoddegIn ? "Log Out" : "Log In"}
             </ButtonNavigation>
           </li>
         </ul>
 
-        <ThemeButton
-          bounce={bounce}
-          onMouseOver={onMouseOver}
-          onMouseOut={onMouseOut}
-          isDarkMode={isDarkMode}
-        />
+        <ThemeButton isDarkMode={isDarkMode} />
       </div>
     </nav>
   );
-};
+});
 
 export default Navigation;

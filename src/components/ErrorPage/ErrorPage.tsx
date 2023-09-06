@@ -1,4 +1,4 @@
-import styles from "./ErrorPage.module.scss";
+import React from "react";
 import { useRouteError } from "react-router-dom";
 
 const ErrorPage: React.FC = () => {

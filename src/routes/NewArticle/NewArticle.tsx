@@ -31,12 +31,10 @@ const NewArticle: React.FC = () => {
   });
 
   const handleTitle = (event: React.FormEvent<HTMLInputElement>) => {
-    event.preventDefault();
     setTitle((event.target as HTMLInputElement).value);
   };
 
   const handleContent = (event: React.FormEvent<HTMLTextAreaElement>) => {
-    event.preventDefault();
     setPerex((event.target as HTMLInputElement).value);
   };
 
@@ -131,7 +129,7 @@ const NewArticle: React.FC = () => {
           </form>
         </div>
       ) : (
-        <div> You aren't logged in! PLease logged in.</div>
+        <div> You aren&apos;t logged in! PLease logged in.</div>
       )}
       <Outlet context={{ isLoddegIn, setIsLoggedIn }} />
     </>

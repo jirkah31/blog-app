@@ -4,6 +4,7 @@ import { useAppSelector } from "../redux/reduxHooks";
 import { useQuery } from "@tanstack/react-query";
 import { RequestConfigT } from "../api_configs";
 import { PathsT } from "../paths";
+import { CommentPropsT } from "../components/Comment/Comment";
 
 export interface ArticleType {
   articleId: string;
@@ -12,7 +13,7 @@ export interface ArticleType {
   createdAt: string;
   imageId: string;
   lastUpdatedAt: string;
-  comments?: any; //dotypovat jak se mi povede implementovat comment functionality
+  comments?: CommentPropsT;
 }
 
 const useAllArticles = () => {

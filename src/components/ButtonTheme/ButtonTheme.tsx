@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./ButtonTheme.module.scss";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,9 +12,6 @@ interface ButtonThemePropsT extends Omit<ButtonNavPropsT, "path"> {}
 
 const ThemeButton: JSXElementConstructor<ButtonThemePropsT> = ({
   isDarkMode,
-  onMouseOut,
-  onMouseOver,
-  bounce,
 }: ButtonThemePropsT) => {
   const dispatch = useAppDispatch();
   const handleTheme = () => {
@@ -25,15 +23,12 @@ const ThemeButton: JSXElementConstructor<ButtonThemePropsT> = ({
     <button
       data-cy="theme-btn"
       className={classNames(styles.btnTheme)}
-      onMouseOver={onMouseOver}
-      onMouseOut={onMouseOut}
       onClick={handleTheme}
     >
       <FontAwesomeIcon
         className={classNames({ [styles.darkMode]: isDarkMode })}
         icon={faLightbulb}
         size="2xl"
-        bounce={bounce}
       />
     </button>
   );

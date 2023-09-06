@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { apiConfig } from "../api_configs";
 import { PathsT } from "../paths";
 
 // type ArticleType = {

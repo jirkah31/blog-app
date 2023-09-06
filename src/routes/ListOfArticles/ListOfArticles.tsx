@@ -11,6 +11,7 @@ import { RequestConfigT, apiConfig } from "../../api_configs";
 import { PathsT } from "../../paths";
 import useDeleteArticle from "../../helpers_hooks/useDeleteArticle";
 import Button from "../../components/Button/Button";
+import TableLine from "../../components/TableLine/TableLine";
 
 const MyArticles: React.FC = () => {
   const [newArticles, setNewArticles] = useState<ArticleType[]>([]);
@@ -47,7 +48,6 @@ const MyArticles: React.FC = () => {
       };
 
       await deleteArticle(config);
-      // await refetchArticles();
       await setNewArticles(articles);
     }
   };
@@ -89,34 +89,17 @@ const MyArticles: React.FC = () => {
                 ) : (
                   newArticles &&
                   newArticles.map((article) => {
-                    const { articleId, title, perex } = article;
                     return (
-                      <tr key={articleId}>
-                        <td className={styles.td}>
-                          {" "}
-                          <input type="checkbox" />{" "}
-                        </td>
-                        <td className={styles.td}>{title}</td>
-                        <td className={styles.td}>{perex}</td>
-                        <td className={styles.td}>Elisabeth Straingth</td>
-                        <td className={styles.td}>4</td>
-                        <td className={styles.td}>
-                          <Button
-                            small
-                            path={`/${PathsT.EditArticlePathT}/${articleId}`}
-                          >
-                            edit
-                          </Button>
-                          <Button
-                            small
-                            onClick={() =>
-                              handleDeleteArticle({ articleId, accessToken })
-                            }
-                          >
-                            delete
-                          </Button>
-                        </td>
-                      </tr>
+                      <TableLine
+                        key={article.articleId}
+                        article={article}
+                        handleDeleteArticle={() =>
+                          handleDeleteArticle({
+                            articleId: article.articleId,
+                            accessToken,
+                          })
+                        }
+                      />
                     );
                   })
                 )}

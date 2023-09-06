@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Article.module.scss";
 import classNames from "classnames";
@@ -31,7 +32,7 @@ const Article = ({
   useEffect(() => {
     if (isImageSuccess && data) {
       const base64ImageString = Buffer.from(data.data, "binary").toString(
-        "base64"
+        "base64",
       );
       setImage(base64ImageString);
     }

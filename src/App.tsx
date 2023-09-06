@@ -12,7 +12,7 @@ import React from "react";
 const App: React.FC = () => {
   const [isLoddegIn, setIsLoggedIn] = useState<boolean>(false);
   const { isDarkMode } = useAppSelector<DarkThemeState>(
-    (state) => state.isDarkMode.value
+    (state) => state.isDarkMode.value,
   );
   const dispatch = useAppDispatch();
 
@@ -22,7 +22,7 @@ const App: React.FC = () => {
   const timeNow = time.getTime();
 
   useEffect(() => {
-    if (!!loginDataJSON) {
+    if (loginDataJSON) {
       const loginData = JSON.parse(loginDataJSON);
       const timeLimit = timeNow - loginData.accessTokenTime;
 
@@ -35,8 +35,7 @@ const App: React.FC = () => {
         dispatch(setAccessToken({ accessToken: "" }));
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loginDataJSON, timeNow]);
+  }, [loginDataJSON]);
 
   useEffect(() => {
     if (getDarkModeJSON) {
@@ -45,7 +44,6 @@ const App: React.FC = () => {
         dispatch(setDarkTheme({ isDarkMode: getDarkMode }));
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getDarkModeJSON]);
 
   return (

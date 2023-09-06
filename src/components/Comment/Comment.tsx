@@ -3,22 +3,22 @@ import styles from "./Comment.module.scss";
 import Avatar from "../Avatar/Avatar";
 import avatar from "../../assets/avatar.png";
 
-interface CommentPropsT {
+export interface CommentPropsT {
   comment: {
     content: string;
     author: string;
     createdAt: string;
     score: number;
+    commentId: string;
   };
 }
 
 const Comment: React.JSXElementConstructor<CommentPropsT> = ({
   comment,
 }: CommentPropsT) => {
-  const { content, author, createdAt, score } = comment;
-
+  const { commentId, content, author, score, createdAt } = comment;
   return (
-    <div className={styles.scommentContainer}>
+    <div key={commentId} className={styles.scommentContainer}>
       <Avatar avatar={avatar} />
 
       <div className={styles.comment}>

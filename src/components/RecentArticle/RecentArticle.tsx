@@ -11,6 +11,14 @@ import classNames from "classnames";
 import { useAppSelector } from "../../redux/reduxHooks";
 import useImage from "../../helpers_hooks/useImage";
 
+interface CommentPropsT {
+  content: string;
+  author: string;
+  createdAt: string;
+  score: number;
+  commentId: string;
+}
+
 const RecentArticle: React.FC = () => {
   const [base64Image, setBase64Image] = useState<string>();
   const [imageId, setImageId] = useState<string>("");
@@ -36,8 +44,8 @@ const RecentArticle: React.FC = () => {
 
   useEffect(() => {
     if (isImageSuccess && imageData) {
-      let base64ImageString = Buffer.from(imageData.data, "binary").toString(
-        "base64"
+      const base64ImageString = Buffer.from(imageData.data, "binary").toString(
+        "base64",
       );
       setBase64Image(base64ImageString);
     }
@@ -83,10 +91,9 @@ const RecentArticle: React.FC = () => {
 
           {isLoddegIn && <NewComment articleId={articleId} />}
           <div className={styles.info}>
-            {comments.map((comment: any) => {
+            {comments.map((comment: CommentPropsT) => {
               //dotypovat jak semi povede implementovat comment functionality
-              const oneComment = { ...comment };
-              return <Comment comment={oneComment} />;
+              return <Comment key={comment.commentId} comment={comment} />;
             })}
           </div>
         </>

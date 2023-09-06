@@ -15,8 +15,8 @@ const useUpdateArticle = (): UseMutationResult<
   unknown
 > => {
   return useMutation({
-    mutationFn: async (config: RequestConfigT) => await axios(config),
-    onSuccess: async () => await successToast("Article was updated!"),
+    mutationFn: (config: RequestConfigT) => axios(config),
+    onSuccess: () => successToast("Article was updated!"),
     onError: (error) => {
       console.error("ERROR_post_articles", error instanceof AxiosError);
       return errorToast("ERROR happend!");

@@ -30,6 +30,7 @@ const MyArticles: React.FC = () => {
 
   useEffect(() => {
     setNewArticles(articles);
+    refetchArticles();
   }, [articles]);
 
   const handleDeleteArticle = async ({

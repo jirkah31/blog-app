@@ -8,7 +8,7 @@ type PropsT = {
   image: string;
 };
 
-const postImage = async ({ accessToken, image }: PropsT) => {
+const postImage = ({ accessToken, image }: PropsT) => {
   const data = new FormData();
   data.append("image", image);
 
@@ -24,8 +24,8 @@ const postImage = async ({ accessToken, image }: PropsT) => {
     data,
   };
 
-  const imageIde = async () =>
-    await axios(config)
+  const imageIde = () =>
+    axios(config)
       .then((response) => {
         return response.data[0].imageId;
       })

@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { apiConfig } from "../api_configs";
 import { successToast, errorToast } from "../toasts/toasts";
 import { RequestConfigT } from "../api_configs";
@@ -9,10 +9,10 @@ type PropsT = {
   password: string;
 };
 
-const tryLogin = async ({
+const tryLogin = ({
   username,
   password,
-}: PropsT): Promise<AxiosResponse> => {
+}: PropsT) => {
   const config: RequestConfigT = {
     ...apiConfig,
     url: PathsT.LoginPathT,
@@ -23,7 +23,7 @@ const tryLogin = async ({
     },
   };
 
-  const response: Promise<AxiosResponse<Response>> = await axios(config)
+  const response = axios(config)
     .then((response) => {
       successToast(`${username}, you are successfully logged in!`);
       return response;
@@ -32,7 +32,8 @@ const tryLogin = async ({
       errorToast("Bad username or password!");
       return error;
     });
-  return response;
+
+  return response
 };
 
 export default tryLogin;

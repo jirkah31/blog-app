@@ -21,7 +21,7 @@ const NewArticle: React.FC = () => {
   const [image, setImage] = useState<string | Blob>("");
 
   const mutation = useMutation({
-    mutationFn: async (config: RequestConfigT) => await axios(config),
+    mutationFn: (config: RequestConfigT) => axios(config),
     onError: (error, variables, context) => {
       console.error("error, variables, context: ", error, variables, context);
     },
@@ -89,7 +89,6 @@ const NewArticle: React.FC = () => {
             <label htmlFor="title" className={styles.label}>
               Article title
             </label>
-            <br />
             <input
               className={styles.titleInput}
               type="text"
@@ -99,10 +98,8 @@ const NewArticle: React.FC = () => {
               value={title}
               onChange={handleTitle}
             />
-            <br />
 
             <p className={styles.label}>Featured image</p>
-            <br />
             <label className={styles.btnFile} htmlFor="filePicker">
               Upload an Image
             </label>
@@ -112,12 +109,10 @@ const NewArticle: React.FC = () => {
               type={"file"}
               onChange={handleImage}
             />
-            <br />
 
             <label htmlFor="content" className={styles.label}>
               Content
             </label>
-            <br />
             <textarea
               className={styles.contentInput}
               id="content-input"

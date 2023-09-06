@@ -82,7 +82,6 @@ const EditArticle: React.FC = () => {
             <label htmlFor="title" className={styles.label}>
               Article title
             </label>
-            <br />
             <input
               type="text"
               id="title-input"
@@ -92,10 +91,8 @@ const EditArticle: React.FC = () => {
               value={title}
               onChange={handleTitle}
             />
-            <br />
 
-            <p className="input-name">Featured image</p>
-            <br />
+            <p className={styles.label}>Featured image</p>
             <label
               htmlFor="filePicker"
               className={classNames(styles.btnFile, {
@@ -110,12 +107,10 @@ const EditArticle: React.FC = () => {
               type={"file"}
               onChange={handleImage}
             />
-            <br />
 
             <label htmlFor="content" className={styles.label}>
               Content
             </label>
-            <br />
             <textarea
               id="content-input"
               className={styles.inputContent}

@@ -12,10 +12,10 @@ export interface DeletePropsT {
 
 // OLD VERSION DELETING ARTICLES
 
-const deleteArticle = async ({
+const deleteArticle = ({
   articleId,
   accessToken,
-}: DeletePropsT): Promise<void> => {
+}: DeletePropsT) => {
   const config: RequestConfigT = {
     ...apiConfig,
     method: "delete",
@@ -26,7 +26,7 @@ const deleteArticle = async ({
     },
   };
 
-  await axios(config)
+  axios(config)
     .then((response: AxiosResponse<object>) => {
       successToast("Delete success!");
       return response;

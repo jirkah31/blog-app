@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 import { PathsT } from "../paths";
 
 // type ArticleType = {
@@ -10,7 +10,7 @@ import { PathsT } from "../paths";
 //   lastUpdatedAt: string;
 // };
 
-const getTenant = (tenantId: string): Promise<void> => {
+const getTenant = (tenantId: string) => {
   // const [article, setArticle] = useState<ArticleType>({
   //   articleId: "",
   //   title: "",
@@ -22,24 +22,21 @@ const getTenant = (tenantId: string): Promise<void> => {
 
   const url = `${PathsT.TenantPathT}/${tenantId}`;
   const method = "get";
-  const recentArticleConfig = {
+  const config = {
     baseURL: "https://fullstack.exercise.applifting.cz",
     url,
     method,
   };
 
-  const getArticle = async (config: AxiosRequestConfig) => {
-    await axios(config)
-      .then((response) => {
-        return response;
-      })
-      .catch((error) => {
-        console.error("TENANT error", error);
-      });
-  };
-  const tenant = getArticle(recentArticleConfig);
 
-  return tenant;
+  axios(config)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      console.error("TENANT error", error);
+    });
 };
+
 
 export default getTenant;

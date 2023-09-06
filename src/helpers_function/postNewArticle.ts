@@ -13,11 +13,11 @@ interface PropsT {
   };
 }
 
-const postNewArticle = async ({
+const postNewArticle = ({
   accessToken,
   newArticle,
   imageId,
-}: PropsT): Promise<void> => {
+}: PropsT) => {
   const { title, perex } = newArticle;
   const config: RequestConfigT = {
     ...apiConfig,
@@ -34,7 +34,7 @@ const postNewArticle = async ({
     },
   };
 
-  await axios(config)
+  axios(config)
     .then((response: AxiosResponse) => {
       response.status === 200 && successToast("Article posted!");
     })

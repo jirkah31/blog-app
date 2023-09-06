@@ -12,16 +12,13 @@ const postTenant = () => {
     },
   };
 
-  const getApiKey = async () => {
-    await axios(config)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        console.error("ERROR_api_key", error);
-      });
-  };
-  getApiKey();
+  axios(config)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("ERROR_api_key", error);
+    });
 };
 
 export default postTenant;

@@ -9,7 +9,7 @@ interface PropsT {
   articleId: string;
 }
 
-const postComments = async ({ articleId, accessToken, content }: PropsT) => {
+const postComments = ({ articleId, accessToken, content }: PropsT) => {
   const config: RequestConfigT = {
     ...apiConfig,
     method: "post",
@@ -25,7 +25,7 @@ const postComments = async ({ articleId, accessToken, content }: PropsT) => {
     },
   };
 
-  await axios(config)
+  axios(config)
     .then((response) => {
       return response.data;
     })

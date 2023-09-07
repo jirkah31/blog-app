@@ -1,5 +1,5 @@
 import React from "react";
-import { PathsT } from "../../paths";
+import { PathsT } from "../../api/paths";
 import Button from "../Button/Button";
 import styles from "./TableLine.module.scss";
 import { ArticleType } from "../../helpers_hooks/useAllArticles";

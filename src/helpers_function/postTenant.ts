@@ -1,18 +1,9 @@
-import axios, { AxiosRequestConfig } from "axios";
-import { apiConfig } from "../api_configs";
+import { AxiosInstance } from "../api/api_configs";
+import { PathsT } from "../api/paths";
 
 const postTenant = () => {
-  const config: AxiosRequestConfig = {
-    ...apiConfig,
-    url: "/tenants",
-    method: "post",
-    headers: {
-      ...apiConfig.headers,
-      // 'Authorization': accessToken,
-    },
-  };
 
-  axios(config)
+  AxiosInstance.post(PathsT.TenantPathT)
     .then((response) => {
       return response.data;
     })

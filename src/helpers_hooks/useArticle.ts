@@ -1,36 +1,26 @@
-import axios from "axios";
-import { apiConfig } from "../api_configs";
+import { AxiosInstance } from "../api/api_configs";
 import { errorToast } from "../toasts/toasts";
-import { RequestConfigT } from "../api_configs";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { PathsT } from "../paths";
+import { PathsT } from "../api/paths";
 
-type PropsT = {
+type ArticlePropsT = {
   articleId?: string;
 };
 
-const useArticle = ({ articleId }: PropsT) => {
+const useArticle = ({ articleId }: ArticlePropsT) => {
   const navigate = useNavigate();
-  const recentArticleConfig: RequestConfigT = {
-    ...apiConfig,
-    url: `${PathsT.ArticlesPathT}/${articleId}`,
-    headers: {
-      ...apiConfig.headers,
-    },
-  };
 
-  const query = useQuery({
-    queryKey: ["RecentArticle"],
-    queryFn: () => axios(recentArticleConfig).catch((error) => {
-      errorToast("Article error!")
-      navigate(PathsT.HomePathT)
-      console.error("ERROR: ", error)
-    })
-    ,
+  return useQuery({
+    queryKey: ["article", articleId],
+    queryFn: () =>
+      AxiosInstance.get(`${PathsT.ArticlesPathT}/${articleId}`)
+        .catch((error) => {
+          navigate(PathsT.HomePathT)
+          errorToast("Articles loading fails!");
+          return console.error("Error: ", error)
+        })
   });
-
-  return { query };
 };
 
 export default useArticle;

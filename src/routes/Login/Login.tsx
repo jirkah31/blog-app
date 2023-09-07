@@ -5,7 +5,7 @@ import useRouterContext from "../../helpers_hooks/useRouterContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { useAppSelector } from "../../redux/reduxHooks";
-import { PathsT } from "../../paths";
+import { PathsT } from "../../api/paths";
 import Button from "../../components/Button/Button";
 
 const Login: React.FC = () => {
@@ -46,28 +46,32 @@ const Login: React.FC = () => {
     navigate(PathsT.HomePathT);
   };
 
+  if (isLoddegIn) {
+    return (
+      <>
+        <h2 className={styles.headline2}>You are still logged in!</h2>
+        <Button
+          path={backwardsPathFromLogin}
+          style={{ position: "absolute", bottom: "0", left: "0" }}
+          type="submit"
+        >
+          Cancel
+        </Button>
+        <Button
+          type="button"
+          onClick={handleLogOut}
+          style={{ position: "absolute", bottom: "0", right: "0" }}
+        >
+          Log Out
+        </Button>
+      </>
+    );
+  }
+
   return (
     <div className={classNames(styles.login, className)}>
       <div className={styles.border}>
-        {isLoddegIn ? (
-          <>
-            <h2 className={styles.headline2}>You are still logged in!</h2>
-            <Button
-              path={backwardsPathFromLogin}
-              style={{ position: "absolute", bottom: "0", left: "0" }}
-              type="submit"
-            >
-              Cancel
-            </Button>
-            <Button
-              type="button"
-              onClick={handleLogOut}
-              style={{ position: "absolute", bottom: "0", right: "0" }}
-            >
-              Log Out
-            </Button>
-          </>
-        ) : (
+        {!isLoddegIn && (
           <>
             <h2 className={styles.headline2}>Log In</h2>
             <form

@@ -1,10 +1,8 @@
-import axios from "axios";
-import { apiConfig } from "../api_configs";
-import { useAppSelector } from "../redux/reduxHooks";
 import { useQuery } from "@tanstack/react-query";
-import { RequestConfigT } from "../api_configs";
-import { PathsT } from "../paths";
+import { PathsT } from "../api/paths";
 import { CommentPropsT } from "../components/Comment/Comment";
+import { AxiosInstance } from "../api/api_configs";
+import { errorToast } from "../toasts/toasts";
 
 export interface ArticleType {
   articleId: string;
@@ -17,23 +15,14 @@ export interface ArticleType {
 }
 
 const useAllArticles = () => {
-  const { accessToken } = useAppSelector((state) => state.accessToken.value);
-
-  const allArticlesConfig: RequestConfigT = {
-    ...apiConfig,
-    url: PathsT.ArticlesPathT,
-    headers: {
-      ...apiConfig.headers,
-      Authorization: accessToken,
-    },
-  };
-
   return useQuery({
     queryKey: ["articles"],
-    queryFn: () => {
-      return axios(allArticlesConfig).catch((error) => console.error("Error: ", error)
-      )
-    },
+    queryFn: () =>
+      AxiosInstance.get(PathsT.ArticlesPathT)
+        .catch((error) => {
+          errorToast("Articles loading fails!");
+          return console.error("Error: ", error)
+        })
   });
 
 };

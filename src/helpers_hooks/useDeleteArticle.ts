@@ -1,19 +1,26 @@
-import axios from "axios";
-import { RequestConfigT } from "../api_configs";
+import { AxiosInstance } from "../api/api_configs";
+import { PathsT } from "../api/paths";
 import { successToast, errorToast } from "../toasts/toasts";
 import { useMutation } from "@tanstack/react-query";
 
+interface DeleteArticleT {
+  articleId: string;
+  accessToken: string;
+}
 
 const useDeleteArticle = (refetchArticles: () => void) => {
   return useMutation({
-    mutationFn: (configArg: RequestConfigT) => axios(configArg),
+    mutationFn: ({ articleId, accessToken }: DeleteArticleT) =>
+      AxiosInstance.delete(`${PathsT.ArticlesPathT}/${articleId}`, {
+        headers: { Authorization: accessToken },
+      }),
+
     onSuccess: () => {
-      refetchArticles()
-      console.log("mutation")
+      refetchArticles();
       successToast("Deletion success!");
     },
     onError: () => errorToast("Deletion fail!"),
   });
-}
+};
 
-export default useDeleteArticle
+export default useDeleteArticle;

@@ -7,8 +7,8 @@ import classNames from "classnames";
 import { useAppSelector } from "../../redux/reduxHooks";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { RequestConfigT, apiConfig } from "../../api_configs";
-import { PathsT } from "../../paths";
+import { RequestConfigT, apiConfig } from "../../api/api_configs";
+import { PathsT } from "../../api/paths";
 import Button from "../../components/Button/Button";
 
 const NewArticle: React.FC = () => {
@@ -72,9 +72,13 @@ const NewArticle: React.FC = () => {
     navigate(`/${PathsT.MyArticlesPathT}`);
   };
 
+  if (!isLoddegIn) {
+    return <div> You aren&apos;t logged in! PLease logged in.</div>;
+  }
+
   return (
     <>
-      {isLoddegIn ? (
+      {isLoddegIn && (
         <div
           className={classNames(styles.article, {
             [styles.darkMode]: isDarkMode,
@@ -123,8 +127,6 @@ const NewArticle: React.FC = () => {
             />
           </form>
         </div>
-      ) : (
-        <div> You aren&apos;t logged in! PLease logged in.</div>
       )}
       <Outlet context={{ isLoddegIn, setIsLoggedIn }} />
     </>

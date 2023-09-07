@@ -1,9 +1,8 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
-import { apiConfig } from "../api_configs";
+import { AxiosError, AxiosResponse } from "axios";
+import { AxiosInstance } from "../api/api_configs";
 import { successToast } from "../toasts/toasts";
 import { errorToast } from "../toasts/toasts";
-import { RequestConfigT } from "../api_configs";
-import { PathsT } from "../paths";
+import { PathsT } from "../api/paths";
 
 export interface DeletePropsT {
   articleId: string;
@@ -16,17 +15,12 @@ const deleteArticle = ({
   articleId,
   accessToken,
 }: DeletePropsT) => {
-  const config: RequestConfigT = {
-    ...apiConfig,
-    method: "delete",
-    url: `${PathsT.ArticlesPathT}/${articleId}`,
-    headers: {
-      ...apiConfig.headers,
-      Authorization: accessToken,
-    },
-  };
 
-  axios(config)
+  AxiosInstance.delete(`${PathsT.ArticlesPathT}/${articleId}`, {
+    headers: {
+      Authorization: accessToken
+    }
+  })
     .then((response: AxiosResponse<object>) => {
       successToast("Delete success!");
       return response;

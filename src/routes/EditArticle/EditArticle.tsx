@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./EditArticle.module.scss";
 import useArticle from "../../helpers_hooks/useArticle";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
-import useUpdateArticle from "../../helpers_function/useUpdateArticle";
+import useUpdateArticle from "../../helpers_hooks/useUpdateArticle";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
 import { useAppSelector } from "../../redux/reduxHooks";
-import { RequestConfigT, apiConfig } from "../../api_configs";
-import { PathsT } from "../../paths";
+import { PathsT } from "../../api/paths";
 import Button from "../../components/Button/Button";
 
 const EditArticle: React.FC = () => {
@@ -19,8 +18,8 @@ const EditArticle: React.FC = () => {
   const { isLoddegIn, setIsLoggedIn } = useRouterContext();
   const { articleId } = useParams();
   const navigate = useNavigate();
-  const { query } = useArticle({ articleId });
-  const article = query.data?.data;
+  const { data: articleData } = useArticle({ articleId });
+  const article = articleData?.data;
   const { mutate: updateArticle } = useUpdateArticle();
 
   useEffect(() => {
@@ -48,26 +47,19 @@ const EditArticle: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const editConfig: RequestConfigT = {
-      ...apiConfig,
-      method: "patch",
-      url: `${PathsT.ArticlesPathT}/${articleId}`,
-      data: {
-        title,
-        perex,
-      },
-      headers: {
-        ...apiConfig.headers,
-        Authorization: accessToken,
-      },
-    };
-    updateArticle(editConfig);
-    navigate(`/${PathsT.MyArticlesPathT}`);
+    if (articleId) {
+      updateArticle({ articleId, title, perex, accessToken });
+      navigate(`/${PathsT.MyArticlesPathT}`);
+    }
   };
+
+  if (!isLoddegIn) {
+    return <div>Not logged in. Please logged in!</div>;
+  }
 
   return (
     <>
-      {isLoddegIn ? (
+      {isLoddegIn && (
         <div
           className={classNames(styles.editArticle, {
             [styles.darkMode]: isDarkMode,
@@ -121,8 +113,6 @@ const EditArticle: React.FC = () => {
             />
           </form>
         </div>
-      ) : (
-        <div>Not logged in. Please logged in!</div>
       )}
       <Outlet context={{ isLoddegIn, setIsLoggedIn }} />
     </>

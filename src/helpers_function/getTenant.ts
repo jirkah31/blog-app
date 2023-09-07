@@ -1,5 +1,5 @@
-import axios from "axios";
-import { PathsT } from "../paths";
+import { PathsT } from "../api/paths";
+import { AxiosInstance } from "../api/api_configs";
 
 // type ArticleType = {
 //   articleId: string;
@@ -20,16 +20,7 @@ const getTenant = (tenantId: string) => {
   //   lastUpdatedAt: "",
   // });
 
-  const url = `${PathsT.TenantPathT}/${tenantId}`;
-  const method = "get";
-  const config = {
-    baseURL: "https://fullstack.exercise.applifting.cz",
-    url,
-    method,
-  };
-
-
-  axios(config)
+  AxiosInstance.get(`${PathsT.TenantPathT}/${tenantId}`)
     .then((response) => {
       return response;
     })

@@ -25,10 +25,13 @@ const RecentArticle: React.FC = () => {
   const { isLoddegIn, setIsLoggedIn } = useRouterContext();
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const { articleId } = useParams();
-  const { query } = useArticle({ articleId });
+  const {
+    data: articleData,
+    isLoading: isArticleLoading,
+    isSuccess: isArticleSuccess,
+  } = useArticle({ articleId });
   const { data: imageData, isSuccess: isImageSuccess } = useImage(imageId);
-  const { isLoading: isArticleLoading, isSuccess: isArticleSuccess } = query;
-  const { title, perex, createdAt, comments } = query.data?.data || {
+  const { title, perex, createdAt, comments } = articleData?.data || {
     title: "",
     perex: "",
     createdAt: "",
@@ -38,9 +41,9 @@ const RecentArticle: React.FC = () => {
 
   useEffect(() => {
     if (isArticleSuccess) {
-      setImageId(query.data?.data.imageId);
+      setImageId(articleData?.data.imageId);
     }
-  }, [isArticleSuccess, query.data?.data.imageId]);
+  }, [isArticleSuccess, articleData?.data.imageId]);
 
   useEffect(() => {
     if (isImageSuccess && imageData) {
@@ -92,7 +95,6 @@ const RecentArticle: React.FC = () => {
           {isLoddegIn && <NewComment articleId={articleId} />}
           <div className={styles.info}>
             {comments.map((comment: CommentPropsT) => {
-              //dotypovat jak semi povede implementovat comment functionality
               return <Comment key={comment.commentId} comment={comment} />;
             })}
           </div>

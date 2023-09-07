@@ -7,13 +7,12 @@ import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
 import { useAppSelector } from "../../redux/reduxHooks";
 import { ArticleType } from "../../helpers_hooks/useAllArticles";
-import { RequestConfigT, apiConfig } from "../../api_configs";
-import { PathsT } from "../../paths";
+import { PathsT } from "../../api/paths";
 import useDeleteArticle from "../../helpers_hooks/useDeleteArticle";
 import Button from "../../components/Button/Button";
 import TableLine from "../../components/TableLine/TableLine";
 
-const MyArticles: React.FC = () => {
+const ListOfArticles: React.FC = () => {
   const [newArticles, setNewArticles] = useState<ArticleType[]>([]);
   const { isDarkMode } = useAppSelector((state) => state.isDarkMode.value);
   const { accessToken } = useAppSelector((state) => state.accessToken.value);
@@ -38,17 +37,7 @@ const MyArticles: React.FC = () => {
     accessToken,
   }: DeletePropsT) => {
     if (accessToken && articleId) {
-      const config: RequestConfigT = {
-        ...apiConfig,
-        method: "delete",
-        url: `${PathsT.ArticlesPathT}/${articleId}`,
-        headers: {
-          ...apiConfig.headers,
-          Authorization: accessToken,
-        },
-      };
-
-      await deleteArticle(config);
+      await deleteArticle({ articleId, accessToken });
       await setNewArticles(articles);
     }
   };
@@ -57,9 +46,13 @@ const MyArticles: React.FC = () => {
     <h2>Something goes wrong...</h2>;
   }
 
+  if (!isLoddegIn) {
+    return <div>You are not logged in. Please log in first.</div>;
+  }
+
   return (
     <div className={classNames(styles.articles, { "dark-mode": isDarkMode })}>
-      {isLoddegIn ? (
+      {isLoddegIn && (
         <>
           <div className={styles.header}>
             <h1 className={styles.headline}>My articles</h1>
@@ -86,7 +79,11 @@ const MyArticles: React.FC = () => {
                 </tr>
 
                 {isArticleFetching ? (
-                  <h2>Loading articles...</h2>
+                  <tr>
+                    <td>
+                      <h2>Loading articles...</h2>
+                    </td>
+                  </tr>
                 ) : (
                   newArticles &&
                   newArticles.map((article) => {
@@ -108,12 +105,10 @@ const MyArticles: React.FC = () => {
             </table>
           )}
         </>
-      ) : (
-        <div>You are not logged in. Please log in first.</div>
       )}
       <Outlet context={{ isLoddegIn, setIsLoggedIn }} />
     </div>
   );
 };
 
-export default MyArticles;
+export default ListOfArticles;

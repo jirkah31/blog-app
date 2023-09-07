@@ -1,7 +1,7 @@
 import axios from "axios";
-import { apiConfig } from "../api_configs";
-import { RequestConfigT } from "../api_configs";
-import { PathsT } from "../paths";
+import { apiConfig } from "../api/api_configs";
+import { RequestConfigT } from "../api/api_configs";
+import { PathsT } from "../api/paths";
 
 type PropsT = {
   accessToken: string;

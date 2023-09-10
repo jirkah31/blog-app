@@ -1,27 +1,30 @@
-import axios, { AxiosRequestConfig } from "axios";
-import { PathsT } from "./paths";
+import axios from "axios";
 
-export interface RequestConfigT extends AxiosRequestConfig {
-  method: "get" | "post" | "delete" | "patch",
-  url: PathsT.HomePathT | PathsT.ArticlesPathT | PathsT.LoginPathT | `${PathsT.ArticlesPathT}/${string}` | PathsT.CommentsPathT | PathsT.ImagesPathT | `${PathsT.ImagesPathT}/${string}`,
-  baseURL: 'https://fullstack.exercise.applifting.cz',
-  headers: {
-    'X-API-KEY': "f6802748-3e4c-4e86-8a53-2a38ef8f5a9b",
-    'Authorization'?: string | null,
-    "Content-Type"?: "multipart/form-data",
-  }
+export enum PathsT {
+  HomePathT = "/",
+  AboutPathT = "about",
+  LoginPathT = "login",
+  MyArticlesPathT = "my-articles",
+  CreateNewArticlePathT = "create-new-article",
+  EditArticlePathT = "edit-article",
+  ImagesPathT = "images",
+  ArticlesPathT = "articles",
+  RecentArticlePathT = "recent-article",
+  CommentsPathT = "comments",
+  TenantPathT = "tenants",
 }
-
-export const apiConfig: RequestConfigT = {
-  method: 'get',
-  url: PathsT.HomePathT,
-  baseURL: 'https://fullstack.exercise.applifting.cz',
-  headers: {
-    "X-API-KEY": "f6802748-3e4c-4e86-8a53-2a38ef8f5a9b"
-  },
-}
+type navLinksT = {
+  id: number;
+  path: string;
+  content: string;
+};
 
 export const AxiosInstance = axios.create({
-  baseURL: 'https://fullstack.exercise.applifting.cz',
-  headers: { 'X-API-KEY': "f6802748-3e4c-4e86-8a53-2a38ef8f5a9b" }
-})
+  baseURL: process.env.REACT_APP_URL,
+  headers: { "X-API-KEY": process.env.REACT_APP_X_API_KEY },
+});
+
+export const navLinks: navLinksT[] = [
+  { id: 1, path: PathsT.HomePathT, content: "Bulldogs Articles" },
+  { id: 2, path: PathsT.AboutPathT, content: "About Buldogs" },
+];

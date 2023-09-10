@@ -1,7 +1,6 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { successToast, errorToast } from "../toasts/toasts";
-import { PathsT } from "../api/paths";
-import { AxiosInstance } from "../api/api_configs";
+import { AxiosInstance, PathsT } from "../api/api_configs";
 
 interface PropsT {
   accessToken: string;
@@ -12,22 +11,22 @@ interface PropsT {
   };
 }
 
-const postNewArticle = ({
-  accessToken,
-  newArticle,
-  imageId,
-}: PropsT) => {
+const postNewArticle = ({ accessToken, newArticle, imageId }: PropsT) => {
   const { title, perex } = newArticle;
 
-  AxiosInstance.post(PathsT.ArticlesPathT, {
-    title,
-    perex,
-    imageId,
-  }, {
-    headers: {
-      Authorization: accessToken,
-    }
-  })
+  AxiosInstance.post(
+    PathsT.ArticlesPathT,
+    {
+      title,
+      perex,
+      imageId,
+    },
+    {
+      headers: {
+        Authorization: accessToken,
+      },
+    },
+  )
     .then((response: AxiosResponse) => {
       response.status === 200 && successToast("Article posted!");
     })

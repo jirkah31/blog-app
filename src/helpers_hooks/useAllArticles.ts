@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { PathsT } from "../api/paths";
 import { CommentPropsT } from "../components/Comment/Comment";
-import { AxiosInstance } from "../api/api_configs";
+import { AxiosInstance, PathsT } from "../api/api_configs";
 import { errorToast } from "../toasts/toasts";
 
 export interface ArticleType {
@@ -18,13 +17,11 @@ const useAllArticles = () => {
   return useQuery({
     queryKey: ["articles"],
     queryFn: () =>
-      AxiosInstance.get(PathsT.ArticlesPathT)
-        .catch((error) => {
-          errorToast("Articles loading fails!");
-          return console.error("Error: ", error)
-        })
+      AxiosInstance.get(PathsT.ArticlesPathT).catch((error) => {
+        errorToast("Articles loading fails!");
+        return console.error("Error: ", error);
+      }),
   });
-
 };
 
 export default useAllArticles;

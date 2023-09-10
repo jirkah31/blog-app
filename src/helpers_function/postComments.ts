@@ -1,6 +1,5 @@
 import { AxiosError } from "axios";
-import { AxiosInstance } from "../api/api_configs";
-import { PathsT } from "../api/paths";
+import { AxiosInstance, PathsT } from "../api/api_configs";
 
 interface PropsT {
   accessToken: string;
@@ -9,16 +8,19 @@ interface PropsT {
 }
 
 const postComments = ({ articleId, accessToken, content }: PropsT) => {
-
-  AxiosInstance.post(PathsT.CommentsPathT, {
-    articleId,
-    content,
-    author: "Jirka",
-  }, {
-    headers: {
-      Authorization: accessToken,
-    }
-  })
+  AxiosInstance.post(
+    PathsT.CommentsPathT,
+    {
+      articleId,
+      content,
+      author: "Jirka",
+    },
+    {
+      headers: {
+        Authorization: accessToken,
+      },
+    },
+  )
     .then((response) => {
       return response.data;
     })

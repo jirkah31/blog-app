@@ -1,7 +1,4 @@
-import axios from "axios";
-import { apiConfig } from "../api/api_configs";
-import { RequestConfigT } from "../api/api_configs";
-import { PathsT } from "../api/paths";
+import { AxiosInstance, PathsT } from "../api/api_configs";
 
 type PropsT = {
   accessToken: string;
@@ -12,20 +9,17 @@ const postImage = ({ accessToken, image }: PropsT) => {
   const data = new FormData();
   data.append("image", image);
 
-  const config: RequestConfigT = {
-    ...apiConfig,
-    url: PathsT.ImagesPathT,
-    method: "post",
-    headers: {
-      ...apiConfig.headers,
-      Authorization: accessToken,
-      "Content-Type": "multipart/form-data",
-    },
-    data,
-  };
-
   const imageIde = () =>
-    axios(config)
+    AxiosInstance.post(
+      PathsT.ImagesPathT,
+      { data },
+      {
+        headers: {
+          Authorization: accessToken,
+          "Content-Type": "multipart/form-data",
+        },
+      },
+    )
       .then((response) => {
         return response.data[0].imageId;
       })

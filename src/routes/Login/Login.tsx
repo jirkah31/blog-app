@@ -5,7 +5,7 @@ import useRouterContext from "../../helpers_hooks/useRouterContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { useAppSelector } from "../../redux/reduxHooks";
-import { PathsT } from "../../api/paths";
+import { PathsT } from "../../api/api_configs";
 import Button from "../../components/Button/Button";
 
 const Login: React.FC = () => {

@@ -1,5 +1,4 @@
-import { AxiosInstance } from "../api/api_configs";
-import { PathsT } from "../api/paths";
+import { AxiosInstance, PathsT } from "../api/api_configs";
 import { successToast, errorToast } from "../toasts/toasts";
 import { useMutation } from "@tanstack/react-query";
 

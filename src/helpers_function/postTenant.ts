@@ -1,8 +1,6 @@
-import { AxiosInstance } from "../api/api_configs";
-import { PathsT } from "../api/paths";
+import { AxiosInstance, PathsT } from "../api/api_configs";
 
 const postTenant = () => {
-
   AxiosInstance.post(PathsT.TenantPathT)
     .then((response) => {
       return response.data;

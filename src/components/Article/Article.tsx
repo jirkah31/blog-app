@@ -6,7 +6,7 @@ import { useAppSelector } from "../../redux/reduxHooks";
 import useImage from "../../helpers_hooks/useImage";
 import { useEffect, useState } from "react";
 import { Buffer } from "buffer";
-import { PathsT } from "../../api/paths";
+import { PathsT } from "../../api/api_configs";
 
 export interface ArticleAPIT {
   articleId: string;

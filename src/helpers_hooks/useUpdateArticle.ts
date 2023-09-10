@@ -3,7 +3,7 @@ import { AxiosInstance } from "../api/api_configs";
 import { successToast } from "../toasts/toasts";
 import { errorToast } from "../toasts/toasts";
 import { useMutation } from "@tanstack/react-query";
-import { PathsT } from "../api/paths";
+import { PathsT } from "../api/api_configs";
 
 interface UpdateArticleT {
   articleId: string;

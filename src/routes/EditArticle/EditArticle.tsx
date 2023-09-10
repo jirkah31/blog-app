@@ -6,7 +6,7 @@ import useUpdateArticle from "../../helpers_hooks/useUpdateArticle";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
 import { useAppSelector } from "../../redux/reduxHooks";
-import { PathsT } from "../../api/paths";
+import { PathsT } from "../../api/api_configs";
 import Button from "../../components/Button/Button";
 
 const EditArticle: React.FC = () => {

@@ -1,17 +1,12 @@
-import { AxiosInstance } from "../api/api_configs";
+import { AxiosInstance, PathsT } from "../api/api_configs";
 import { successToast, errorToast } from "../toasts/toasts";
-import { PathsT } from "../api/paths";
 
 type PropsT = {
   username: string;
   password: string;
 };
 
-const tryLogin = ({
-  username,
-  password,
-}: PropsT) => {
-
+const tryLogin = ({ username, password }: PropsT) => {
   const response = AxiosInstance.post(PathsT.LoginPathT, {
     username,
     password,
@@ -25,7 +20,7 @@ const tryLogin = ({
       return error;
     });
 
-  return response
+  return response;
 };
 
 export default tryLogin;

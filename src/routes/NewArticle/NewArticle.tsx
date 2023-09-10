@@ -5,11 +5,9 @@ import { Outlet, useNavigate } from "react-router-dom";
 import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
 import { useAppSelector } from "../../redux/reduxHooks";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import { RequestConfigT, apiConfig } from "../../api/api_configs";
-import { PathsT } from "../../api/paths";
+import { PathsT } from "../../api/api_configs";
 import Button from "../../components/Button/Button";
+import usePostImage from "../../helpers_hooks/usePostImage";
 
 const NewArticle: React.FC = () => {
   const navigate = useNavigate();
@@ -19,16 +17,7 @@ const NewArticle: React.FC = () => {
   const [title, setTitle] = useState<string>("");
   const [perex, setPerex] = useState<string>("");
   const [image, setImage] = useState<string | Blob>("");
-
-  const mutation = useMutation({
-    mutationFn: (config: RequestConfigT) => axios(config),
-    onError: (error, variables, context) => {
-      console.error("error, variables, context: ", error, variables, context);
-    },
-    onSuccess: (data) => {
-      return { data };
-    },
-  });
+  const mutation = usePostImage();
 
   const handleTitle = (event: React.FormEvent<HTMLInputElement>) => {
     setTitle((event.target as HTMLInputElement).value);
@@ -46,27 +35,15 @@ const NewArticle: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
     const data = new FormData();
-    data.append("image", image);
-
-    const configImage: RequestConfigT = {
-      ...apiConfig,
-      url: PathsT.ImagesPathT,
-      method: "post",
-      headers: {
-        ...apiConfig.headers,
-        Authorization: accessToken,
-        "Content-Type": "multipart/form-data",
-      },
-      data,
-    };
     const newArticle = {
       title,
       perex,
     };
 
-    const dataImage = await mutation.mutateAsync(configImage);
+    data.append("image", image);
+    const dataImage = await mutation.mutateAsync({ accessToken, data });
+    console.log("dataImage: ", dataImage);
     const imageId = dataImage.data[0].imageId;
     await postNewArticle({ accessToken, newArticle, imageId });
     navigate(`/${PathsT.MyArticlesPathT}`);

@@ -7,7 +7,7 @@ import useRouterContext from "../../helpers_hooks/useRouterContext";
 import classNames from "classnames";
 import { useAppSelector } from "../../redux/reduxHooks";
 import { ArticleType } from "../../helpers_hooks/useAllArticles";
-import { PathsT } from "../../api/paths";
+import { PathsT } from "../../api/api_configs";
 import useDeleteArticle from "../../helpers_hooks/useDeleteArticle";
 import Button from "../../components/Button/Button";
 import TableLine from "../../components/TableLine/TableLine";

@@ -1,12 +1,11 @@
 import React from "react";
 import styles from "./Navigation.module.scss";
-import { navLinks } from "../../api/links";
 import "react-toastify/dist/ReactToastify.css";
 import ThemeButton from "../../components/ButtonTheme/ButtonTheme";
 import classNames from "classnames";
 import ButtonNavigation from "../../components/ButtonNavigation/ButtonNavigation";
 import { useAppSelector } from "../../redux/reduxHooks";
-import { PathsT } from "../../api/paths";
+import { PathsT, navLinks } from "../../api/api_configs";
 import { useLocation } from "react-router-dom";
 
 type PropsT = {

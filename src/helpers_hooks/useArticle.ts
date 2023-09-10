@@ -1,8 +1,7 @@
-import { AxiosInstance } from "../api/api_configs";
+import { AxiosInstance, PathsT } from "../api/api_configs";
 import { errorToast } from "../toasts/toasts";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { PathsT } from "../api/paths";
 
 type ArticlePropsT = {
   articleId?: string;
@@ -14,12 +13,13 @@ const useArticle = ({ articleId }: ArticlePropsT) => {
   return useQuery({
     queryKey: ["article", articleId],
     queryFn: () =>
-      AxiosInstance.get(`${PathsT.ArticlesPathT}/${articleId}`)
-        .catch((error) => {
-          navigate(PathsT.HomePathT)
+      AxiosInstance.get(`${PathsT.ArticlesPathT}/${articleId}`).catch(
+        (error) => {
+          navigate(PathsT.HomePathT);
           errorToast("Articles loading fails!");
-          return console.error("Error: ", error)
-        })
+          return console.error("Error: ", error);
+        },
+      ),
   });
 };
 

@@ -1,7 +1,6 @@
-import { AxiosInstance } from "../api/api_configs";
+import { AxiosInstance, PathsT } from "../api/api_configs";
 import { useQuery } from "@tanstack/react-query";
 import { errorToast } from "../toasts/toasts";
-import { PathsT } from "../api/paths";
 
 const useImage = (imageId: string) => {
   return useQuery({
